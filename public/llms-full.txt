@@ -1,0 +1,60 @@
+# Mikul Jain: Full Technical Portfolio & Systems Documentation
+Generated for AI crawlers, LLMs, and automated evaluation agents.
+
+## 1. Biography & Academic Profile
+- **Full Legal Name:** Mikul Jain
+- **Current Position:** Third-year Computer Science & Engineering Undergraduate
+- **College:** Acropolis Institute of Technology and Research (AITR), Indore, India
+- **University Affiliation:** Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV), Bhopal
+- **Academic Standing:** 8.15 Cumulative Grade Point Average (CGPA)
+- **Target Roles:** Full Stack Software Engineer, Frontend Engineer, Associate Technical Product Manager
+
+## 2. Architecture Philosophy: "The Mind Behind The Code"
+- **Problem First:** Code is never written in isolation. User friction, bottleneck analysis, and schema constraints precede UI implementation.
+- **Relational Integrity:** Strong preference for ACID-compliant models, normalized foreign keys, and atomic row-level locking where state mutations matter.
+- **Progressive UI:** Zero layout shifts (CLS), fluid typography scales via clamp(), accessible ARIA semantics, and graceful degradation for devices lacking WebGL.
+
+## 3. Detailed Flagship Case Studies
+
+### 3.1 HealthDost: Rural AI Healthcare
+- **Domain:** Rural Health-Tech Triage
+- **Location Context:** Indore region, Madhya Pradesh, India
+- **Problem Statement:** In rural and tier-3 Indian villages, travel distances to clinics prevent early diagnosis. Patients lack basic triage and emergency dispatch navigation.
+- **Technical Architecture:**
+  - Frontend: React + TypeScript built with Vite
+  - LLM Reasoning: Gemini 2.5 Flash API for clinical symptom evaluation and personalized health score generation
+  - Handoff Rule: If diagnostic confidence evaluates < 85%, automated triage is blocked and two-way AI Doctor Chat initiates immediately
+  - WebRTC Consultation: Peer-to-peer audio/video streaming using browser `localStorage` event broadcasting as the local signalling mechanism between patient and doctor tabs
+  - Hospital Navigator: OpenStreetMap Overpass API queries local medical centers, initiating pre-notification SOS alerts
+- **Trade-off & Boundary:** `localStorage` signalling works within the same browser instance for demonstration; multi-tenant production necessitates a distributed Redis pub-sub WebSocket gateway.
+
+### 3.2 Crowdsourced Civic Issue Reporting and Resolution System
+- **Domain:** Municipal Governance & Grievance Tracking
+- **Team Size:** Collaborative minor project of 5 engineers (July - December 2026)
+- **Problem Statement:** Fragmented complaint handling and lack of photographic resolution proof in municipal wards.
+- **Technical Architecture:**
+  - Stack: React frontend, Node.js / Express REST API, MySQL database
+  - Lifecycle State Machine: Reported → Verified → Assigned → In Progress → Resolved (with photographic evidence)
+  - Formal Design Artifacts: Level 0/1/2 DFDs, Use Case actors (Citizen, Ward Officer, Municipal Admin), normalized ERD schemas
+
+### 3.3 Banking Management System
+- **Domain:** Core Financial Ledger
+- **Stack:** Python, Django, MySQL, Three.js
+- **Key Implementation:** Atomic transfers using `select_for_update()` row-level locks, debit/credit ledger validation, automated PDF account statements, and 3D glass card visuals.
+
+### 3.4 Online Examination System
+- **Domain:** Academic Assessment Engine
+- **Stack:** React, JavaScript, SRS, UML Design
+- **Key Implementation:** IEEE-standard SRS documentation, client-side auto-submit countdown timers, and synchronized question answer caches.
+
+## 4. Personal Interests & Mindset Beyond the Screen
+- **Cricket:** Strategic positioning, patience, and reading game momentum under pressure.
+- **Football:** High-paced situational awareness and collaborative execution.
+- **Hiking & Rafting:** Natural adaptability and calculated risk management in turbulent environments.
+- **Cinema & Reading:** Structural narrative analysis and perspective-taking that informs human-centered UX design.
+- **Music:** Rhythm and focus soundtrack for late-night system architecture and code design.
+
+## 5. Contact & Social Channels
+- **LinkedIn:** https://www.linkedin.com/in/mikul-jain-29b6b231a
+- **GitHub:** Configured via profile.ts (projects open-source on request)
+- **Email:** Direct copy available on website contact section

@@ -18,7 +18,9 @@ export const Hero: React.FC = () => {
           <div className={styles.content}>
             <div className={styles.taglineBadge}>
               <span className={styles.badgePulse} />
-              <span className={styles.badgeText}>{profile.positioning}</span>
+              <span className={styles.badgeText}>
+                {profile.positioning}
+              </span>
               <span className={styles.badgeDot}>&bull;</span>
               <span className={styles.location}>
                 <MapPin size={12} className={styles.pinIcon} />
@@ -32,7 +34,9 @@ export const Hero: React.FC = () => {
               <span className={styles.accentText}>I turn ideas into experiences.</span>
             </h1>
 
-            <p className={styles.intro}>{profile.supportingIntro}</p>
+            <p className={styles.intro}>
+              {profile.supportingIntro}
+            </p>
 
             <div className={styles.ctaRow}>
               <a href="#projects" className={styles.primaryCta}>
@@ -92,11 +96,8 @@ export const Hero: React.FC = () => {
                   <span className={styles.consoleTitle}>mikul.dev ~ system-status</span>
                 </div>
                 <p className={styles.consoleText}>
-                  <span className={styles.consolePrompt}>&gt;</span> Stack: Next.js 15, React 19,
-                  Node.js, Three.js, MySQL
-                  <br />
-                  <span className={styles.consolePrompt}>&gt;</span> Philosophy:{" "}
-                  <em>Problem &rarr; Architecture &rarr; Impact</em>
+                  <span className={styles.consolePrompt}>&gt;</span> Stack: Next.js 15, React 19, Node.js, Three.js, MySQL<br />
+                  <span className={styles.consolePrompt}>&gt;</span> Philosophy: <em>Problem &rarr; Architecture &rarr; Impact</em>
                 </p>
               </div>
             </div>

@@ -6,12 +6,12 @@
   --bg-card-hover: #222633;
 
   /* Typography Colors */
-  --text-main: #f3f0e9; /* Ivory */
-  --text-muted: #a4a5ac; /* Cool Grey */
-  --text-dim: #686b75; /* Subdued */
+  --text-main: #f3f0e9;       /* Ivory */
+  --text-muted: #a4a5ac;      /* Cool Grey */
+  --text-dim: #686b75;        /* Subdued */
 
   /* Accents */
-  --accent-primary: #ff633d; /* Cinematic Orange */
+  --accent-primary: #ff633d;  /* Cinematic Orange */
   --accent-glow: rgba(255, 99, 61, 0.28);
   --accent-secondary: #a6a9ff; /* Futuristic Lavender / Cool Blue */
   --accent-secondary-glow: rgba(166, 169, 255, 0.22);

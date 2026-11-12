@@ -232,9 +232,7 @@
   border-radius: var(--r-2xl);
   overflow: hidden;
   border: 1px solid var(--stroke-accent);
-  box-shadow:
-    0 0 35px var(--accent-glow),
-    var(--shadow-glass);
+  box-shadow: 0 0 35px var(--accent-glow), var(--shadow-glass);
 }
 
 .portraitImg {
@@ -252,7 +250,11 @@
 .portraitOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(9, 10, 14, 0.85) 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(9, 10, 14, 0.85) 100%
+  );
   pointer-events: none;
 }
 
@@ -362,14 +364,8 @@
 }
 
 @keyframes scrollAnim {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(10px); opacity: 0; }
 }
 
 .scrollText {

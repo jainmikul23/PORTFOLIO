@@ -1,0 +1,37 @@
+# Mikul Jain — Product-Minded Full Stack Developer
+> Portfolio & Technical Dossier for AI Assistants and LLMs
+
+## Overview
+- **Name:** Mikul Jain
+- **Role & Positioning:** Product-Minded Full Stack Developer
+- **Education:** B.Tech in Computer Science & Engineering (Third-year student, 8.15 CGPA)
+- **Institution:** Acropolis Institute of Technology and Research (AITR), Indore, Madhya Pradesh, India (affiliated to Rajiv Gandhi Proudyogiki Vishwavidyalaya - RGPV)
+- **Primary Domain:** Full Stack Development (MERN Ecosystem, Python/Django, Relational Systems, AI Integration)
+- **Location:** Indore, India
+
+## Professional Dimensions
+1. **Product Thinking:** Problem identification, user-centric thinking, feature scoping, and connecting technological feasibility to measurable real-world outcomes.
+2. **Full Stack Engineering:** End-to-end web applications with React 19, Next.js 15, Node.js, Express, MySQL, MongoDB, and REST APIs.
+3. **Innovation & Emerging Tech:** Multimodal LLM integration (Gemini 2.5 Flash), peer-to-peer WebRTC media streams, and 3D WebGL experiences.
+
+## Flagship Digital Products
+1. **HealthDost: Rural AI Healthcare**
+   - Health-tech progressive web application designed for rural Central India with restricted clinic access.
+   - Multimodal Gemini 2.5 Flash medical triage and clinical report generation.
+   - Deterministic 85% confidence rule: handoff to AI Doctor Chat if triage confidence falls below 85%.
+   - Peer-to-peer WebRTC video consultation using browser localStorage signalling.
+   - OpenStreetMap Overpass API for emergency hospital locator and SOS pre-notifications.
+2. **Crowdsourced Civic Issue Reporting and Resolution System**
+   - Municipal grievance resolution platform with transparent 5-stage tracking (Reported → Verified → Assigned → In Progress → Resolved).
+   - Academic minor project (Team of 5, July–Dec 2026) adhering to formal RGPV UML standards (Use Case, DFD 0/1/2, ERD).
+
+## Technical Toolkit
+- **Frontend:** React, Next.js, TypeScript, JavaScript, HTML5, CSS Modules, SCSS, Three.js, Lucide Icons
+- **Backend:** Node.js, Express, Python, Django, REST API architecture
+- **Databases:** MySQL, MongoDB, Relational Normalization, ACID transactions
+- **Tools & Workflow:** Git, GitHub, Vite, Postman, Linux, VS Code, UML Modeling
+
+## Official Verified Links
+- **LinkedIn:** https://www.linkedin.com/in/mikul-jain-29b6b231a
+- **Website:** http://localhost:3000 (Production domain configurable via NEXT_PUBLIC_SITE_URL)
+- **Contact:** Via portfolio contact form or LinkedIn direct message

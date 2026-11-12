@@ -1,0 +1,22 @@
+.canvasContainer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.cssFallback {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 80% 20%,
+    rgba(255, 99, 61, 0.08) 0%,
+    rgba(166, 169, 255, 0.04) 40%,
+    transparent 70%
+  );
+}

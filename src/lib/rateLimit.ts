@@ -39,3 +39,7 @@ export async function rateLimit(
   record.count += 1;
   return { success: true, remaining: limit - record.count };
 }
+
+export function resetRateLimitForTesting(): void {
+  memoryStore.clear();
+}

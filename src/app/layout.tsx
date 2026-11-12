@@ -1,10 +1,49 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import { ClientProviders } from "@/components/providers/ClientProviders";
 
 export const metadata: Metadata = {
-  title: "Mikul Jain | Full Stack Engineer",
+  title: "Mikul Jain | Product-Minded Full Stack Developer",
   description:
-    "Personal portfolio of Mikul Jain - Full Stack Engineer specializing in reliable web systems, systems design, and databases.",
+    "Personal portfolio of Mikul Jain - Product-Minded Full Stack Developer specializing in reliable web systems, systems design, and AI integration.",
+  keywords: [
+    "Mikul Jain",
+    "Full Stack Developer",
+    "Product Engineer",
+    "AITR Indore",
+    "Next.js",
+    "React",
+    "Three.js",
+    "HealthDost",
+    "Civic Issue System",
+  ],
+  authors: [{ name: "Mikul Jain" }],
+  creator: "Mikul Jain",
+  metadataBase: new URL("https://mikuljain.dev"),
+  openGraph: {
+    title: "Mikul Jain | Product-Minded Full Stack Developer",
+    description:
+      "I don't just write code. I turn ideas into experiences. Explore flagship systems, architecture case studies, and engineering philosophy.",
+    url: "https://mikuljain.dev",
+    siteName: "Mikul Jain Portfolio",
+    images: [
+      {
+        url: "/mikul-jain.jpg",
+        width: 1024,
+        height: 1014,
+        alt: "Mikul Jain - Product-Minded Full Stack Developer",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mikul Jain | Product-Minded Full Stack Developer",
+    description:
+      "Full Stack Developer combining product thinking, resilient system design, and modern web craft.",
+    images: ["/mikul-jain.jpg"],
+  },
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -19,7 +58,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        <ClientProviders>{children}</ClientProviders>
+      </body>
     </html>
   );
 }

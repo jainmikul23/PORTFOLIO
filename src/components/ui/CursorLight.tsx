@@ -46,3 +46,4 @@ export const CursorLight: React.FC = () => {
     />
   );
 };
+

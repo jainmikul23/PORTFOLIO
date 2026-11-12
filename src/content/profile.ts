@@ -55,15 +55,7 @@ export const rawProfile = {
     },
   ],
   skills: {
-    frontend: [
-      "React",
-      "Next.js",
-      "JavaScript",
-      "TypeScript",
-      "HTML5",
-      "CSS Modules / SCSS",
-      "Three.js",
-    ],
+    frontend: ["React", "Next.js", "JavaScript", "TypeScript", "HTML5", "CSS Modules / SCSS", "Three.js"],
     backend: ["Node.js", "Express", "Python", "Django", "REST APIs"],
     database: ["MySQL", "MongoDB", "Relational Modeling", "ACID Compliance"],
     languages: ["JavaScript", "TypeScript", "Python", "C / C++ (Academic)"],
@@ -74,8 +66,7 @@ export const rawProfile = {
     {
       slug: "healthdost",
       title: "HealthDost: Rural AI Healthcare",
-      tagline:
-        "Health-tech single-page app engineered for rural India with limited physical healthcare access.",
+      tagline: "Health-tech single-page app engineered for rural India with limited physical healthcare access.",
       problem:
         "In rural regions around Indore, physical doctor access is severely constrained by travel distance and clinic shortages. Patients lack immediate triage and emergency navigation.",
       solution:
@@ -85,8 +76,7 @@ export const rawProfile = {
       flagship: true,
       stack: ["React", "TypeScript", "Vite", "Gemini 2.5 Flash", "WebRTC", "OpenStreetMap API"],
       role: "Lead Full Stack & AI Integration Engineer",
-      impact:
-        "Designed for rural Central India with low network overhead and zero server dependency.",
+      impact: "Designed for rural Central India with low network overhead and zero server dependency.",
       links: {
         github: "TODO: https://github.com/...",
         live: "TODO: https://...",
@@ -101,8 +91,7 @@ export const rawProfile = {
     {
       slug: "civic-issue-system",
       title: "Crowdsourced Civic Issue Reporting and Resolution System",
-      tagline:
-        "Municipal grievance pipeline with transparent tracking from citizen reporting to administrative verification.",
+      tagline: "Municipal grievance pipeline with transparent tracking from citizen reporting to administrative verification.",
       problem:
         "Civic issues (potholes, sanitation, water supply) frequently go unattended due to fragmented complaint systems and zero visibility into municipal assignment or resolution proof.",
       solution:
@@ -112,8 +101,7 @@ export const rawProfile = {
       flagship: true,
       stack: ["React", "Node.js", "Express", "MySQL", "UML Modeling"],
       role: "Full Stack Engineering Contributor (Team of 5)",
-      impact:
-        "Designed for municipal accountability across citizen reporting and authority resolution stages.",
+      impact: "Designed for municipal accountability across citizen reporting and authority resolution stages.",
       links: {
         github: "TODO: https://github.com/...",
       },
@@ -127,8 +115,7 @@ export const rawProfile = {
     {
       slug: "online-examination-system",
       title: "Online Examination System",
-      tagline:
-        "Structured assessment platform with formal SRS documentation and synchronized timer engine.",
+      tagline: "Structured assessment platform with formal SRS documentation and synchronized timer engine.",
       problem:
         "Academic testing environments require deterministic timer synchronization, resilient answer caching, and structured multi-section question navigation.",
       solution:
@@ -150,8 +137,7 @@ export const rawProfile = {
     {
       slug: "banking-management-system",
       title: "Banking Management System",
-      tagline:
-        "Core relational banking engine with atomic ledger transfers and 3D glassmorphic dashboard.",
+      tagline: "Core relational banking engine with atomic ledger transfers and 3D glassmorphic dashboard.",
       problem:
         "Financial systems must guarantee zero balance drift and absolute data consistency under concurrent transfer requests.",
       solution:
@@ -181,6 +167,15 @@ export const rawProfile = {
         "Maintaining an 8.15 CGPA while mastering core computer science: Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, and Object-Oriented Software Design.",
     },
     {
+      period: "2024 - 2025",
+      title: "Hackathon Certificate of Achievement",
+      organization: "AITR ACM Student Chapter & ACM-W • Powered by Google",
+      category: "Hackathon Recognition",
+      description:
+        "Recognized on stage at Acropolis Institute of Technology and Research (AITR ACM Student Chapter, Powered by Google) for collaborative innovation, engineering problem-solving, and technical execution.",
+      image: "/images/mikul-hackathon-award.jpg",
+    },
+    {
       period: "July - Dec 2026",
       title: "Civic Issue Reporting System (Minor Project)",
       organization: "AITR Academic Curriculum • Team of 5",
@@ -201,32 +196,39 @@ export const rawProfile = {
     {
       name: "Cricket",
       category: "Sport & Strategy",
-      reflection:
-        "Strategic field placements and tactical patience under pressure mirror architectural planning in distributed systems.",
+      reflection: "Strategic field placements and tactical patience under pressure mirror architectural planning in distributed systems.",
     },
     {
       name: "Football",
       category: "High-Paced Collaboration",
-      reflection:
-        "Fast situational awareness, teamwork, and knowing when to pass or take the shot.",
+      reflection: "Fast situational awareness, teamwork, and knowing when to pass or take the shot.",
+    },
+    {
+      name: "Travel & Reflection",
+      category: "Adventures & Downtime",
+      reflection: "Disconnecting from the screen by the water to recharge, reflect on system architectures, and maintain mental clarity.",
+      image: "/images/mikul-pool.jpg",
+    },
+    {
+      name: "Cafes & Creative Conversations",
+      category: "Culture & Connections",
+      reflection: "Exploring unique coffee spaces and having great conversations about products, life, and the future of technology.",
+      image: "/images/mikul-cafe.jpg",
     },
     {
       name: "Hiking & Rafting",
       category: "Adventures in Nature",
-      reflection:
-        "Navigating mountain trails and turbulent rapids instills adaptability and calm decision-making when conditions change.",
+      reflection: "Navigating mountain trails and turbulent rapids instills adaptability and calm decision-making when conditions change.",
     },
     {
       name: "Cinema & Reading",
       category: "Storytelling & Perspectives",
-      reflection:
-        "Analyzing director vision, world-building, and character arcs informs how I approach digital storytelling and UX.",
+      reflection: "Analyzing director vision, world-building, and character arcs informs how I approach digital storytelling and UX.",
     },
     {
       name: "Music",
       category: "Focus & Rhythm",
-      reflection:
-        "The soundtrack to deep flow states during late-night debugging and system architecture design.",
+      reflection: "The soundtrack to deep flow states during late-night debugging and system architecture design.",
     },
   ],
   links: {

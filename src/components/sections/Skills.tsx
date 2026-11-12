@@ -22,53 +22,48 @@ export const Skills: React.FC = () => {
       name: "Frontend Development",
       icon: <Code size={20} />,
       skills: profile.skills.frontend,
-      description:
-        "Building responsive, GPU-accelerated client interfaces with modern component patterns and fluid layouts.",
+      description: "Building responsive, GPU-accelerated client interfaces with modern component patterns and fluid layouts.",
     },
     {
       id: "backend",
       name: "Backend Development",
       icon: <Server size={20} />,
       skills: profile.skills.backend,
-      description:
-        "Architecting REST APIs, routing logic, and business workflows across Node.js/Express and Python/Django.",
+      description: "Architecting REST APIs, routing logic, and business workflows across Node.js/Express and Python/Django.",
     },
     {
       id: "database",
       name: "Database Management",
       icon: <Database size={20} />,
       skills: profile.skills.database,
-      description:
-        "Designing normalized relational schemas in MySQL and document structures in MongoDB with ACID guarantees.",
+      description: "Designing normalized relational schemas in MySQL and document structures in MongoDB with ACID guarantees.",
     },
     {
       id: "languages",
       name: "Programming Languages",
       icon: <Terminal size={20} />,
       skills: profile.skills.languages,
-      description:
-        "Core fluency in typed languages and scripting for systems logic, data structures, and algorithms.",
+      description: "Core fluency in typed languages and scripting for systems logic, data structures, and algorithms.",
     },
     {
       id: "tools",
       name: "Tools & Technologies",
       icon: <Wrench size={20} />,
       skills: profile.skills.tools,
-      description:
-        "Version control workflows, API debugging, local development tooling, and formal UML software design.",
+      description: "Version control workflows, API debugging, local development tooling, and formal UML software design.",
     },
     {
       id: "aiEmerging",
       name: "AI & Emerging Tech",
       icon: <Sparkles size={20} />,
       skills: profile.skills.aiEmerging,
-      description:
-        "Integrating multimodal LLMs (Gemini 2.5 Flash), WebRTC peer streams, and geospatial Overpass queries.",
+      description: "Integrating multimodal LLMs (Gemini 2.5 Flash), WebRTC peer streams, and geospatial Overpass queries.",
     },
   ];
 
-  const displayed =
-    activeCategory === "all" ? categories : categories.filter((c) => c.id === activeCategory);
+  const displayed = activeCategory === "all"
+    ? categories
+    : categories.filter((c) => c.id === activeCategory);
 
   return (
     <section id="skills" className={styles.skillsSection} aria-label="Technical Skills">
@@ -76,11 +71,11 @@ export const Skills: React.FC = () => {
         <div className={styles.sectionHeader}>
           <span className="label-caps">Chapter 05 &bull; Technical Universe</span>
           <h2 className={styles.sectionTitle}>
-            Tools, architectures &amp; <span className={styles.accentText}>engineering stack.</span>
+            Tools, architectures &amp;{" "}
+            <span className={styles.accentText}>engineering stack.</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            A structured breakdown of my full stack engineering toolkit. Evaluated through practical
-            implementation in flagship products and university computer science coursework.
+            A structured breakdown of my full stack engineering toolkit. Evaluated through practical implementation in flagship products and university computer science coursework.
           </p>
 
           {/* Filter Pills */}

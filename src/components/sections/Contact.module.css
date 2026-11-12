@@ -186,9 +186,7 @@
   color: var(--text-main);
   font-family: var(--font-body);
   font-size: 0.95rem;
-  transition:
-    border-color var(--duration-fast) ease,
-    box-shadow var(--duration-fast) ease;
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .inputField:focus,

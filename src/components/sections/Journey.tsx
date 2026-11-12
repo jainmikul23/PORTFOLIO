@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import styles from "./Journey.module.css";
 import { profile } from "@/content/profile";
-import { GraduationCap, Users, Sparkles, Calendar } from "lucide-react";
+import { GraduationCap, Users, Sparkles, Calendar, Award } from "lucide-react";
 
 export const Journey: React.FC = () => {
   return (
@@ -12,11 +13,11 @@ export const Journey: React.FC = () => {
         <div className={styles.sectionHeader}>
           <span className="label-caps">Chapter 06 &bull; The Story So Far</span>
           <h2 className={styles.sectionTitle}>
-            Academic trajectory &amp; <span className={styles.accentText}>milestones.</span>
+            Academic trajectory &amp;{" "}
+            <span className={styles.accentText}>milestones.</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            A chronological timeline of computer science education at AITR, collaborative
-            engineering projects, and independent technical development.
+            A chronological timeline of computer science education at AITR, collaborative engineering projects, and independent technical development.
           </p>
         </div>
 
@@ -50,6 +51,22 @@ export const Journey: React.FC = () => {
 
                   <span className={styles.organization}>{item.organization}</span>
                   <p className={styles.description}>{item.description}</p>
+
+                  {item.image && (
+                    <div className={styles.milestoneImageWrapper}>
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={520}
+                        height={340}
+                        className={styles.milestoneImage}
+                      />
+                      <div className={styles.imageOverlayBadge}>
+                        <Award size={14} className={styles.awardIcon} />
+                        <span>AITR ACM Student Chapter &bull; Powered by Google</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

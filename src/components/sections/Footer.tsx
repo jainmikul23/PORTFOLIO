@@ -31,8 +31,7 @@ export const Footer: React.FC = () => {
 
         <div className={styles.bottomRow}>
           <p className={styles.copyright}>
-            Designed &amp; Developed with Next.js 15, TypeScript &amp; Cinematic Digital
-            Storytelling.
+            Designed &amp; Developed with Next.js 15, TypeScript &amp; Cinematic Digital Storytelling.
           </p>
 
           <div className={styles.actionsGroup}>
@@ -49,10 +48,7 @@ export const Footer: React.FC = () => {
 
         <div className={styles.easterEggBar}>
           <Terminal size={12} className={styles.termIcon} />
-          <span>
-            Press <kbd className={styles.kbd}>`</kbd> or <kbd className={styles.kbd}>⌘K</kbd>{" "}
-            anywhere for the interactive command palette
-          </span>
+          <span>Press <kbd className={styles.kbd}>`</kbd> or <kbd className={styles.kbd}>⌘K</kbd> anywhere for the interactive command palette</span>
         </div>
       </div>
     </footer>
