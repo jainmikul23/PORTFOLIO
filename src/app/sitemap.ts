@@ -2,7 +2,12 @@ import type { MetadataRoute } from "next";
 import { profile } from "@/content/profile";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : undefined) ||
+    "https://mikuljain.vercel.app";
 
   const projectRoutes: MetadataRoute.Sitemap = profile.projects.map((project) => ({
     url: `${siteUrl}/projects/${project.slug}`,

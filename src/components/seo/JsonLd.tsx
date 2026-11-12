@@ -2,7 +2,9 @@ import React from "react";
 import { profile } from "@/content/profile";
 
 export const JsonLd: React.FC = () => {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (typeof window !== "undefined" ? window.location.origin : "https://mikuljain.vercel.app");
 
   const personSchema = {
     "@context": "https://schema.org",

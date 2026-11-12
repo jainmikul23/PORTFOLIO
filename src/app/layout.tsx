@@ -42,12 +42,12 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Mikul Jain" }],
   creator: "Mikul Jain",
-  metadataBase: new URL("https://mikuljain.dev"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://mikuljain.vercel.app"),
   openGraph: {
     title: "Mikul Jain | Product-Minded Full Stack Developer",
     description:
       "I don't just write code. I turn ideas into experiences. Explore flagship systems, architecture case studies, and engineering philosophy.",
-    url: "https://mikuljain.dev",
+    url: "https://mikuljain.vercel.app",
     siteName: "Mikul Jain Portfolio",
     images: [
       {
