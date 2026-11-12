@@ -76,6 +76,9 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
+  verification: {
+    google: "Pg12xxCwxKSdyMJoogu5Qs1qPjNXdlERCoBC2VJlAcw",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -86,6 +89,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
+        {/* Google Search Console Verification */}
+        <meta
+          name="google-site-verification"
+          content="Pg12xxCwxKSdyMJoogu5Qs1qPjNXdlERCoBC2VJlAcw"
+        />
         {/* Preload hero LCP image for fastest paint */}
         <link
           rel="preload"
