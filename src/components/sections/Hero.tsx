@@ -88,8 +88,9 @@ export const Hero: React.FC = () => {
                   width={340}
                   height={380}
                   priority
-                  quality={85}
-                  sizes="(max-width: 768px) 100vw, 380px"
+                  fetchPriority="high"
+                  quality={80}
+                  sizes="(max-width: 768px) 340px, 380px"
                   className={styles.portraitImg}
                 />
                 <div className={styles.portraitOverlay} />
@@ -116,7 +117,11 @@ export const Hero: React.FC = () => {
 
         {/* Scroll Indicator */}
         <div className={styles.scrollIndicator}>
-          <a href="#about" className={styles.scrollLink} aria-label="Scroll to About Section">
+          <a
+            href="#about"
+            className={styles.scrollLink}
+            aria-label="Chapter 01 • Explore The Journey - Scroll to About Section"
+          >
             <span className={styles.scrollMouse}>
               <span className={styles.scrollWheel} />
             </span>

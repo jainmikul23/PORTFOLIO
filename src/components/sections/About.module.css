@@ -1,6 +1,6 @@
 .aboutSection {
   padding: 7rem 1.5rem;
-  background: rgba(20, 23, 32, 0.82);
+  background: var(--bg-section-secondary);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   position: relative;
@@ -82,7 +82,7 @@
   background: linear-gradient(
     to bottom,
     transparent 65%,
-    rgba(27, 30, 40, 0.9) 100%
+    var(--bg-card) 100%
   );
 }
 
@@ -266,5 +266,19 @@
 @media (max-width: 960px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSection {
+    padding: 5rem 1rem;
+  }
+
+  .captionBox {
+    padding: 1rem;
+  }
+
+  .credentialCard {
+    padding: 1rem;
   }
 }

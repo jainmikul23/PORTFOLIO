@@ -48,18 +48,23 @@ export function useSectionDisappear<T extends HTMLElement>() {
     if (!containerRef.current || prefersReducedMotion()) return;
 
     const cleanups: Array<{ kill: () => void }> = [];
+    let rafId: number | null = null;
 
-    if (headerRef.current) {
-      cleanups.push(bindHeaderDisappear(headerRef.current));
-    }
+    rafId = requestAnimationFrame(() => {
+      if (!containerRef.current) return;
+      if (headerRef.current) {
+        cleanups.push(bindHeaderDisappear(headerRef.current));
+      }
 
-    // Automatically bind to any marked cards or articles within the section container
-    const cards = containerRef.current.querySelectorAll<HTMLElement>("[data-scroll-disappear]");
-    cards.forEach((card) => {
-      cleanups.push(bindCardScrollDisappear(card));
+      // Automatically bind to any marked cards or articles within the section container
+      const cards = containerRef.current.querySelectorAll<HTMLElement>("[data-scroll-disappear]");
+      cards.forEach((card) => {
+        cleanups.push(bindCardScrollDisappear(card));
+      });
     });
 
     return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
       cleanups.forEach((c) => c.kill());
     };
   }, []);

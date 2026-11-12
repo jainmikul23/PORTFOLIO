@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk, Playfair_Display } from "next/font/google";
 import "@/styles/globals.css";
 import { ClientProviders } from "@/components/providers/ClientProviders";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space-grotesk",
+  weight: ["400", "500", "600", "700"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-playfair",
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+});
 
 export const metadata: Metadata = {
   title: "Mikul Jain | Product-Minded Full Stack Developer",
@@ -57,7 +80,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${spaceGrotesk.variable} ${playfair.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <ClientProviders>{children}</ClientProviders>
       </body>

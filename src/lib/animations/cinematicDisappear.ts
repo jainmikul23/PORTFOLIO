@@ -53,7 +53,6 @@ export function bindHeroDisappear(
         {
           y: -70,
           opacity: 0,
-          filter: "blur(8px)",
           ease: "power2.inOut",
         },
         0,
@@ -67,7 +66,6 @@ export function bindHeroDisappear(
           y: -45,
           scale: 0.91,
           opacity: 0,
-          filter: "blur(10px)",
           ease: "power2.inOut",
         },
         0.05,
@@ -80,7 +78,6 @@ export function bindHeroDisappear(
         {
           y: -25,
           opacity: 0,
-          filter: "blur(6px)",
           ease: "power2.inOut",
         },
         0.1,
@@ -128,7 +125,6 @@ export function bindHeaderDisappear(headerElement: HTMLElement): DisappearCleanu
       },
       y: -50,
       opacity: 0,
-      filter: "blur(7px)",
       ease: "power2.inOut",
     });
   }, headerElement);
@@ -161,7 +157,6 @@ export function bindCardScrollDisappear(
 
   const targetScale = options?.scale ?? 0.93;
   const targetY = options?.y ?? -40;
-  const targetBlur = options?.blur ?? 8;
   const triggerStart = options?.start ?? "top 18%";
   const triggerEnd = options?.end ?? "bottom 8%";
 
@@ -177,7 +172,6 @@ export function bindCardScrollDisappear(
       scale: targetScale,
       y: targetY,
       opacity: 0,
-      filter: `blur(${targetBlur}px)`,
       transformOrigin: "center top",
       ease: "power2.inOut",
     });
@@ -225,7 +219,6 @@ export function bindStickyDissolve(
       scale: 0.9,
       y: -60,
       opacity: 0,
-      filter: "blur(12px)",
       ease: "power2.inOut",
     });
   }, sectionElement);

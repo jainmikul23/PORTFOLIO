@@ -23,22 +23,30 @@ export const ClientProviders: React.FC<ClientProvidersProps> = ({ children }) =>
     // Initialize Lenis smooth scroll
     initSmoothScroll();
 
-    let idleId: number | null = null;
     let timerId: NodeJS.Timeout | null = null;
 
+    const start3D = () => {
+      setMount3D(true);
+      window.removeEventListener("scroll", start3D);
+      window.removeEventListener("pointermove", start3D);
+      window.removeEventListener("touchstart", start3D);
+    };
+
     if (typeof window !== "undefined") {
-      if ("requestIdleCallback" in window) {
-        idleId = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number })
-          .requestIdleCallback(() => setMount3D(true), { timeout: 600 });
-      } else {
-        timerId = setTimeout(() => setMount3D(true), 250);
-      }
+      window.addEventListener("scroll", start3D, { passive: true, once: true });
+      window.addEventListener("pointermove", start3D, { passive: true, once: true });
+      window.addEventListener("touchstart", start3D, { passive: true, once: true });
+
+      // Fallback timer: mount after initial paint window so TBT stays minimal
+      timerId = setTimeout(start3D, 2200);
     }
 
     return () => {
       destroySmoothScroll();
-      if (idleId !== null && typeof window !== "undefined" && "cancelIdleCallback" in window) {
-        (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("scroll", start3D);
+        window.removeEventListener("pointermove", start3D);
+        window.removeEventListener("touchstart", start3D);
       }
       if (timerId !== null) {
         clearTimeout(timerId);

@@ -5,10 +5,17 @@
   --bg-card: #1b1e28;
   --bg-card-hover: #222633;
 
+  /* Translucent Section Surfaces (shines WebGL through while keeping text legible) */
+  --bg-section-primary: rgba(9, 10, 14, 0.82);
+  --bg-section-secondary: rgba(20, 23, 32, 0.82);
+  --bg-overlay-badge: rgba(9, 10, 14, 0.85);
+  --bg-channel-btn: rgba(243, 240, 233, 0.04);
+  --bg-channel-btn-hover: rgba(243, 240, 233, 0.08);
+
   /* Typography Colors */
   --text-main: #f3f0e9;       /* Ivory */
-  --text-muted: #a4a5ac;      /* Cool Grey */
-  --text-dim: #686b75;        /* Subdued */
+  --text-muted: #b8bac3;      /* Crisp Legible Grey */
+  --text-dim: #9aa0ae;        /* AA Accessible Subdued */
 
   /* Accents */
   --accent-primary: #ff633d;  /* Cinematic Orange */
@@ -61,28 +68,42 @@
 }
 
 [data-theme="light"] {
-  --bg-primary: #f6f4f0;
-  --bg-secondary: #eae6de;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f9f8f6;
+  /* Surfaces - Warm Porcelain Paper */
+  --bg-primary: #FAF8F5;
+  --bg-secondary: #F0ECE4;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8F6F2;
 
-  --text-main: #121418;
-  --text-muted: #565961;
-  --text-dim: #848790;
+  /* Translucent Section Surfaces - Clean warm porcelain glow */
+  --bg-section-primary: rgba(250, 248, 245, 0.88);
+  --bg-section-secondary: rgba(240, 236, 228, 0.88);
+  --bg-overlay-badge: rgba(255, 255, 255, 0.95);
+  --bg-channel-btn: rgba(18, 20, 24, 0.03);
+  --bg-channel-btn-hover: rgba(18, 20, 24, 0.07);
 
-  --accent-primary: #e64c24;
+  /* Crisp Readable High-Contrast Typography */
+  --text-main: #14161B;
+  --text-muted: #3c4049;
+  --text-dim: #555b68;
+
+  /* Vibrant Accents */
+  --accent-primary: #E64C24;
   --accent-glow: rgba(230, 76, 36, 0.2);
-  --accent-secondary: #5e64d6;
-  --accent-secondary-glow: rgba(94, 100, 214, 0.18);
+  --accent-secondary: #5258D6;
+  --accent-secondary-glow: rgba(82, 88, 214, 0.16);
+  --accent-success: #1B7A5C;
 
-  --stroke: rgba(18, 20, 24, 0.1);
-  --stroke-hi: rgba(18, 20, 24, 0.2);
+  /* Clean Borders & Shadows */
+  --stroke: rgba(18, 20, 24, 0.08);
+  --stroke-hi: rgba(18, 20, 24, 0.18);
   --stroke-accent: rgba(230, 76, 36, 0.45);
+  --stroke-secondary: rgba(82, 88, 214, 0.35);
 
-  --glass: rgba(255, 255, 255, 0.85);
-  --glass-hi: rgba(255, 255, 255, 0.95);
-  --glass-panel: rgba(246, 244, 240, 0.9);
+  --glass: rgba(255, 255, 255, 0.9);
+  --glass-hi: rgba(255, 255, 255, 0.98);
+  --glass-panel: rgba(250, 248, 245, 0.94);
 
-  --shadow-glass: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 16px 36px -12px rgba(0, 0, 0, 0.08);
-  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 12px 25px -8px rgba(0, 0, 0, 0.06);
+  --shadow-glass: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-accent: 0 8px 24px rgba(230, 76, 36, 0.2);
 }

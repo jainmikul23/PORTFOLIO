@@ -30,7 +30,7 @@ export function initSmoothScroll(): Lenis | null {
   };
 
   gsap.ticker.add(tickerCallback);
-  gsap.ticker.lagSmoothing(0);
+  gsap.ticker.lagSmoothing(500, 33);
 
   // Delegated smooth scroll for any internal anchor
   clickHandler = (e: MouseEvent) => {

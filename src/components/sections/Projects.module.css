@@ -1,6 +1,6 @@
 .projectsSection {
   padding: 7rem 1.5rem;
-  background: rgba(20, 23, 32, 0.82);
+  background: var(--bg-section-secondary);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   position: relative;
@@ -95,11 +95,7 @@
 
 .flagshipCard {
   border-color: var(--stroke-accent);
-  background: linear-gradient(
-    135deg,
-    rgba(27, 30, 40, 0.95) 0%,
-    rgba(20, 23, 32, 0.95) 100%
-  );
+  background: var(--bg-card);
 }
 
 .cardHeader {
@@ -190,7 +186,7 @@
 }
 
 .storyBox {
-  background: rgba(9, 10, 14, 0.4);
+  background: var(--bg-card-hover);
   border: 1px solid var(--stroke);
   border-radius: var(--r-lg);
   padding: 1.25rem;
@@ -353,5 +349,28 @@
 
   .highlightsList {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .productCard {
+    padding: 1.25rem;
+  }
+
+  .productStory {
+    gap: 1rem;
+  }
+
+  .badgeRow {
+    gap: 0.5rem;
+  }
+
+  .filterBar {
+    gap: 0.4rem;
+  }
+
+  .filterBtn {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.78rem;
   }
 }

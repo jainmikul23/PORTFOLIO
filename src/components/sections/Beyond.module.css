@@ -1,6 +1,6 @@
 .beyondSection {
   padding: 7rem 1.5rem;
-  background: rgba(9, 10, 14, 0.82);
+  background: var(--bg-section-primary);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   position: relative;
@@ -38,7 +38,7 @@
 
 .interestsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap: 2rem;
   margin-bottom: 4rem;
 }
@@ -131,7 +131,7 @@
   position: absolute;
   top: 0.75rem;
   left: 0.75rem;
-  background: rgba(9, 10, 14, 0.75);
+  background: var(--bg-overlay-badge);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--stroke);

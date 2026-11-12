@@ -29,7 +29,6 @@ export const Scene: React.FC = () => {
   }, []);
 
   if (!mounted || !supported) {
-    // Elegant CSS Fallback Mesh
     return <div className={styles.cssFallback} aria-hidden="true" />;
   }
 
@@ -37,15 +36,16 @@ export const Scene: React.FC = () => {
     <div className={styles.canvasContainer} aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0, 6.5], fov: 45 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        dpr={[1, 1.5]}
+        gl={{
+          antialias: false,
+          alpha: true,
+          powerPreference: "high-performance",
+          depth: true,
+          stencil: false,
+        }}
       >
-        <ambientLight intensity={0.6} />
-        <pointLight position={[5, 4, 5]} intensity={3.5} color="#FF633D" />
-        <pointLight position={[-4, -3, 3]} intensity={2.5} color="#A6A9FF" />
-        <pointLight position={[1.6, 0.5, 3]} intensity={2.0} color="#FF805E" />
-
-        <Particles count={650} />
+        <Particles count={300} />
         <AmbientMesh />
       </Canvas>
     </div>

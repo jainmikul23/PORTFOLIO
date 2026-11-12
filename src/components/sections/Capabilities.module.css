@@ -1,6 +1,6 @@
 .capabilitiesSection {
   padding: 7rem 1.5rem;
-  background: rgba(9, 10, 14, 0.82);
+  background: var(--bg-section-primary);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   position: relative;

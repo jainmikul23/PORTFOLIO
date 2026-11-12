@@ -1,6 +1,6 @@
 .skillsSection {
   padding: 7rem 1.5rem;
-  background: rgba(9, 10, 14, 0.82);
+  background: var(--bg-section-primary);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   position: relative;
@@ -69,7 +69,7 @@
 
 .categoryGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: 2rem;
 }
 

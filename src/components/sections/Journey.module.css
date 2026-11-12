@@ -1,6 +1,6 @@
 .journeySection {
   padding: 7rem 1.5rem;
-  background: rgba(20, 23, 32, 0.82);
+  background: var(--bg-section-secondary);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   position: relative;
@@ -184,7 +184,7 @@
   bottom: 0.75rem;
   left: 0.75rem;
   right: 0.75rem;
-  background: rgba(9, 10, 14, 0.85);
+  background: var(--bg-overlay-badge);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--stroke);
@@ -196,7 +196,7 @@
   font-family: var(--font-primary);
   font-size: 0.74rem;
   color: var(--text-main);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .awardIcon {
@@ -256,5 +256,15 @@
 
   .cardCol {
     grid-column: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .journeySection {
+    padding: 5rem 1rem;
+  }
+
+  .milestoneCard {
+    padding: 1.25rem;
   }
 }
