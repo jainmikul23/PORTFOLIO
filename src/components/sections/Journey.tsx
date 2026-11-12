@@ -4,8 +4,15 @@ import React from "react";
 import Image from "next/image";
 import styles from "./Journey.module.css";
 import { profile } from "@/content/profile";
-import { GraduationCap, Users, Sparkles, Calendar, Award } from "lucide-react";
+import { GraduationCap, Users, Sparkles, Calendar, Award, ExternalLink } from "lucide-react";
 import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
+
+const getCategoryIcon = (category: string) => {
+  if (category.includes("Academic")) return <GraduationCap size={20} className={styles.headerIcon} />;
+  if (category.includes("Hackathon")) return <Award size={20} className={styles.headerIcon} />;
+  if (category.includes("Collaborative")) return <Users size={20} className={styles.headerIcon} />;
+  return <Sparkles size={20} className={styles.headerIcon} />;
+};
 
 export const Journey: React.FC = () => {
   const { containerRef, headerRef } = useSectionDisappear<HTMLElement>();
@@ -25,7 +32,7 @@ export const Journey: React.FC = () => {
             <span className={styles.accentText}>milestones.</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            A chronological timeline of computer science education at AITR, collaborative engineering projects, and independent technical development.
+            A chronological timeline of computer science education at AITR, hackathon recognitions, collaborative engineering projects, and independent technical development.
           </p>
         </div>
 
@@ -51,9 +58,7 @@ export const Journey: React.FC = () => {
               <div className={styles.cardCol}>
                 <div data-scroll-disappear className={styles.milestoneCard}>
                   <div className={styles.cardHeader}>
-                    {idx === 0 && <GraduationCap size={20} className={styles.headerIcon} />}
-                    {idx === 1 && <Users size={20} className={styles.headerIcon} />}
-                    {idx === 2 && <Sparkles size={20} className={styles.headerIcon} />}
+                    {getCategoryIcon(item.category)}
                     <h3 className={styles.milestoneTitle}>{item.title}</h3>
                   </div>
 
@@ -71,8 +76,23 @@ export const Journey: React.FC = () => {
                       />
                       <div className={styles.imageOverlayBadge}>
                         <Award size={14} className={styles.awardIcon} />
-                        <span>AITR ACM Student Chapter &bull; Powered by Google</span>
+                        <span>{item.badge || item.organization}</span>
                       </div>
+                    </div>
+                  )}
+
+                  {item.link && (
+                    <div className={styles.cardActions}>
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.linkedinLink}
+                        aria-label={`View verified LinkedIn post for ${item.title}`}
+                      >
+                        <span>View Verified Post</span>
+                        <ExternalLink size={13} />
+                      </a>
                     </div>
                   )}
                 </div>

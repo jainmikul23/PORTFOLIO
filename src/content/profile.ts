@@ -167,6 +167,28 @@ export const rawProfile = {
         "Maintaining an 8.15 CGPA while mastering core computer science: Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, and Object-Oriented Software Design.",
     },
     {
+      period: "Jan 2026",
+      title: "Top 10 Teams • CodeSpire 3.0 Finale",
+      organization: "AITR, Google Developer Groups (GDG) On Campus & Hack2Skill",
+      category: "Hackathon Recognition",
+      description:
+        "Awarded Top 10 Teams certificate at CodeSpire 3.0 Finale with Team Hashira for 'Rural Health Helpdesk' — an AI-assisted healthcare platform integrating Gemini API symptom interpretation, doctor triage pathways, and consultation queue scheduling. Evaluated by Prof. (Dr) Kamal Kumar Sethi (HOD CSE) & Ishika Jain (Lead GDG).",
+      image: "/images/codespire-top10.jpg",
+      badge: "Top 10 Teams Certificate • GDG On Campus & Hack2Skill",
+      link: "https://www.linkedin.com/posts/mikul-jain-29b6b231a_healthtech-aiinhealthcare-prototyping-ugcPost-7415053328117719040-oeez/",
+    },
+    {
+      period: "2026",
+      title: "Finalist • Kriyeta 36+hr Hackathon",
+      organization: "Kriyeta National Hackathon (Round-2 Finalist)",
+      category: "Hackathon Recognition",
+      description:
+        "Selected as a Finalist in the grueling 36+ hour national hackathon. Engineered 'Civic Eye' — an AI-driven real-time road damage and pothole detection system combining computer vision with smartphone sensor telemetry for smart municipal road maintenance alerts.",
+      image: "/images/kriyeta-finalist.jpg",
+      badge: "Round-2 Finalist • 36+ Hour National Hackathon",
+      link: "https://www.linkedin.com/posts/mikul-jain-29b6b231a_hackathon-kriyeta-finalist-ugcPost-7452021778521935872-Ygi1/",
+    },
+    {
       period: "HackDay • 2nd Position",
       title: "2nd Position • HackDay Hackathon",
       organization: "AITR ACM Student Chapter & ACM-W • Powered by Google",
@@ -174,6 +196,7 @@ export const rawProfile = {
       description:
         "Secured 2nd Position at HackDay, organized by the AITR ACM Student Chapter and ACM-W (Powered by Google) at Acropolis Institute of Technology and Research, recognized for high-impact software design and rapid engineering execution.",
       image: "/images/mikul-hackathon-award.jpg",
+      badge: "2nd Position Trophy & Certificate • ACM-W & Google",
     },
     {
       period: "July - Dec 2026",

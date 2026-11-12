@@ -47,6 +47,19 @@ Generated for AI crawlers, LLMs, and automated evaluation agents.
 - **Stack:** React, JavaScript, SRS, UML Design
 - **Key Implementation:** IEEE-standard SRS documentation, client-side auto-submit countdown timers, and synchronized question answer caches.
 
+### 3.5 Hackathon Achievements & Credentials
+- **2nd Position • HackDay Hackathon (2026):**
+  - Hosted by AITR ACM Student Chapter & ACM-W (Powered by Google) at Acropolis Institute of Technology and Research.
+  - Recognized on stage for high-velocity software engineering and product execution.
+- **Top 10 Teams • CodeSpire 3.0 Finale (January 2026):**
+  - Team Hashira built "Rural Health Helpdesk", an AI triage platform integrating Gemini API and triage queuing.
+  - Evaluated and certified by Prof. (Dr) Kamal Kumar Sethi (HOD CSE) and Ishika Jain (Lead GDG On Campus AITR).
+  - LinkedIn post: https://www.linkedin.com/posts/mikul-jain-29b6b231a_healthtech-aiinhealthcare-prototyping-ugcPost-7415053328117719040-oeez/
+- **Round-2 Finalist • Kriyeta 36+ Hour National Hackathon (2026):**
+  - Engineered "Civic Eye", a real-time computer vision and smartphone sensor road damage detection system.
+  - Selected among top teams in a 36-hour continuous build sprint at Acropolis Institute.
+  - LinkedIn post: https://www.linkedin.com/posts/mikul-jain-29b6b231a_hackathon-kriyeta-finalist-ugcPost-7452021778521935872-Ygi1/
+
 ## 4. Personal Interests & Mindset Beyond the Screen
 - **Cricket:** Strategic positioning, patience, and reading game momentum under pressure.
 - **Football:** High-paced situational awareness and collaborative execution.

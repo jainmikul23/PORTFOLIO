@@ -28,11 +28,29 @@ describe("Profile & Content Integrity", () => {
   });
 
   it("includes authentic HackDay 2nd position achievement with photo asset", () => {
-    const hackathon = profile.journey.find((j) => j.category === "Hackathon Recognition");
-    expect(hackathon).toBeDefined();
-    expect(hackathon?.title).toContain("2nd Position");
-    expect(hackathon?.organization).toContain("AITR ACM Student Chapter");
-    expect(hackathon?.image).toBe("/images/mikul-hackathon-award.jpg");
+    const hackDay = profile.journey.find((j) => j.title.includes("HackDay"));
+    expect(hackDay).toBeDefined();
+    expect(hackDay?.title).toContain("2nd Position");
+    expect(hackDay?.organization).toContain("AITR ACM Student Chapter");
+    expect(hackDay?.image).toBe("/images/mikul-hackathon-award.jpg");
+  });
+
+  it("includes authentic CodeSpire 3.0 Top 10 Teams milestone with photo and LinkedIn link", () => {
+    const codespire = profile.journey.find((j) => j.title.includes("CodeSpire"));
+    expect(codespire).toBeDefined();
+    expect(codespire?.title).toContain("Top 10");
+    expect(codespire?.organization).toContain("Google Developer Groups");
+    expect(codespire?.image).toBe("/images/codespire-top10.jpg");
+    expect(codespire?.link).toContain("linkedin.com");
+  });
+
+  it("includes authentic Kriyeta 36+hr Hackathon Finalist milestone with photo and LinkedIn link", () => {
+    const kriyeta = profile.journey.find((j) => j.title.includes("Kriyeta"));
+    expect(kriyeta).toBeDefined();
+    expect(kriyeta?.title).toContain("Finalist");
+    expect(kriyeta?.organization).toContain("Kriyeta");
+    expect(kriyeta?.image).toBe("/images/kriyeta-finalist.jpg");
+    expect(kriyeta?.link).toContain("linkedin.com");
   });
 
   it("includes authentic disciplines outside the code editor", () => {

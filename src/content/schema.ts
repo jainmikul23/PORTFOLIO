@@ -56,6 +56,8 @@ export const ProfileSchema = z.object({
       category: z.string(),
       description: z.string(),
       image: z.string().optional(),
+      badge: z.string().optional(),
+      link: z.string().optional(),
     }),
   ),
   interests: z.array(

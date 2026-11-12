@@ -25,6 +25,16 @@
    - Municipal grievance resolution platform with transparent 5-stage tracking (Reported → Verified → Assigned → In Progress → Resolved).
    - Academic minor project (Team of 5, July–Dec 2026) adhering to formal RGPV UML standards (Use Case, DFD 0/1/2, ERD).
 
+## Verified Hackathon Achievements
+1. **2nd Position • HackDay Hackathon (2026)**
+   - Awarded 2nd position at HackDay hosted by AITR ACM Student Chapter & ACM-W (Powered by Google).
+2. **Top 10 Teams • CodeSpire 3.0 Finale (Jan 2026)**
+   - Qualified to Top 10 Teams with Team Hashira for "Rural Health Helpdesk" at CodeSpire 3.0 (AITR, GDG On Campus & Hack2Skill).
+   - Post: https://www.linkedin.com/posts/mikul-jain-29b6b231a_healthtech-aiinhealthcare-prototyping-ugcPost-7415053328117719040-oeez/
+3. **Round-2 Finalist • Kriyeta 36+ Hour National Hackathon (2026)**
+   - Engineered "Civic Eye" — real-time AI road damage and pothole detection using computer vision and smartphone sensor telemetry.
+   - Post: https://www.linkedin.com/posts/mikul-jain-29b6b231a_hackathon-kriyeta-finalist-ugcPost-7452021778521935872-Ygi1/
+
 ## Technical Toolkit
 - **Frontend:** React, Next.js, TypeScript, JavaScript, HTML5, CSS Modules, SCSS, Three.js, Lucide Icons
 - **Backend:** Node.js, Express, Python, Django, REST API architecture

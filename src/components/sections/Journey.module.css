@@ -204,6 +204,38 @@
   flex-shrink: 0;
 }
 
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+}
+
+.linkedinLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  font-family: var(--font-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: rgba(255, 99, 61, 0.08);
+  border: 1px solid rgba(255, 99, 61, 0.28);
+  border-radius: var(--r-full);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-out);
+  width: fit-content;
+}
+
+.linkedinLink:hover {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 99, 61, 0.35);
+}
+
 @media (max-width: 768px) {
   .timelineItem {
     grid-template-columns: 24px 1fr;
