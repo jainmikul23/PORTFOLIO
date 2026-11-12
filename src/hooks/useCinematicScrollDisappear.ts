@@ -86,3 +86,4 @@ export function useStickyDissolve<T extends HTMLElement, C extends HTMLElement>(
 
   return { containerRef, contentRef };
 }
+

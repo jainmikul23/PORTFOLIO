@@ -45,9 +45,9 @@ export const About: React.FC = () => {
               </div>
 
               <div className={styles.captionBox}>
-                <span className={styles.captionTag}>Authentic Milestone</span>
+                <span className={styles.captionTag}>HackDay &bull; 2nd Position</span>
                 <p className={styles.captionText}>
-                  On stage at Acropolis Institute &bull; Receiving Certificate of Achievement at AITR ACM Student Chapter Hackathon (Powered by Google).
+                  On stage at Acropolis Institute &bull; Awarded 2nd Position at HackDay, hosted by the AITR ACM Student Chapter and ACM-W (Powered by Google).
                 </p>
               </div>
             </div>

@@ -167,12 +167,12 @@ export const rawProfile = {
         "Maintaining an 8.15 CGPA while mastering core computer science: Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, and Object-Oriented Software Design.",
     },
     {
-      period: "2024 - 2025",
-      title: "Hackathon Certificate of Achievement",
+      period: "HackDay • 2nd Position",
+      title: "2nd Position • HackDay Hackathon",
       organization: "AITR ACM Student Chapter & ACM-W • Powered by Google",
       category: "Hackathon Recognition",
       description:
-        "Recognized on stage at Acropolis Institute of Technology and Research (AITR ACM Student Chapter, Powered by Google) for collaborative innovation, engineering problem-solving, and technical execution.",
+        "Secured 2nd Position at HackDay, organized by the AITR ACM Student Chapter and ACM-W (Powered by Google) at Acropolis Institute of Technology and Research, recognized for high-impact software design and rapid engineering execution.",
       image: "/images/mikul-hackathon-award.jpg",
     },
     {
@@ -202,18 +202,6 @@ export const rawProfile = {
       name: "Football",
       category: "High-Paced Collaboration",
       reflection: "Fast situational awareness, teamwork, and knowing when to pass or take the shot.",
-    },
-    {
-      name: "Travel & Reflection",
-      category: "Adventures & Downtime",
-      reflection: "Disconnecting from the screen by the water to recharge, reflect on system architectures, and maintain mental clarity.",
-      image: "/images/mikul-pool.jpg",
-    },
-    {
-      name: "Cafes & Creative Conversations",
-      category: "Culture & Connections",
-      reflection: "Exploring unique coffee spaces and having great conversations about products, life, and the future of technology.",
-      image: "/images/mikul-cafe.jpg",
     },
     {
       name: "Hiking & Rafting",

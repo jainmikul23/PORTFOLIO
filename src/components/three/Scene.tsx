@@ -36,18 +36,18 @@ export const Scene: React.FC = () => {
   return (
     <div className={styles.canvasContainer} aria-hidden="true">
       <Canvas
-        camera={{ position: [0, 0, 7], fov: 45 }}
-        dpr={[1, 1.5]}
+        camera={{ position: [0, 0, 6.5], fov: 45 }}
+        dpr={[1, 2]}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
-        <ambientLight intensity={0.4} />
-        <pointLight position={[5, 5, 5]} intensity={1.5} color="#FF633D" />
-        <pointLight position={[-5, -5, -2]} intensity={1.0} color="#A6A9FF" />
+        <ambientLight intensity={0.6} />
+        <pointLight position={[5, 4, 5]} intensity={3.5} color="#FF633D" />
+        <pointLight position={[-4, -3, 3]} intensity={2.5} color="#A6A9FF" />
+        <pointLight position={[1.6, 0.5, 3]} intensity={2.0} color="#FF805E" />
 
-        <Particles count={380} />
+        <Particles count={650} />
         <AmbientMesh />
       </Canvas>
     </div>
   );
 };
-

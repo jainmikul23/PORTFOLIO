@@ -27,21 +27,21 @@ describe("Profile & Content Integrity", () => {
     expect(civic?.flagship).toBe(true);
   });
 
-  it("includes authentic hackathon achievement with photo asset", () => {
+  it("includes authentic HackDay 2nd position achievement with photo asset", () => {
     const hackathon = profile.journey.find((j) => j.category === "Hackathon Recognition");
     expect(hackathon).toBeDefined();
+    expect(hackathon?.title).toContain("2nd Position");
     expect(hackathon?.organization).toContain("AITR ACM Student Chapter");
     expect(hackathon?.image).toBe("/images/mikul-hackathon-award.jpg");
   });
 
-  it("includes beyond-the-screen interests with photos", () => {
-    const travel = profile.interests.find((i) => i.name === "Travel & Reflection");
-    expect(travel).toBeDefined();
-    expect(travel?.image).toBe("/images/mikul-pool.jpg");
-
-    const cafe = profile.interests.find((i) => i.name === "Cafes & Creative Conversations");
-    expect(cafe).toBeDefined();
-    expect(cafe?.image).toBe("/images/mikul-cafe.jpg");
+  it("includes authentic disciplines outside the code editor", () => {
+    const names = profile.interests.map((i) => i.name);
+    expect(names).toContain("Cricket");
+    expect(names).toContain("Football");
+    expect(names).toContain("Hiking & Rafting");
+    expect(names).toContain("Cinema & Reading");
+    expect(names).toContain("Music");
   });
 });
 

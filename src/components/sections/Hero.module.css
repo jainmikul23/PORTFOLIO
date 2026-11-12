@@ -5,7 +5,7 @@
   position: relative;
   padding: 8rem 1.5rem 5rem;
   overflow: hidden;
-  background-color: var(--bg-primary);
+  background-color: transparent;
 }
 
 .ambientGlow {
@@ -17,7 +17,7 @@
   background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
   pointer-events: none;
   filter: blur(60px);
-  opacity: 0.6;
+  opacity: 0.15;
   z-index: 0;
 }
 
@@ -30,7 +30,7 @@
   background: radial-gradient(circle, var(--accent-secondary-glow) 0%, transparent 70%);
   pointer-events: none;
   filter: blur(70px);
-  opacity: 0.4;
+  opacity: 0.12;
   z-index: 0;
 }
 

@@ -1,24 +1,20 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import styles from "./Beyond.module.css";
 import { profile } from "@/content/profile";
-import { Compass, Film, Music, Dumbbell, BookOpen, Waves, Trophy, Coffee, Sun } from "lucide-react";
+import { Compass, Film, Music, Dumbbell, BookOpen, Waves, Trophy } from "lucide-react";
 import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
 
 export const Beyond: React.FC = () => {
   const { containerRef, headerRef } = useSectionDisappear<HTMLElement>();
+
   const getInterestIcon = (name: string) => {
     switch (name.toLowerCase()) {
       case "cricket":
         return <Trophy size={20} />;
       case "football":
         return <Dumbbell size={20} />;
-      case "travel & reflection":
-        return <Sun size={20} />;
-      case "cafes & creative conversations":
-        return <Coffee size={20} />;
       case "hiking & rafting":
       case "river rafting":
         return <Waves size={20} />;
@@ -66,21 +62,6 @@ export const Beyond: React.FC = () => {
 
               <h3 className={styles.interestName}>{interest.name}</h3>
               <p className={styles.interestReflection}>{interest.reflection}</p>
-
-              {interest.image && (
-                <div className={styles.interestImageWrapper}>
-                  <Image
-                    src={interest.image}
-                    alt={interest.name}
-                    width={400}
-                    height={280}
-                    className={styles.interestImage}
-                  />
-                  <div className={styles.imageTag}>
-                    <span>{interest.name.includes("Pool") || interest.name.includes("Travel") ? "Downtime & Focus" : "Creative Spaces"}</span>
-                  </div>
-                </div>
-              )}
 
               <div className={styles.cardAccentBar} />
             </div>
