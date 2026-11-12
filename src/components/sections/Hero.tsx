@@ -5,17 +5,25 @@ import Image from "next/image";
 import styles from "./Hero.module.css";
 import { profile } from "@/content/profile";
 import { ArrowRight, MessageSquare, Terminal, Sparkles, MapPin } from "lucide-react";
+import { useHeroDisappear } from "@/hooks/useCinematicScrollDisappear";
 
 export const Hero: React.FC = () => {
+  const { sectionRef, headlineRef, visualRef, factsRef, glowRef } = useHeroDisappear();
+
   return (
-    <section id="hero" className={styles.heroSection} aria-label="Introduction">
-      <div className={styles.ambientGlow} aria-hidden="true" />
+    <section
+      id="hero"
+      ref={sectionRef}
+      className={styles.heroSection}
+      aria-label="Introduction"
+    >
+      <div ref={glowRef} className={styles.ambientGlow} aria-hidden="true" />
       <div className={styles.ambientCoolGlow} aria-hidden="true" />
 
       <div className={styles.container}>
         <div className={styles.grid}>
           {/* Left Column: Cinematic Headline & Narrative */}
-          <div className={styles.content}>
+          <div ref={headlineRef} className={styles.content}>
             <div className={styles.taglineBadge}>
               <span className={styles.badgePulse} />
               <span className={styles.badgeText}>
@@ -51,7 +59,7 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Quick Facts Strip */}
-            <div className={styles.factsStrip}>
+            <div ref={factsRef} className={styles.factsStrip}>
               <div className={styles.factItem}>
                 <span className={styles.factLabel}>Education</span>
                 <span className={styles.factValue}>B.Tech CSE &bull; AITR</span>
@@ -72,7 +80,7 @@ export const Hero: React.FC = () => {
           {/* Right Column: Authentic Cinematic Portrait & Live System Console */}
           <div className={styles.visualCol}>
             {/* Real Photograph Frame with Cinematic Orange Lighting */}
-            <div className={styles.portraitCard}>
+            <div ref={visualRef} className={styles.portraitCard}>
               <div className={styles.portraitFrame}>
                 <Image
                   src="/mikul-jain.jpg"

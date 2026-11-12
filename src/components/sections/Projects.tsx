@@ -6,9 +6,11 @@ import styles from "./Projects.module.css";
 import { profile } from "@/content/profile";
 import type { Project } from "@/content/schema";
 import { ArrowUpRight, ExternalLink, Check, Zap, Layers } from "lucide-react";
+import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
 
 export const Projects: React.FC = () => {
   const [filter, setFilter] = useState<"all" | "flagship" | "systems">("all");
+  const { containerRef, headerRef } = useSectionDisappear<HTMLElement>();
 
   const filteredProjects = profile.projects.filter((p) => {
     if (filter === "flagship") return p.flagship;
@@ -17,9 +19,14 @@ export const Projects: React.FC = () => {
   });
 
   return (
-    <section id="projects" className={styles.projectsSection} aria-label="Selected Projects">
+    <section
+      id="projects"
+      ref={containerRef}
+      className={styles.projectsSection}
+      aria-label="Selected Projects"
+    >
       <div className={styles.container}>
-        <div className={styles.sectionHeader}>
+        <div ref={headerRef} className={styles.sectionHeader}>
           <span className="label-caps">Chapter 04 &bull; Selected Work</span>
           <h2 className={styles.sectionTitle}>
             Ideas turned into{" "}
@@ -55,7 +62,11 @@ export const Projects: React.FC = () => {
         {/* Product Cards Showcase */}
         <div className={styles.productsGrid}>
           {filteredProjects.map((project: Project, idx: number) => (
-            <article key={project.slug} className={`${styles.productCard} ${project.flagship ? styles.flagshipCard : ""}`}>
+            <article
+              key={project.slug}
+              data-scroll-disappear
+              className={`${styles.productCard} ${project.flagship ? styles.flagshipCard : ""}`}
+            >
               {/* Card Header & Badges */}
               <div className={styles.cardHeader}>
                 <div className={styles.badgeRow}>

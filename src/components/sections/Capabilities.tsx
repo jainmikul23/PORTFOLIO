@@ -4,16 +4,20 @@ import React from "react";
 import styles from "./Capabilities.module.css";
 import { profile } from "@/content/profile";
 import { CheckCircle2, ArrowUpRight } from "lucide-react";
+import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
 
 export const Capabilities: React.FC = () => {
+  const { containerRef, headerRef } = useSectionDisappear<HTMLElement>();
+
   return (
     <section
       id="capabilities"
+      ref={containerRef}
       className={styles.capabilitiesSection}
       aria-label="Professional Capabilities"
     >
       <div className={styles.container}>
-        <div className={styles.sectionHeader}>
+        <div ref={headerRef} className={styles.sectionHeader}>
           <span className="label-caps">Chapter 03 &bull; What I Do</span>
           <h2 className={styles.sectionTitle}>
             Three dimensions of a{" "}
@@ -28,7 +32,11 @@ export const Capabilities: React.FC = () => {
 
         <div className={styles.cardsGrid}>
           {profile.capabilities.map((cap) => (
-            <div key={cap.id} className={styles.capabilityCard}>
+            <div
+              key={cap.id}
+              data-scroll-disappear
+              className={styles.capabilityCard}
+            >
               <div className={styles.cardTop}>
                 <span className={styles.cardHeaderNumber}>{cap.title.split("—")[0]}</span>
                 <span className={styles.cardHeaderTitle}>{cap.title.split("—")[1]}</span>

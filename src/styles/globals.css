@@ -90,3 +90,24 @@ a {
 .skip-link:focus {
   top: 1rem;
 }
+
+/* Lenis Smooth Scroll Optimization */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* GPU Acceleration for Scroll-Disappear Elements */
+[data-scroll-disappear] {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

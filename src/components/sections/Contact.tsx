@@ -17,7 +17,7 @@ export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
   const copyEmail = () => {
-    navigator.clipboard.writeText("mikul.jain.placeholder@example.com");
+    navigator.clipboard.writeText(profile.links.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -88,7 +88,7 @@ export const Contact: React.FC = () => {
                   <Mail size={18} className={styles.channelIcon} />
                   <div className={styles.btnTextWrapper}>
                     <span className={styles.btnLabel}>Email Transmission</span>
-                    <span className={styles.btnValue}>mikul.jain.placeholder@example.com</span>
+                    <span className={styles.btnValue}>{profile.links.email}</span>
                   </div>
                   {copied ? <Check size={18} className={styles.copyCheck} /> : <Copy size={16} />}
                 </button>
@@ -123,7 +123,7 @@ export const Contact: React.FC = () => {
                   </svg>
                   <div className={styles.btnTextWrapper}>
                     <span className={styles.btnLabel}>Code Repositories</span>
-                    <span className={styles.btnValue}>github.com (Projects &amp; Architectures)</span>
+                    <span className={styles.btnValue}>github.com/jainmikul23</span>
                   </div>
                   <span className={styles.linkArrow}>&rarr;</span>
                 </a>

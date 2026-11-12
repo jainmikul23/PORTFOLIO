@@ -33,6 +33,7 @@
 
 ## Official Verified Links
 - **LinkedIn:** https://www.linkedin.com/in/mikul-jain-29b6b231a
-- **Website:** http://localhost:3000 (Production domain configurable via NEXT_PUBLIC_SITE_URL)
-- **Contact:** Via portfolio contact form or LinkedIn direct message
+- **GitHub:** https://github.com/jainmikul23
+- **Email:** mikuljain09@gmail.com
+- **Website:** https://mikuljain.dev (or local preview: http://localhost:3000)
 

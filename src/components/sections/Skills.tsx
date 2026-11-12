@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "./Skills.module.css";
 import { profile } from "@/content/profile";
 import { Code, Server, Database, Terminal, Wrench, Sparkles } from "lucide-react";
+import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
 
 interface SkillCategory {
   id: string;
@@ -15,6 +16,7 @@ interface SkillCategory {
 
 export const Skills: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const { containerRef, headerRef } = useSectionDisappear<HTMLElement>();
 
   const categories: SkillCategory[] = [
     {
@@ -66,9 +68,14 @@ export const Skills: React.FC = () => {
     : categories.filter((c) => c.id === activeCategory);
 
   return (
-    <section id="skills" className={styles.skillsSection} aria-label="Technical Skills">
+    <section
+      id="skills"
+      ref={containerRef}
+      className={styles.skillsSection}
+      aria-label="Technical Skills"
+    >
       <div className={styles.container}>
-        <div className={styles.sectionHeader}>
+        <div ref={headerRef} className={styles.sectionHeader}>
           <span className="label-caps">Chapter 05 &bull; Technical Universe</span>
           <h2 className={styles.sectionTitle}>
             Tools, architectures &amp;{" "}
@@ -101,7 +108,11 @@ export const Skills: React.FC = () => {
         {/* Categories Grid */}
         <div className={styles.categoryGrid}>
           {displayed.map((cat) => (
-            <div key={cat.id} className={styles.categoryCard}>
+            <div
+              key={cat.id}
+              data-scroll-disappear
+              className={styles.categoryCard}
+            >
               <div className={styles.catHeader}>
                 <div className={styles.iconBox}>{cat.icon}</div>
                 <h3 className={styles.catName}>{cat.name}</h3>

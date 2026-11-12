@@ -78,7 +78,7 @@ export const rawProfile = {
       role: "Lead Full Stack & AI Integration Engineer",
       impact: "Designed for rural Central India with low network overhead and zero server dependency.",
       links: {
-        github: "TODO: https://github.com/...",
+        github: "https://github.com/jainmikul23",
         live: "TODO: https://...",
       },
       highlights: [
@@ -103,7 +103,7 @@ export const rawProfile = {
       role: "Full Stack Engineering Contributor (Team of 5)",
       impact: "Designed for municipal accountability across citizen reporting and authority resolution stages.",
       links: {
-        github: "TODO: https://github.com/...",
+        github: "https://github.com/jainmikul23",
       },
       highlights: [
         "Transparent 5-stage issue resolution state machine",
@@ -126,7 +126,7 @@ export const rawProfile = {
       stack: ["React", "JavaScript", "SRS", "UML Design"],
       role: "System Analyst & Frontend Developer",
       links: {
-        github: "TODO: https://github.com/...",
+        github: "https://github.com/jainmikul23",
       },
       highlights: [
         "Formal IEEE-format Software Requirements Specification (SRS)",
@@ -148,7 +148,7 @@ export const rawProfile = {
       stack: ["Python", "Django", "MySQL", "Three.js", "CSS Modules"],
       role: "Backend & Database Architect",
       links: {
-        github: "TODO: https://github.com/...",
+        github: "https://github.com/jainmikul23",
       },
       highlights: [
         "Atomic database transactions preventing race conditions during ledger transfers",
@@ -233,8 +233,8 @@ export const rawProfile = {
   ],
   links: {
     linkedin: "https://www.linkedin.com/in/mikul-jain-29b6b231a",
-    github: "TODO: https://github.com/...",
-    email: "TODO: your.email@domain.com",
+    github: "https://github.com/jainmikul23",
+    email: "mikuljain09@gmail.com",
   },
 } as const;
 

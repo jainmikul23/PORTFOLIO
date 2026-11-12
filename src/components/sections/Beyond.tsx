@@ -5,8 +5,10 @@ import Image from "next/image";
 import styles from "./Beyond.module.css";
 import { profile } from "@/content/profile";
 import { Compass, Film, Music, Dumbbell, BookOpen, Waves, Trophy, Coffee, Sun } from "lucide-react";
+import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
 
 export const Beyond: React.FC = () => {
+  const { containerRef, headerRef } = useSectionDisappear<HTMLElement>();
   const getInterestIcon = (name: string) => {
     switch (name.toLowerCase()) {
       case "cricket":
@@ -31,9 +33,14 @@ export const Beyond: React.FC = () => {
   };
 
   return (
-    <section id="beyond" className={styles.beyondSection} aria-label="Beyond Development">
+    <section
+      id="beyond"
+      ref={containerRef}
+      className={styles.beyondSection}
+      aria-label="Beyond Development"
+    >
       <div className={styles.container}>
-        <div className={styles.sectionHeader}>
+        <div ref={headerRef} className={styles.sectionHeader}>
           <span className="label-caps">Chapter 07 &bull; Beyond The Screen</span>
           <h2 className={styles.sectionTitle}>
             The mindset outside <span className={styles.accentText}>the code editor.</span>
@@ -47,7 +54,11 @@ export const Beyond: React.FC = () => {
         {/* Interests Editorial Grid */}
         <div className={styles.interestsGrid}>
           {profile.interests.map((interest, idx) => (
-            <div key={idx} className={styles.interestCard}>
+            <div
+              key={idx}
+              data-scroll-disappear
+              className={styles.interestCard}
+            >
               <div className={styles.cardHeader}>
                 <div className={styles.iconBox}>{getInterestIcon(interest.name)}</div>
                 <span className={styles.interestCategory}>{interest.category}</span>
@@ -77,7 +88,7 @@ export const Beyond: React.FC = () => {
         </div>
 
         {/* Human Note Banner */}
-        <div className={styles.quoteBanner}>
+        <div data-scroll-disappear className={styles.quoteBanner}>
           <div className={styles.quoteIcon}>
             <Compass size={28} className={styles.compassSvg} />
           </div>

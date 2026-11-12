@@ -5,12 +5,20 @@ import Image from "next/image";
 import styles from "./About.module.css";
 import { profile } from "@/content/profile";
 import { GraduationCap, Award, Lightbulb, Compass, Code2 } from "lucide-react";
+import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
 
 export const About: React.FC = () => {
+  const { containerRef, headerRef } = useSectionDisappear<HTMLElement>();
+
   return (
-    <section id="about" className={styles.aboutSection} aria-label="About Mikul Jain">
+    <section
+      id="about"
+      ref={containerRef}
+      className={styles.aboutSection}
+      aria-label="About Mikul Jain"
+    >
       <div className={styles.container}>
-        <div className={styles.sectionHeader}>
+        <div ref={headerRef} className={styles.sectionHeader}>
           <span className="label-caps">Chapter 02 &bull; The Person Behind The Screen</span>
           <h2 className={styles.sectionTitle}>
             Engineering rigor powered by{" "}
@@ -24,7 +32,7 @@ export const About: React.FC = () => {
         <div className={styles.grid}>
           {/* Left Column: Visual Editorial Card with Authentic Hackathon Achievement */}
           <div className={styles.editorialVisual}>
-            <div className={styles.imageCard}>
+            <div data-scroll-disappear className={styles.imageCard}>
               <div className={styles.imageFrame}>
                 <Image
                   src="/images/mikul-hackathon-award.jpg"
@@ -45,7 +53,7 @@ export const About: React.FC = () => {
             </div>
 
             {/* Academic Credential Card */}
-            <div className={styles.credentialCard}>
+            <div data-scroll-disappear className={styles.credentialCard}>
               <div className={styles.credentialIconBox}>
                 <GraduationCap size={24} className={styles.credIcon} />
               </div>
@@ -65,7 +73,7 @@ export const About: React.FC = () => {
 
           {/* Right Column: Editorial Narrative & 3 Core Pillars */}
           <div className={styles.narrativeCol}>
-            <div className={styles.proseBlock}>
+            <div data-scroll-disappear className={styles.proseBlock}>
               <p className={styles.leadParagraph}>
                 I see code not as an end in itself, but as the raw material to <em>solve real human problems</em>. As a third-year Computer Science student, my journey is driven by answering two fundamental questions: <strong>What value does this create?</strong> and <strong>How do we build it to be resilient and fast?</strong>
               </p>
@@ -76,7 +84,7 @@ export const About: React.FC = () => {
 
             {/* Three Distinct Dimensions */}
             <div className={styles.pillarsGrid}>
-              <div className={styles.pillarCard}>
+              <div data-scroll-disappear className={styles.pillarCard}>
                 <div className={styles.pillarHeader}>
                   <Lightbulb size={20} className={styles.pillarIcon} />
                   <h3 className={styles.pillarTitle}>Product Thinking</h3>
@@ -86,7 +94,7 @@ export const About: React.FC = () => {
                 </p>
               </div>
 
-              <div className={styles.pillarCard}>
+              <div data-scroll-disappear className={styles.pillarCard}>
                 <div className={styles.pillarHeader}>
                   <Code2 size={20} className={styles.pillarIcon} />
                   <h3 className={styles.pillarTitle}>Full Stack Craft</h3>
@@ -96,7 +104,7 @@ export const About: React.FC = () => {
                 </p>
               </div>
 
-              <div className={styles.pillarCard}>
+              <div data-scroll-disappear className={styles.pillarCard}>
                 <div className={styles.pillarHeader}>
                   <Compass size={20} className={styles.pillarIcon} />
                   <h3 className={styles.pillarTitle}>Curiosity &amp; Innovation</h3>

@@ -5,12 +5,20 @@ import Image from "next/image";
 import styles from "./Journey.module.css";
 import { profile } from "@/content/profile";
 import { GraduationCap, Users, Sparkles, Calendar, Award } from "lucide-react";
+import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
 
 export const Journey: React.FC = () => {
+  const { containerRef, headerRef } = useSectionDisappear<HTMLElement>();
+
   return (
-    <section id="journey" className={styles.journeySection} aria-label="Journey & Milestones">
+    <section
+      id="journey"
+      ref={containerRef}
+      className={styles.journeySection}
+      aria-label="Journey & Milestones"
+    >
       <div className={styles.container}>
-        <div className={styles.sectionHeader}>
+        <div ref={headerRef} className={styles.sectionHeader}>
           <span className="label-caps">Chapter 06 &bull; The Story So Far</span>
           <h2 className={styles.sectionTitle}>
             Academic trajectory &amp;{" "}
@@ -41,7 +49,7 @@ export const Journey: React.FC = () => {
 
               {/* Right Column: Narrative Card */}
               <div className={styles.cardCol}>
-                <div className={styles.milestoneCard}>
+                <div data-scroll-disappear className={styles.milestoneCard}>
                   <div className={styles.cardHeader}>
                     {idx === 0 && <GraduationCap size={20} className={styles.headerIcon} />}
                     {idx === 1 && <Users size={20} className={styles.headerIcon} />}
