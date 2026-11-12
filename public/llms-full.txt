@@ -58,3 +58,4 @@ Generated for AI crawlers, LLMs, and automated evaluation agents.
 - **LinkedIn:** https://www.linkedin.com/in/mikul-jain-29b6b231a
 - **GitHub:** Configured via profile.ts (projects open-source on request)
 - **Email:** Direct copy available on website contact section
+

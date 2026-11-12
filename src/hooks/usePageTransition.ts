@@ -18,3 +18,4 @@ export function usePageTransition() {
 
   return { isTransitioning, pathname };
 }
+

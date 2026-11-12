@@ -74,3 +74,4 @@ export function animateSectionEntrance(
     ease: ANIMATION_CONFIG.easings.out,
   });
 }
+

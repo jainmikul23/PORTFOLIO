@@ -38,3 +38,4 @@ export function bindCardTilt(element: HTMLElement): () => void {
     element.removeEventListener("mouseleave", handleMouseLeave);
   };
 }
+

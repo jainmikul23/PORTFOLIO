@@ -16,3 +16,4 @@ export function initGSAP(): typeof gsap {
 }
 
 export { gsap, ScrollTrigger };
+

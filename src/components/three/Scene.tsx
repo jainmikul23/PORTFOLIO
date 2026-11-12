@@ -50,3 +50,4 @@ export const Scene: React.FC = () => {
     </div>
   );
 };
+

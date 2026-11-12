@@ -44,3 +44,4 @@ describe("Profile & Content Integrity", () => {
     expect(cafe?.image).toBe("/images/mikul-cafe.jpg");
   });
 });
+

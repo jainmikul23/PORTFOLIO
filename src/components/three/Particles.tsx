@@ -67,3 +67,4 @@ export const Particles: React.FC<{ count?: number }> = ({ count = 450 }) => {
     </instancedMesh>
   );
 };
+

@@ -32,3 +32,4 @@ export function pageFadeOut(container: HTMLElement, onComplete?: () => void): gs
     onComplete,
   });
 }
+
