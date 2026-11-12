@@ -4,6 +4,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./LoadingScreen.module.css";
 import { prefersReducedMotion } from "@/lib/animations/config";
 
+/**
+ * Non-blocking ambient loading line that sweeps across the top of the viewport
+ * without blocking FCP (First Contentful Paint) or LCP (Largest Contentful Paint).
+ */
 export const LoadingScreen: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const [fading, setFading] = useState(false);
@@ -14,11 +18,10 @@ export const LoadingScreen: React.FC = () => {
       return;
     }
 
-    // Dismiss as soon as window loads, with maximum 600ms grace to never block LCP
     const timer = setTimeout(() => {
       setFading(true);
-      setTimeout(() => setVisible(false), 500);
-    }, 450);
+      setTimeout(() => setVisible(false), 400);
+    }, 600);
 
     return () => clearTimeout(timer);
   }, []);
@@ -27,18 +30,10 @@ export const LoadingScreen: React.FC = () => {
 
   return (
     <div
-      className={`${styles.overlay} ${fading ? styles.fadeOut : ""}`}
+      className={`${styles.loadingContainer} ${fading ? styles.fadeOut : ""}`}
       aria-hidden="true"
     >
-      <div className={styles.centerBox}>
-        <div className={styles.pulseRing} />
-        <span className={styles.loaderLine} />
-        <div className={styles.loaderText}>
-          <span className={styles.dot} />
-          <span>INITIALIZING DIGITAL EXPERIENCE</span>
-        </div>
-      </div>
+      <div className={styles.loadingBar} />
     </div>
   );
 };
-

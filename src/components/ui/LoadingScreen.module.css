@@ -1,75 +1,44 @@
-.overlay {
+.loadingContainer {
   position: fixed;
-  inset: 0;
-  background-color: var(--bg-primary);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
   z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   pointer-events: none;
-  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  background: transparent;
+  overflow: hidden;
+  transition: opacity 0.4s var(--ease-out);
 }
 
 .fadeOut {
   opacity: 0;
 }
 
-.centerBox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  position: relative;
-}
-
-.pulseRing {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 1px solid var(--accent-primary);
-  box-shadow: 0 0 25px var(--accent-glow);
-  animation: pulseAperture 1.5s infinite ease-out;
-}
-
-@keyframes pulseAperture {
-  0% { transform: scale(0.85); opacity: 0.9; }
-  50% { transform: scale(1.15); opacity: 0.4; }
-  100% { transform: scale(0.85); opacity: 0.9; }
-}
-
-.loaderLine {
-  width: 140px;
-  height: 2px;
+.loadingBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
   background: linear-gradient(
     90deg,
     transparent 0%,
     var(--accent-primary) 50%,
-    transparent 100%
+    var(--accent-secondary) 100%
   );
-  animation: lineSweep 1.2s infinite ease-in-out;
+  box-shadow: 0 0 12px var(--accent-primary);
+  animation: sweepBar 1.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-@keyframes lineSweep {
-  0% { transform: scaleX(0.2); opacity: 0.4; }
-  50% { transform: scaleX(1); opacity: 1; }
-  100% { transform: scaleX(0.2); opacity: 0.4; }
+@keyframes sweepBar {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
 }
-
-.loaderText {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-primary);
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  color: var(--text-dim);
-}
-
-.dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent-primary);
-  box-shadow: 0 0 8px var(--accent-primary);
-}
-

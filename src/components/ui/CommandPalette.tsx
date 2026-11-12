@@ -37,7 +37,7 @@ export const CommandPalette: React.FC = () => {
   };
 
   const copyEmail = () => {
-    navigator.clipboard.writeText("mikul.jain.placeholder@example.com");
+    navigator.clipboard.writeText("mikuljain09@gmail.com");
     alert("Email copied to clipboard!");
     close();
   };
@@ -112,6 +112,15 @@ export const CommandPalette: React.FC = () => {
       category: "Social",
       action: () => {
         window.open("https://www.linkedin.com/in/mikul-jain-29b6b231a", "_blank");
+        close();
+      },
+    },
+    {
+      id: "github",
+      title: "Open GitHub Profile",
+      category: "Social",
+      action: () => {
+        window.open("https://github.com/jainmikul23", "_blank");
         close();
       },
     },

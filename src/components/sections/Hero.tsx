@@ -88,6 +88,8 @@ export const Hero: React.FC = () => {
                   width={340}
                   height={380}
                   priority
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, 380px"
                   className={styles.portraitImg}
                 />
                 <div className={styles.portraitOverlay} />
