@@ -55,7 +55,6 @@ const nextConfig: NextConfig = {
       "lucide-react",
       "three",
       "@react-three/fiber",
-      "@react-three/drei",
       "gsap",
       "lenis",
     ],

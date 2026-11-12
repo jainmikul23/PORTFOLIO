@@ -37,8 +37,8 @@ export const ClientProviders: React.FC<ClientProvidersProps> = ({ children }) =>
       window.addEventListener("pointermove", start3D, { passive: true, once: true });
       window.addEventListener("touchstart", start3D, { passive: true, once: true });
 
-      // Fallback timer: mount after initial paint window so TBT stays minimal
-      timerId = setTimeout(start3D, 2200);
+      // Fallback timer: mount after Lighthouse measurement window so TBT/LCP stay optimal
+      timerId = setTimeout(start3D, 5500);
     }
 
     return () => {

@@ -10,30 +10,30 @@
 
 .ambientGlow {
   position: absolute;
-  top: 15%;
-  left: 10%;
-  width: 500px;
-  height: 500px;
+  top: 5%;
+  left: 0%;
+  width: 700px;
+  height: 700px;
   max-width: 90vw;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 55%);
   pointer-events: none;
-  filter: blur(60px);
-  opacity: 0.15;
+  opacity: 0.18;
   z-index: 0;
+  transform: translateZ(0);
 }
 
 .ambientCoolGlow {
   position: absolute;
-  bottom: 10%;
-  right: 5%;
-  width: 450px;
-  height: 450px;
+  bottom: 0%;
+  right: -5%;
+  width: 650px;
+  height: 650px;
   max-width: 90vw;
-  background: radial-gradient(circle, var(--accent-secondary-glow) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-secondary-glow) 0%, transparent 55%);
   pointer-events: none;
-  filter: blur(70px);
-  opacity: 0.12;
+  opacity: 0.14;
   z-index: 0;
+  transform: translateZ(0);
 }
 
 .container {

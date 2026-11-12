@@ -85,6 +85,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${spaceGrotesk.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/* Preload hero LCP image for fastest paint */}
+        <link
+          rel="preload"
+          as="image"
+          href="/mikul-jain.jpg"
+          type="image/jpeg"
+          fetchPriority="high"
+        />
+      </head>
       <body>
         <ClientProviders>{children}</ClientProviders>
       </body>

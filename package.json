@@ -18,13 +18,8 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
-    "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^9.0.0-rc.3",
-    "@react-three/postprocessing": "^2.16.3",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.4.7",
-    "gray-matter": "^4.0.3",
     "gsap": "^3.12.7",
     "lenis": "^1.1.20",
     "lucide-react": "^1.72.0",
@@ -32,7 +27,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^4.1.2",
-    "split-type": "^0.3.4",
     "three": "^0.173.0",
     "zod": "^3.24.2"
   },
