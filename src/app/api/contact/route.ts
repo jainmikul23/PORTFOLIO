@@ -79,3 +79,11 @@ export async function POST(req: Request) {
     );
   }
 }
+
+export async function GET() {
+  return NextResponse.json(
+    { status: "ok", message: "Contact API endpoint is operational. Use POST to transmit inquiries." },
+    { status: 200 },
+  );
+}
+

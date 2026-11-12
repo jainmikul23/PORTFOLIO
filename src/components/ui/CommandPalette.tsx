@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import styles from "./CommandPalette.module.css";
 import { Glass } from "./Glass";
+import { profile } from "@/content/profile";
 
 interface CommandItem {
   id: string;
@@ -99,10 +100,10 @@ export const CommandPalette: React.FC = () => {
     },
     {
       id: "resume",
-      title: "View Resume (PDF)",
+      title: "View Professional Profile (LinkedIn)",
       category: "Action",
       action: () => {
-        window.open("/resume.pdf", "_blank");
+        window.open(profile.links.linkedin, "_blank");
         close();
       },
     },
