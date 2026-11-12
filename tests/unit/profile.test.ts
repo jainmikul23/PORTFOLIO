@@ -11,7 +11,7 @@ describe("Profile & Content Integrity", () => {
   it("contains verified authentic student data for Mikul Jain", () => {
     expect(profile.name).toBe("Mikul Jain");
     expect(profile.education.college).toContain("Acropolis Institute of Technology and Research");
-    expect(profile.education.cgpa).toBe("8.15");
+    expect(profile.education.cgpa).toBe("8.22");
     expect(profile.education.year).toContain("Third-year");
   });
 

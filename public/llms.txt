@@ -4,7 +4,7 @@
 ## Overview
 - **Name:** Mikul Jain
 - **Role & Positioning:** Product-Minded Full Stack Developer
-- **Education:** B.Tech in Computer Science & Engineering (Third-year student, 8.15 CGPA)
+- **Education:** B.Tech in Computer Science & Engineering (Third-year student, 8.22 CGPA)
 - **Institution:** Acropolis Institute of Technology and Research (AITR), Indore, Madhya Pradesh, India (affiliated to Rajiv Gandhi Proudyogiki Vishwavidyalaya - RGPV)
 - **Primary Domain:** Full Stack Development (MERN Ecosystem, Python/Django, Relational Systems, AI Integration)
 - **Location:** Indore, India

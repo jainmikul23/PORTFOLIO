@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
           <div className={styles.statusBox}>
             <span className={styles.statusDot} />
             <span className={styles.statusText}>
-              All Systems Operational &bull; 8.15 CGPA &bull; Full Stack MERN &amp; Python
+              All Systems Operational &bull; 8.22 CGPA &bull; Full Stack MERN &amp; Python
             </span>
           </div>
         </div>

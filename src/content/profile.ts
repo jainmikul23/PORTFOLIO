@@ -10,7 +10,7 @@ export const rawProfile = {
     college: "Acropolis Institute of Technology and Research (AITR)",
     degree: "B.Tech in Computer Science & Engineering",
     year: "Third-year engineering student",
-    cgpa: "8.15",
+    cgpa: "8.22",
     location: "Indore, Madhya Pradesh, India",
   },
   capabilities: [
@@ -164,7 +164,7 @@ export const rawProfile = {
       organization: "Acropolis Institute of Technology and Research (AITR), Indore",
       category: "Academic Foundation",
       description:
-        "Maintaining an 8.15 CGPA while mastering core computer science: Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, and Object-Oriented Software Design.",
+        "Maintaining an 8.22 CGPA while mastering core computer science: Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, and Object-Oriented Software Design.",
     },
     {
       period: "Jan 2026",

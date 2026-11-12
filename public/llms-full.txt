@@ -6,7 +6,7 @@ Generated for AI crawlers, LLMs, and automated evaluation agents.
 - **Current Position:** Third-year Computer Science & Engineering Undergraduate
 - **College:** Acropolis Institute of Technology and Research (AITR), Indore, India
 - **University Affiliation:** Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV), Bhopal
-- **Academic Standing:** 8.15 Cumulative Grade Point Average (CGPA)
+- **Academic Standing:** 8.22 Cumulative Grade Point Average (CGPA)
 - **Target Roles:** Full Stack Software Engineer, Frontend Engineer, Associate Technical Product Manager
 
 ## 2. Architecture Philosophy: "The Mind Behind The Code"

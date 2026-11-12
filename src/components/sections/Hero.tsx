@@ -67,7 +67,7 @@ export const Hero: React.FC = () => {
               <div className={styles.factDivider} />
               <div className={styles.factItem}>
                 <span className={styles.factLabel}>Academic Record</span>
-                <span className={styles.factValue}>8.15 CGPA (3rd Year)</span>
+                <span className={styles.factValue}>8.22 CGPA (3rd Year)</span>
               </div>
               <div className={styles.factDivider} />
               <div className={styles.factItem}>
