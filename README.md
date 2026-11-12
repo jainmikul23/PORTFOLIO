@@ -97,3 +97,4 @@ Build and run using the multi-stage, non-root Dockerfile:
 docker build -t portfolio-mikul .
 docker run -p 3000:3000 --env-file .env.local portfolio-mikul
 ```
+

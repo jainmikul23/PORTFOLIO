@@ -17,3 +17,4 @@ We chose **Three.js via React Three Fiber (@react-three/fiber)** paired with `@r
 - **Negative:**
   - Requires strict lifecycle management and explicit disposal (`dispose()`) of meshes and geometries on unmount to prevent WebGL context leaks.
   - 3D bundle size must be isolated and loaded dynamically (`next/dynamic` with `ssr: false`) to safeguard LCP performance budgets.
+

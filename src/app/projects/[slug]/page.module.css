@@ -1,0 +1,281 @@
+.caseStudyMain {
+  min-height: 100vh;
+  padding: 5rem 1.5rem 8rem;
+  background-color: var(--ink-950);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  margin-bottom: 2rem;
+}
+
+.backLink {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--brass);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.badges {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-h1);
+  color: var(--bone);
+  line-height: var(--leading-tight);
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  font-size: var(--text-lead);
+  color: var(--stone);
+  line-height: var(--leading-normal);
+  margin-bottom: 2rem;
+}
+
+.metaStrip {
+  display: flex;
+  gap: 3rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--stroke);
+  border-bottom: 1px solid var(--stroke);
+  flex-wrap: wrap;
+}
+
+.metaValue {
+  margin-top: 0.35rem;
+  font-size: var(--text-sm);
+  color: var(--bone);
+  font-weight: 500;
+}
+
+.stackChips {
+  margin-top: 0.35rem;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.impactCard {
+  padding: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.impactBody {
+  margin-top: 0.5rem;
+  font-size: var(--text-body);
+  color: var(--bone);
+  line-height: var(--leading-normal);
+}
+
+.deepDiveSection {
+  margin-bottom: 3.5rem;
+}
+
+.deepDiveCard {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sectionHeading {
+  font-family: var(--font-serif);
+  font-size: var(--text-h2);
+  color: var(--bone);
+}
+
+.subHeading {
+  font-size: 1.25rem;
+  color: var(--brass);
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.prose {
+  font-size: var(--text-body);
+  color: var(--stone);
+  line-height: var(--leading-normal);
+}
+
+.prose strong {
+  color: var(--bone);
+}
+
+.calloutBox {
+  padding: 1.25rem;
+  border-radius: var(--r-md);
+  background: rgba(224, 164, 88, 0.08);
+  border: 1px solid var(--stroke-brass);
+  color: var(--bone);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.calloutBox strong {
+  color: var(--brass);
+}
+
+.honestLimitBox {
+  padding: 1.25rem;
+  border-radius: var(--r-md);
+  background: rgba(232, 85, 61, 0.08);
+  border: 1px solid rgba(232, 85, 61, 0.3);
+  color: var(--bone);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.honestLimitBox strong {
+  color: var(--vermilion);
+}
+
+.workflowDiagram {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: rgba(10, 13, 17, 0.5);
+  border-radius: var(--r-md);
+  border: 1px solid var(--stroke);
+  overflow-x: auto;
+}
+
+.workflowStep {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: center;
+  min-width: 140px;
+}
+
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--brass);
+  font-weight: 700;
+}
+
+.stepTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--bone);
+}
+
+.stepDesc {
+  font-size: 0.75rem;
+  color: var(--dim);
+}
+
+.arrow {
+  color: var(--brass);
+  font-weight: bold;
+}
+
+.lifecycleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background: rgba(10, 13, 17, 0.4);
+  border-radius: var(--r-md);
+  border: 1px solid var(--stroke);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.stateChip {
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--r-full);
+  background: var(--glass-hi);
+  border: 1px solid var(--stroke);
+  color: var(--stone);
+}
+
+.resolvedState {
+  background: rgba(127, 183, 164, 0.15);
+  border-color: rgba(127, 183, 164, 0.4);
+  color: var(--sage);
+  font-weight: 600;
+}
+
+.diagramList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.diagramList li {
+  font-size: var(--text-sm);
+  color: var(--stone);
+  line-height: 1.5;
+  padding-left: 1rem;
+  border-left: 2px solid var(--stroke-brass);
+}
+
+.diagramList strong {
+  color: var(--bone);
+}
+
+.sectionBox {
+  margin-bottom: 3.5rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  color: var(--bone);
+  margin-bottom: 1.5rem;
+}
+
+.highlightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.25rem;
+}
+
+.highlightCard {
+  padding: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.checkIcon {
+  color: var(--sage);
+  font-weight: bold;
+}
+
+.highlightText {
+  font-size: var(--text-sm);
+  color: var(--stone);
+  line-height: 1.5;
+}
+
+.footerActions {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--stroke);
+  flex-wrap: wrap;
+}

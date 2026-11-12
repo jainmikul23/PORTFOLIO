@@ -17,3 +17,4 @@ We adopted **Vanilla CSS Modules coupled with root CSS custom properties (tokens
   - Native CSS variables allow smooth runtime theme transitions (warm paper light vs ink dark) and dynamic accent tint shifts.
 - **Negative:**
   - Requires maintaining custom utility tokens and layout primitives manually rather than relying on standard utility classes.
+

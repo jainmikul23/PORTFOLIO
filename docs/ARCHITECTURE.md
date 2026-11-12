@@ -36,3 +36,4 @@ flowchart TD
 2. **3D Scene Graph (R3F)**: Rendered through a single persistent `<Canvas>` background. Driven by scroll offsets and mouse parallax via `useFrame`.
 3. **Data Layer**: Strictly validated schema (`src/content/profile.ts`) and MDX frontmatter with zero unchecked any types.
 4. **API & Defense**: Next.js App Router Route Handler protected by client rate limiting, honeypot spam detection, and Zod input validation.
+

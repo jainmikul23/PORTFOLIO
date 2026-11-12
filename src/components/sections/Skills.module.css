@@ -1,0 +1,166 @@
+.skillsSection {
+  padding: 7rem 1.5rem;
+  background-color: var(--bg-primary);
+  position: relative;
+}
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  margin-bottom: 3.5rem;
+  max-width: 840px;
+}
+
+.sectionTitle {
+  font-family: var(--font-primary);
+  font-size: var(--text-h2);
+  color: var(--text-main);
+  line-height: var(--leading-tight);
+  margin-top: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.accentText {
+  color: var(--accent-primary);
+}
+
+.sectionSubtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-lead);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+  margin-bottom: 2rem;
+}
+
+.filterRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 0.45rem 1rem;
+  border-radius: var(--r-full);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+  color: var(--text-muted);
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.filterBtn:hover {
+  border-color: var(--stroke-hi);
+  color: var(--text-main);
+}
+
+.activeFilter {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+  box-shadow: 0 2px 10px var(--accent-glow);
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 2rem;
+}
+
+.categoryCard {
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-2xl);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--duration-normal) var(--ease-out);
+  box-shadow: var(--shadow-card);
+}
+
+.categoryCard:hover {
+  border-color: var(--stroke-accent);
+  transform: translateY(-3px);
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-glass);
+}
+
+.catHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.iconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  background: rgba(255, 99, 61, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+}
+
+.catName {
+  font-family: var(--font-primary);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.catDesc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.skillsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--stroke);
+}
+
+.skillBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--r-full);
+  background: rgba(243, 240, 233, 0.05);
+  border: 1px solid var(--stroke);
+  color: var(--text-main);
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.skillBadge:hover {
+  border-color: var(--stroke-accent);
+  color: var(--accent-primary);
+  background: rgba(255, 99, 61, 0.08);
+}
+
+.skillDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}
+
+@media (max-width: 640px) {
+  .categoryGrid {
+    grid-template-columns: 1fr;
+  }
+}

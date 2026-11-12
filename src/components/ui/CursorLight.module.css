@@ -1,0 +1,31 @@
+.cursorLight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 480px;
+  margin-top: -240px;
+  margin-left: -240px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(224, 164, 88, 0.08) 0%,
+    rgba(127, 183, 164, 0.03) 40%,
+    transparent 70%
+  );
+  z-index: 1;
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+
+[data-theme="light"] .cursorLight {
+  background: radial-gradient(
+    circle,
+    rgba(194, 130, 54, 0.06) 0%,
+    rgba(69, 120, 104, 0.02) 40%,
+    transparent 70%
+  );
+  mix-blend-mode: multiply;
+}

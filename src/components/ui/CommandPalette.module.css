@@ -1,0 +1,110 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 13, 17, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 580px;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--stroke);
+  color: var(--dim);
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--bone);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--dim);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--r-xs);
+  background: var(--glass-hi);
+  border: 1px solid var(--stroke);
+  color: var(--stone);
+}
+
+.results {
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--dim);
+  font-size: var(--text-sm);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background var(--duration-fast) ease;
+}
+
+.item.selected {
+  background: rgba(224, 164, 88, 0.12);
+  border: 1px solid var(--stroke-brass);
+}
+
+.category {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--dim);
+  min-width: 80px;
+}
+
+.title {
+  flex: 1;
+  font-size: var(--text-sm);
+  color: var(--bone);
+}
+
+.shortcut {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--brass);
+  background: rgba(224, 164, 88, 0.1);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--r-xs);
+  border: 1px solid rgba(224, 164, 88, 0.3);
+}

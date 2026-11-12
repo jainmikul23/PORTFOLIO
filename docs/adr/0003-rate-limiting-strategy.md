@@ -18,3 +18,4 @@ We implement a **dual-tier rate limiter**:
   - Graceful degradation without application crashes or deployment blockers.
 - **Negative:**
   - In-memory rate limiting does not share state across ephemeral serverless invocations if Redis is omitted in production.
+

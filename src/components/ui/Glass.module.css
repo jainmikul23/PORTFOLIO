@@ -1,0 +1,82 @@
+.base {
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    transform var(--duration-fast) var(--ease-spring),
+    background var(--duration-normal) var(--ease-out);
+}
+
+.panel {
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)) saturate(170%);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(170%);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--r-xl);
+}
+
+.pill {
+  background: var(--glass-hi);
+  backdrop-filter: blur(var(--blur-sm)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-sm)) saturate(180%);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-full);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 8px 20px -5px rgba(0, 0, 0, 0.35);
+}
+
+.sheet {
+  background: var(--glass-card);
+  backdrop-filter: blur(var(--blur-lg)) saturate(190%);
+  -webkit-backdrop-filter: blur(var(--blur-lg)) saturate(190%);
+  border: 1px solid var(--stroke-hi);
+  border-radius: var(--r-xl);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.3) inset,
+    0 35px 80px -25px rgba(0, 0, 0, 0.7);
+}
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover {
+  border-color: var(--stroke-hi);
+  transform: translateY(-2px);
+}
+
+.interactive:active {
+  transform: scale(0.98);
+}
+
+.glow_brass {
+  border-color: var(--stroke-brass);
+  box-shadow: var(--shadow-glass), var(--shadow-brass);
+}
+
+.glow_sage {
+  border-color: rgba(127, 183, 164, 0.4);
+  box-shadow:
+    var(--shadow-glass),
+    0 0 20px var(--sage-glow);
+}
+
+.glow_vermilion {
+  border-color: rgba(232, 85, 61, 0.4);
+  box-shadow:
+    var(--shadow-glass),
+    0 0 20px var(--vermilion-glow);
+}

@@ -49,3 +49,4 @@ Every glass panel implements a multi-layer composite:
 4. **Elevation Shadow**: `box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55)`
 5. **Border Stroke**: `border: 1px solid var(--stroke)`
 6. **Subtle Grain**: 3% noise texture overlay to eliminate plastic-sheen banding.
+

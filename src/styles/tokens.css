@@ -1,0 +1,88 @@
+:root {
+  /* Surfaces - Cinematic Dark (Default) */
+  --bg-primary: #090a0e;
+  --bg-secondary: #141720;
+  --bg-card: #1b1e28;
+  --bg-card-hover: #222633;
+
+  /* Typography Colors */
+  --text-main: #f3f0e9; /* Ivory */
+  --text-muted: #a4a5ac; /* Cool Grey */
+  --text-dim: #686b75; /* Subdued */
+
+  /* Accents */
+  --accent-primary: #ff633d; /* Cinematic Orange */
+  --accent-glow: rgba(255, 99, 61, 0.28);
+  --accent-secondary: #a6a9ff; /* Futuristic Lavender / Cool Blue */
+  --accent-secondary-glow: rgba(166, 169, 255, 0.22);
+  --accent-success: #7fb7a4;
+
+  /* Strokes & Glass */
+  --stroke: rgba(243, 240, 233, 0.1);
+  --stroke-hi: rgba(243, 240, 233, 0.22);
+  --stroke-accent: rgba(255, 99, 61, 0.4);
+  --stroke-secondary: rgba(166, 169, 255, 0.35);
+
+  --glass: rgba(27, 30, 40, 0.7);
+  --glass-hi: rgba(27, 30, 40, 0.88);
+  --glass-panel: rgba(20, 23, 32, 0.75);
+
+  /* Fonts */
+  --font-primary: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-body: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-editorial: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* Radii */
+  --r-full: 9999px;
+  --r-2xl: 32px;
+  --r-xl: 24px;
+  --r-lg: 18px;
+  --r-md: 12px;
+  --r-sm: 8px;
+  --r-xs: 4px;
+
+  /* Optics */
+  --blur: 24px;
+  --blur-sm: 14px;
+  --blur-lg: 40px;
+
+  /* Shadows */
+  --shadow-glass: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 20px 50px -15px rgba(0, 0, 0, 0.7);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+  --shadow-accent: 0 0 28px rgba(255, 99, 61, 0.35);
+
+  /* Animations */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 600ms;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f6f4f0;
+  --bg-secondary: #eae6de;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f9f8f6;
+
+  --text-main: #121418;
+  --text-muted: #565961;
+  --text-dim: #848790;
+
+  --accent-primary: #e64c24;
+  --accent-glow: rgba(230, 76, 36, 0.2);
+  --accent-secondary: #5e64d6;
+  --accent-secondary-glow: rgba(94, 100, 214, 0.18);
+
+  --stroke: rgba(18, 20, 24, 0.1);
+  --stroke-hi: rgba(18, 20, 24, 0.2);
+  --stroke-accent: rgba(230, 76, 36, 0.45);
+
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-hi: rgba(255, 255, 255, 0.95);
+  --glass-panel: rgba(246, 244, 240, 0.9);
+
+  --shadow-glass: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 16px 36px -12px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 12px 25px -8px rgba(0, 0, 0, 0.06);
+}

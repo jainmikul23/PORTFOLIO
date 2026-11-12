@@ -1,0 +1,150 @@
+.footer {
+  padding: 5rem 1.5rem 4rem;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--stroke);
+  position: relative;
+  z-index: 10;
+}
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.brandName {
+  font-family: var(--font-primary);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.brandPositioning {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+.statusBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--r-full);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.statusText {
+  font-family: var(--font-primary);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.bottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.copyright {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.actionsGroup {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.craftedWith {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+.heartIcon {
+  color: var(--accent-primary);
+}
+
+.backToTopBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+  color: var(--text-muted);
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.backToTopBtn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.easterEggBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  padding-top: 1rem;
+  border-top: 1px dashed var(--stroke);
+}
+
+.termIcon {
+  color: var(--accent-primary);
+}
+
+.kbd {
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--r-xs);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+  color: var(--accent-primary);
+}
+
+@media (max-width: 768px) {
+  .topRow,
+  .bottomRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
