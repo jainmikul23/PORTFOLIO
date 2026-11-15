@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "./Contact.module.css";
 import { profile } from "@/content/profile";
-import { Send, Copy, Check, Mail, ShieldCheck } from "lucide-react";
+import { Send, Copy, Check, Mail, ShieldCheck, ExternalLink } from "lucide-react";
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -47,7 +47,7 @@ export const Contact: React.FC = () => {
 
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.error || "Failed to dispatch transmission.");
+        throw new Error(errorData.error || "Failed to send message.");
       }
 
       setStatus("success");
@@ -55,22 +55,26 @@ export const Contact: React.FC = () => {
     } catch (err: unknown) {
       setStatus("error");
       setErrorMessage(
-        err instanceof Error ? err.message : "Submission failed. Please reach out directly on LinkedIn.",
+        err instanceof Error ? err.message : "Submission failed. Please email directly at mikuljain09@gmail.com.",
       );
     }
   };
+
+  const mailtoHref = `mailto:${profile.links.email}?subject=${encodeURIComponent(
+    formData.name ? `Portfolio Inquiry from ${formData.name}` : "Portfolio Inquiry",
+  )}&body=${encodeURIComponent(formData.message || "")}`;
 
   return (
     <section id="contact" className={styles.contactSection} aria-label="Contact Mikul Jain">
       <div className={styles.container}>
         <div className={styles.sectionHeader}>
-          <span className="label-caps">Chapter 08 &bull; Contact</span>
+          <span className="label-caps">Chapter 06 &bull; Direct Contact</span>
           <h2 className={styles.sectionTitle}>
-            Still learning. Still building.{" "}
-            <span className={styles.accentText}>Always exploring what&apos;s possible.</span>
+            Let&apos;s build something{" "}
+            <span className={styles.accentText}>exceptional together.</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Whether you have an opening for a Product-Minded Full Stack Developer, want to discuss the architecture behind HealthDost, or collaborate on systems design — my inbox is open.
+            Whether you have an opening for a Full Stack Developer, want to discuss systems architecture, or collaborate on innovative web products — my inbox is open.
           </p>
         </div>
 
@@ -80,14 +84,14 @@ export const Contact: React.FC = () => {
             <div className={styles.channelsCard}>
               <h3 className={styles.channelsHeading}>Direct Channels</h3>
               <p className={styles.channelsDesc}>
-                Open to full-stack engineering roles, software engineering internships, and product development discussions.
+                Open to full-stack engineering roles, high-impact software internships, and product engineering collaborations.
               </p>
 
               <div className={styles.channelButtons}>
-                <button onClick={copyEmail} className={styles.copyBtn}>
+                <button onClick={copyEmail} className={styles.copyBtn} type="button">
                   <Mail size={18} className={styles.channelIcon} />
                   <div className={styles.btnTextWrapper}>
-                    <span className={styles.btnLabel}>Email Transmission</span>
+                    <span className={styles.btnLabel}>Direct Email</span>
                     <span className={styles.btnValue}>{profile.links.email}</span>
                   </div>
                   {copied ? <Check size={18} className={styles.copyCheck} /> : <Copy size={16} />}
@@ -105,7 +109,7 @@ export const Contact: React.FC = () => {
                     <circle cx="4" cy="4" r="2" />
                   </svg>
                   <div className={styles.btnTextWrapper}>
-                    <span className={styles.btnLabel}>Professional Network</span>
+                    <span className={styles.btnLabel}>LinkedIn Profile</span>
                     <span className={styles.btnValue}>linkedin.com/in/mikul-jain-29b6b231a</span>
                   </div>
                   <span className={styles.linkArrow}>&rarr;</span>
@@ -131,7 +135,7 @@ export const Contact: React.FC = () => {
 
               <div className={styles.privacyNotice}>
                 <ShieldCheck size={16} className={styles.shieldIcon} />
-                <span>Strict privacy guaranteed &bull; 24-hour turnaround SLA</span>
+                <span>Verified response within 24 hours &bull; Strict privacy</span>
               </div>
             </div>
           </div>
@@ -142,12 +146,12 @@ export const Contact: React.FC = () => {
               {status === "success" ? (
                 <div className={styles.successState}>
                   <div className={styles.successCircle}>✓</div>
-                  <h4 className={styles.successTitle}>Transmission Received</h4>
+                  <h4 className={styles.successTitle}>Message Sent Successfully</h4>
                   <p className={styles.successMessage}>
-                    Thank you for reaching out. Your transmission payload has been validated and queued. I will respond to your email promptly.
+                    Thank you for reaching out! Your message has been delivered to Mikul&apos;s inbox ({profile.links.email}). You will receive a response promptly.
                   </p>
-                  <button onClick={() => setStatus("idle")} className={styles.resetBtn}>
-                    Send Another Transmission
+                  <button onClick={() => setStatus("idle")} className={styles.resetBtn} type="button">
+                    Send Another Message
                   </button>
                 </div>
               ) : (
@@ -171,7 +175,7 @@ export const Contact: React.FC = () => {
                       id="name"
                       type="text"
                       required
-                      placeholder="Jane Doe"
+                      placeholder="Alex Turner"
                       className={styles.inputField}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -186,7 +190,7 @@ export const Contact: React.FC = () => {
                       id="email"
                       type="email"
                       required
-                      placeholder="jane@company.com"
+                      placeholder="alex@company.com"
                       className={styles.inputField}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -201,7 +205,7 @@ export const Contact: React.FC = () => {
                       id="message"
                       required
                       rows={5}
-                      placeholder="Discussing a full stack role, project collaboration, or architecture breakdown..."
+                      placeholder="Discussing an engineering opportunity, systems architecture, or project collaboration..."
                       className={styles.textareaField}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -211,6 +215,14 @@ export const Contact: React.FC = () => {
                   {status === "error" && (
                     <div className={styles.errorBanner} role="alert">
                       {errorMessage}
+                      <div style={{ marginTop: "0.5rem" }}>
+                        <a
+                          href={mailtoHref}
+                          style={{ color: "#ff633d", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "0.25rem" }}
+                        >
+                          Open in your email client instead <ExternalLink size={13} />
+                        </a>
+                      </div>
                     </div>
                   )}
 
@@ -219,7 +231,7 @@ export const Contact: React.FC = () => {
                     disabled={status === "sending"}
                     className={styles.submitBtn}
                   >
-                    <span>{status === "sending" ? "Encrypting & Transmitting..." : "Send Transmission"}</span>
+                    <span>{status === "sending" ? "Sending Message..." : "Send Message"}</span>
                     <Send size={16} />
                   </button>
                 </form>

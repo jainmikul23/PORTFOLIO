@@ -89,15 +89,15 @@
   /* Vibrant Accents */
   --accent-primary: #E64C24;
   --accent-glow: rgba(230, 76, 36, 0.2);
-  --accent-secondary: #5258D6;
-  --accent-secondary-glow: rgba(82, 88, 214, 0.16);
+  --accent-secondary: #FF7A45;
+  --accent-secondary-glow: rgba(255, 122, 69, 0.16);
   --accent-success: #1B7A5C;
 
   /* Clean Borders & Shadows */
   --stroke: rgba(18, 20, 24, 0.08);
   --stroke-hi: rgba(18, 20, 24, 0.18);
   --stroke-accent: rgba(230, 76, 36, 0.45);
-  --stroke-secondary: rgba(82, 88, 214, 0.35);
+  --stroke-secondary: rgba(255, 122, 69, 0.35);
 
   --glass: rgba(255, 255, 255, 0.9);
   --glass-hi: rgba(255, 255, 255, 0.98);

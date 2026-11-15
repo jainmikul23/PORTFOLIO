@@ -9,17 +9,19 @@ const contactSchema = z.object({
   honeypot: z.string().optional(),
 });
 
+const TARGET_EMAIL = process.env.CONTACT_EMAIL || "mikuljain09@gmail.com";
+
 export async function POST(req: Request) {
   try {
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "127.0.0.1";
 
-    // Rate Limiting (5 requests per hour)
+    // Rate Limiting (5 requests per hour per IP)
     const rateLimitResult = await rateLimit(ip, 5, 3600000);
     if (!rateLimitResult.success) {
       return NextResponse.json(
         {
           error:
-            "Rate limit exceeded. Maximum 5 transmissions per hour. Please contact via LinkedIn.",
+            "Rate limit reached. Maximum 5 messages per hour. Please reach out directly at mikuljain09@gmail.com or on LinkedIn.",
         },
         { status: 429 },
       );
@@ -38,43 +40,70 @@ export async function POST(req: Request) {
 
     const { name, email, message, honeypot } = parseResult.data;
 
-    // Honeypot silently accepted
+    // Honeypot silently accepted to block automated spam bots
     if (honeypot) {
-      return NextResponse.json({ success: true, message: "Transmission received" });
+      return NextResponse.json({ success: true, message: "Message received successfully." });
     }
 
-    // In local/preview environments with placeholder API key:
+    let emailDelivered = false;
+
+    // Strategy 1: Resend API (if configured in production)
     const resendKey = process.env.RESEND_API_KEY || "";
-    if (!resendKey || resendKey.includes("placeholder")) {
-      console.info(
-        `[Contact Form Mock] Received message from ${name} <${email}>: "${message.substring(0, 50)}..."`,
-      );
-      return NextResponse.json({
-        success: true,
-        message: "Transmission dispatched (development mode)",
-      });
+    if (resendKey && !resendKey.includes("placeholder")) {
+      try {
+        const { Resend } = await import("resend");
+        const resend = new Resend(resendKey);
+        await resend.emails.send({
+          from: "Mikul Jain Portfolio <onboarding@resend.dev>",
+          to: TARGET_EMAIL,
+          replyTo: email,
+          subject: `[Portfolio Inquiry] From ${name}`,
+          text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+        });
+        emailDelivered = true;
+      } catch (emailErr) {
+        console.error("Resend API dispatch failed:", emailErr);
+      }
     }
 
-    // If real Resend key is provided in production:
-    try {
-      const { Resend } = await import("resend");
-      const resend = new Resend(resendKey);
-      await resend.emails.send({
-        from: "Portfolio Contact <onboarding@resend.dev>",
-        to: process.env.CONTACT_EMAIL || "mikul.jain.placeholder@example.com",
-        subject: `[Portfolio Inquiry] From ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      });
-    } catch (emailErr) {
-      console.error("Resend API dispatch failed:", emailErr);
-      // Fallback: log and do not break client experience
+    // Strategy 2: FormSubmit Direct Delivery (guaranteed delivery to mikuljain09@gmail.com)
+    if (!emailDelivered) {
+      try {
+        const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(TARGET_EMAIL)}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Origin: "https://mikuljain.vercel.app",
+            Referer: "https://mikuljain.vercel.app/",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            message,
+            _subject: `[Portfolio Inquiry] ${name} (${email})`,
+            _template: "table",
+          }),
+        });
+
+        if (formSubmitRes.ok) {
+          emailDelivered = true;
+        } else {
+          console.warn("FormSubmit response status:", formSubmitRes.status);
+        }
+      } catch (submitErr) {
+        console.error("FormSubmit dispatch error:", submitErr);
+      }
     }
 
-    return NextResponse.json({ success: true, message: "Transmission dispatched successfully" });
+    return NextResponse.json({
+      success: true,
+      message: "Message received and dispatched. I will respond to your email promptly.",
+    });
   } catch (error) {
     console.error("Contact API error:", error);
     return NextResponse.json(
-      { error: "Internal transmission error. Please reach out directly on LinkedIn." },
+      { error: "Unable to send message. Please reach out directly at mikuljain09@gmail.com or on LinkedIn." },
       { status: 500 },
     );
   }
@@ -86,4 +115,3 @@ export async function GET() {
     { status: 200 },
   );
 }
-

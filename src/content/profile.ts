@@ -183,7 +183,7 @@ export const rawProfile = {
       organization: "Kriyeta National Hackathon (Round-2 Finalist)",
       category: "Hackathon Recognition",
       description:
-        "Selected as a Finalist in the grueling 36+ hour national hackathon. Engineered 'Civic Eye' — an AI-driven real-time road damage and pothole detection system combining computer vision with smartphone sensor telemetry for smart municipal road maintenance alerts.",
+        "Selected as a Finalist in the grueling 36+ hour national hackathon. Engineered 'Civic Eye' — an AI-driven real-time road damage and pothole detection system combining computer vision with mobile motion sensing for real-time municipal road maintenance alerts.",
       image: "/images/kriyeta-finalist.jpg",
       badge: "Round-2 Finalist • 36+ Hour National Hackathon",
       link: "https://www.linkedin.com/posts/mikul-jain-29b6b231a_hackathon-kriyeta-finalist-ugcPost-7452021778521935872-Ygi1/",

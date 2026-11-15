@@ -94,7 +94,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           name="google-site-verification"
           content="Pg12xxCwxKSdyMJoogu5Qs1qPjNXdlERCoBC2VJlAcw"
         />
-        {/* Preload hero LCP image for fastest paint */}
+        {/* Preload hero assets for instantaneous first frame paint */}
+        <link
+          rel="preload"
+          as="image"
+          href="/frames/frame_001.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
         <link
           rel="preload"
           as="image"

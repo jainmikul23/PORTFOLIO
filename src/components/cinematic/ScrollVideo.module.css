@@ -5,6 +5,10 @@
   height: 100%;
   overflow: hidden;
   background-color: #090a0e;
+  background-image: url("/frames/frame_001.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   z-index: 0;
   pointer-events: none;
 }
@@ -16,30 +20,31 @@
   object-fit: cover;
   transform: translateZ(0);
   will-change: transform;
+  filter: contrast(1.05) brightness(0.98);
 }
 
 /* Deep Cinematic Vignette */
-.cockpitVignette {
+.cinematicVignette {
   position: absolute;
   inset: 0;
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(9, 10, 14, 0.15) 0%,
-    rgba(9, 10, 14, 0.6) 60%,
-    rgba(9, 10, 14, 0.95) 100%
+    rgba(9, 10, 14, 0.2) 0%,
+    rgba(9, 10, 14, 0.65) 60%,
+    rgba(9, 10, 14, 0.98) 100%
   );
   pointer-events: none;
   z-index: 1;
 }
 
-/* Warm Cinematic Glow (Orange & Clean Light) */
-.magentaAmbientGlow {
+/* Warm Cinematic Glow (Electric Orange & Amber Embers) */
+.warmAmbientGlow {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 25%, rgba(255, 99, 61, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 80% 75%, rgba(255, 144, 102, 0.12) 0%, transparent 50%),
-    linear-gradient(180deg, rgba(9, 10, 14, 0.35) 0%, transparent 30%, transparent 70%, rgba(9, 10, 14, 0.85) 100%);
+    radial-gradient(circle at 25% 20%, rgba(255, 99, 61, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 80% 75%, rgba(255, 130, 92, 0.15) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(9, 10, 14, 0.4) 0%, transparent 30%, transparent 70%, rgba(9, 10, 14, 0.9) 100%);
   pointer-events: none;
   z-index: 2;
   mix-blend-mode: screen;
@@ -51,12 +56,12 @@
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(255, 255, 255, 0.01) 0px,
-    rgba(255, 255, 255, 0.01) 1px,
+    rgba(255, 255, 255, 0.012) 0px,
+    rgba(255, 255, 255, 0.012) 1px,
     transparent 1px,
     transparent 3px
   );
   pointer-events: none;
   z-index: 3;
-  opacity: 0.5;
+  opacity: 0.4;
 }

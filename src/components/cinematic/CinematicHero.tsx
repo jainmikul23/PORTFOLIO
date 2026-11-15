@@ -8,12 +8,12 @@ import { prefersReducedMotion } from "@/lib/animations/config";
 import { profile } from "@/content/profile";
 import {
   ArrowRight,
-  MessageSquare,
   Sparkles,
   Terminal,
   Layers,
   Code2,
   ChevronDown,
+  Mail,
 } from "lucide-react";
 import styles from "./CinematicHero.module.css";
 
@@ -27,10 +27,10 @@ interface CardState {
 }
 
 const DECK_ITEMS = [
-  { id: 0, label: "01", title: "Introduction" },
-  { id: 1, label: "02", title: "Core Focus" },
+  { id: 0, label: "01", title: "Master Identity" },
+  { id: 1, label: "02", title: "Core Architecture" },
   { id: 2, label: "03", title: "About Mikul" },
-  { id: 3, label: "04", title: "Explore" },
+  { id: 3, label: "04", title: "Chapters" },
 ];
 
 export const CinematicHero: React.FC = () => {
@@ -55,7 +55,7 @@ export const CinematicHero: React.FC = () => {
         end: "+=360%",
         pin: pinContainerRef.current,
         pinSpacing: true,
-        scrub: 0.6,
+        scrub: 0.35,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           setScrollProgress(self.progress);
@@ -150,7 +150,7 @@ export const CinematicHero: React.FC = () => {
         {/* 1. Scroll-Controlled Frame-by-Frame Canvas Engine */}
         <ScrollVideo progress={scrollProgress} />
 
-        {/* 2. Floating Clean Minimal Deck Indicator (Right side) */}
+        {/* 2. Floating Minimal Deck Indicator */}
         <nav className={styles.deckNav} aria-label="Deck Navigation">
           {DECK_ITEMS.map((item, idx) => (
             <button
@@ -187,7 +187,7 @@ export const CinematicHero: React.FC = () => {
             <div className={styles.cardInner}>
               <div className={styles.tagBadge}>
                 <span className={styles.badgeDot} />
-                <span>Product-Minded Full Stack Developer</span>
+                <span>Full Stack Developer &bull; Systems Architect</span>
               </div>
 
               {/* Letter-by-Letter Title */}
@@ -204,16 +204,15 @@ export const CinematicHero: React.FC = () => {
               </h1>
 
               <p className={styles.masterHeadline}>
-                I don&apos;t just write code.
+                DESIGNING THE FUTURE.
                 <br />
                 <span className={styles.orangeAccent}>
-                  I turn ideas into experiences.
+                  BUILDING THE DIGITAL WORLD.
                 </span>
               </p>
 
               <p className={styles.masterSubheading}>
-                Building resilient web applications, systems architecture, and
-                AI integrations.
+                Product-minded software engineering, distributed systems architecture, and 60 FPS interactive web craft.
               </p>
 
               {/* Scroll Prompter */}
@@ -241,7 +240,7 @@ export const CinematicHero: React.FC = () => {
               CARD 2: CORE ARCHITECTURE & FOCUS
               ---------------------------------------------------- */}
           <article
-            className={`${styles.card} ${styles.cardCockpit}`}
+            className={`${styles.card} ${styles.cardArchitecture}`}
             style={{
               opacity: cards[1]?.opacity,
               transform: `translate3d(0, ${cards[1]?.y}px, ${cards[1]?.z}px) rotateX(${cards[1]?.rotX}deg) scale(${cards[1]?.scale})`,
@@ -251,7 +250,7 @@ export const CinematicHero: React.FC = () => {
             <div className={styles.cardGlowBorder} aria-hidden="true" />
             <div className={styles.cardInner}>
               <div className={styles.sectionHeader}>
-                <span className={styles.categoryLabel}>ENGINEERING FOCUS</span>
+                <span className={styles.categoryLabel}>ENGINEERING FOUNDATION</span>
                 <h2 className={styles.cardTitle}>
                   Full-Stack Architecture &amp;{" "}
                   <span className={styles.orangeAccent}>Modern Craft</span>
@@ -262,33 +261,30 @@ export const CinematicHero: React.FC = () => {
                 <div className={styles.focusBox}>
                   <div className={styles.boxHeader}>
                     <Terminal size={16} className={styles.orangeIcon} />
-                    <span>01. CORE ENGINEERING</span>
+                    <span>01. RESILIENT SYSTEMS</span>
                   </div>
-                  <h3 className={styles.boxTitle}>Full Stack Systems</h3>
+                  <h3 className={styles.boxTitle}>Full Stack Architecture</h3>
                   <p className={styles.boxDesc}>
-                    Scalable full-stack products using Next.js 15, React 19,
-                    TypeScript, and Node.js with clean API boundaries.
+                    Scalable cloud products engineered with Next.js 15, React 19, TypeScript, and clean modular domain architecture.
                   </p>
                   <div className={styles.chipRow}>
                     <span className={styles.chip}>Next.js 15</span>
-                    <span className={styles.chip}>React 19</span>
                     <span className={styles.chip}>TypeScript</span>
+                    <span className={styles.chip}>Node.js</span>
                   </div>
                 </div>
 
                 <div className={styles.focusBox}>
                   <div className={styles.boxHeader}>
                     <Layers size={16} className={styles.orangeIcon} />
-                    <span>02. SYSTEMS &amp; AI</span>
+                    <span>02. INTELLIGENT PIPELINES</span>
                   </div>
-                  <h3 className={styles.boxTitle}>Intelligent Workflows</h3>
+                  <h3 className={styles.boxTitle}>AI &amp; Data Workflows</h3>
                   <p className={styles.boxDesc}>
-                    Integrating structured AI inference, robust relational
-                    databases, and resilient backend pipelines for real-world
-                    impact.
+                    Integrating structured AI inference, robust relational schemas, and low-latency database transactions for mission-critical software.
                   </p>
                   <div className={styles.chipRow}>
-                    <span className={styles.chip}>AI Logic</span>
+                    <span className={styles.chip}>AI Workflows</span>
                     <span className={styles.chip}>MySQL</span>
                     <span className={styles.chip}>REST APIs</span>
                   </div>
@@ -297,15 +293,14 @@ export const CinematicHero: React.FC = () => {
                 <div className={styles.focusBox}>
                   <div className={styles.boxHeader}>
                     <Code2 size={16} className={styles.orangeIcon} />
-                    <span>03. PERFORMANCE &amp; 3D</span>
+                    <span>03. HARDWARE ACCELERATION</span>
                   </div>
                   <h3 className={styles.boxTitle}>Interactive Experiences</h3>
                   <p className={styles.boxDesc}>
-                    60 FPS scroll synchronization, GPU canvas acceleration, and
-                    accessible design engineered for speed.
+                    Frame-locked 60 FPS scroll synchronization, GPU canvas acceleration, and accessible responsive design engineered for instant feel.
                   </p>
                   <div className={styles.chipRow}>
-                    <span className={styles.chip}>GSAP Scrub</span>
+                    <span className={styles.chip}>GSAP Engine</span>
                     <span className={styles.chip}>Three.js</span>
                     <span className={styles.chip}>100 Lighthouse</span>
                   </div>
@@ -378,14 +373,14 @@ export const CinematicHero: React.FC = () => {
                   </div>
                   <div className={styles.credDivider} />
                   <div className={styles.credCol}>
-                    <span className={styles.credLabel}>RECORD</span>
+                    <span className={styles.credLabel}>ACADEMICS</span>
                     <span className={styles.credValue}>
                       8.22 CGPA (3rd Year)
                     </span>
                   </div>
                   <div className={styles.credDivider} />
                   <div className={styles.credCol}>
-                    <span className={styles.credLabel}>AWARDS</span>
+                    <span className={styles.credLabel}>HONORS</span>
                     <span className={styles.credValue}>
                       Top 10 CodeSpire &bull; Kriyeta Finalist
                     </span>
@@ -394,12 +389,12 @@ export const CinematicHero: React.FC = () => {
 
                 <div className={styles.btnRow}>
                   <a href="#projects" className={styles.primaryCta}>
-                    <span>Explore My Work</span>
+                    <span>Explore Selected Work</span>
                     <ArrowRight size={17} />
                   </a>
                   <a href="#contact" className={styles.secondaryCta}>
-                    <MessageSquare size={16} />
-                    <span>Let&apos;s Connect</span>
+                    <Mail size={16} />
+                    <span>Get In Touch</span>
                   </a>
                 </div>
               </div>
@@ -432,13 +427,13 @@ export const CinematicHero: React.FC = () => {
                   <span className={styles.tileNum}>01</span>
                   <span className={styles.tileTitle}>ABOUT ME</span>
                   <span className={styles.tileDesc}>
-                    Background, story &amp; development philosophy
+                    Story, engineering principles &amp; background
                   </span>
                 </a>
 
                 <a href="#capabilities" className={styles.hubTile}>
                   <span className={styles.tileNum}>02</span>
-                  <span className={styles.tileTitle}>WHAT I DO</span>
+                  <span className={styles.tileTitle}>CAPABILITIES</span>
                   <span className={styles.tileDesc}>
                     Full stack architecture, performance &amp; APIs
                   </span>
@@ -462,9 +457,9 @@ export const CinematicHero: React.FC = () => {
 
                 <a href="#journey" className={styles.hubTile}>
                   <span className={styles.tileNum}>05</span>
-                  <span className={styles.tileTitle}>JOURNEY &amp; AWARDS</span>
+                  <span className={styles.tileTitle}>HONORS &amp; MILESTONES</span>
                   <span className={styles.tileDesc}>
-                    Hackathons, milestones &amp; achievements
+                    Hackathon podiums &amp; academic distinctions
                   </span>
                 </a>
 
@@ -472,7 +467,7 @@ export const CinematicHero: React.FC = () => {
                   <span className={styles.tileNum}>06</span>
                   <span className={styles.tileTitle}>CONTACT</span>
                   <span className={styles.tileDesc}>
-                    Get in touch for projects &amp; collaborations
+                    Open inbox for opportunities &amp; discussions
                   </span>
                 </a>
               </div>

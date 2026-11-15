@@ -13,11 +13,16 @@ export function initSmoothScroll(): Lenis | null {
 
   initGSAP();
 
+  // Ultra-smooth buttery scroll with zero friction
   const lenis = new Lenis({
-    duration: 1.2,
+    duration: 1.35,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: "vertical",
+    gestureOrientation: "vertical",
     smoothWheel: true,
-    touchMultiplier: 1.5,
+    wheelMultiplier: 1.0,
+    touchMultiplier: 1.8,
+    infinite: false,
   });
 
   lenisInstance = lenis;
@@ -30,9 +35,10 @@ export function initSmoothScroll(): Lenis | null {
   };
 
   gsap.ticker.add(tickerCallback);
-  gsap.ticker.lagSmoothing(500, 33);
+  // Crucial: Set lagSmoothing to 0 to prevent GSAP and Lenis from fighting over frame timing
+  gsap.ticker.lagSmoothing(0);
 
-  // Delegated smooth scroll for any internal anchor
+  // Delegated smooth scroll for any internal anchor link
   clickHandler = (e: MouseEvent) => {
     const target = (e.target as HTMLElement).closest('a[href^="#"]');
     if (!target) return;
@@ -41,7 +47,7 @@ export function initSmoothScroll(): Lenis | null {
       const element = document.querySelector(href);
       if (element) {
         e.preventDefault();
-        lenis.scrollTo(element as HTMLElement, { offset: -60 });
+        lenis.scrollTo(element as HTMLElement, { offset: -60, duration: 1.2 });
       }
     }
   };

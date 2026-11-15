@@ -192,9 +192,9 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     <div className={`${styles.videoContainer} ${className || ""}`}>
       <canvas ref={canvasRef} className={styles.canvas} />
 
-      {/* Luxury Automotive Tint & Vignette Overlays */}
-      <div className={styles.magentaAmbientGlow} aria-hidden="true" />
-      <div className={styles.cockpitVignette} aria-hidden="true" />
+      {/* Warm Cinematic Amber/Orange Glow & Vignette Overlays */}
+      <div className={styles.warmAmbientGlow} aria-hidden="true" />
+      <div className={styles.cinematicVignette} aria-hidden="true" />
       <div className={styles.scanlineOverlay} aria-hidden="true" />
     </div>
   );
