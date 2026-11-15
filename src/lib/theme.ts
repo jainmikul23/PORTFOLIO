@@ -1,19 +1,26 @@
 import { prefersReducedMotion } from "@/lib/animations/config";
-import { generateInkPolygon, inkTransitionEngine } from "@/lib/animations/inkTransition";
 
 export type Theme = "dark" | "light";
 
 export function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "light";
-  const stored = localStorage.getItem("portfolio-theme") as Theme | null;
-  if (stored === "dark" || stored === "light") return stored;
+  try {
+    const stored = localStorage.getItem("portfolio-theme") as Theme | null;
+    if (stored === "dark" || stored === "light") return stored;
+  } catch {
+    // Ignore storage errors
+  }
   return "light";
 }
 
 export function applyTheme(theme: Theme): void {
   if (typeof document === "undefined") return;
   document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("portfolio-theme", theme);
+  try {
+    localStorage.setItem("portfolio-theme", theme);
+  } catch {
+    // Ignore storage quota or access issues
+  }
 
   // Sync meta color-scheme for native UI elements (scrollbars, form controls)
   const meta = document.querySelector('meta[name="color-scheme"]') as HTMLMetaElement | null;
@@ -29,10 +36,16 @@ export function switchThemeWithTransition(
   return new Promise((resolve) => {
     if (typeof document === "undefined") return resolve();
 
-    // Respect user's reduced motion preference
+    // Respect user's reduced motion preference (instant switch)
     if (prefersReducedMotion()) {
       applyTheme(nextTheme);
       return resolve();
+    }
+
+    // Clean up any lingering legacy canvas overlays
+    const lingeringCanvas = document.getElementById("ink-transition-canvas");
+    if (lingeringCanvas && lingeringCanvas.parentNode) {
+      lingeringCanvas.parentNode.removeChild(lingeringCanvas);
     }
 
     // Modern View Transitions API (Chrome 111+, Safari 18+, Edge 111+)
@@ -43,9 +56,9 @@ export function switchThemeWithTransition(
       };
     };
 
-    // Calculate origin coordinate for the ink splatter
-    let x = window.innerWidth - 60;
-    let y = 44;
+    // Calculate origin coordinate for the circular ripple
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
 
     if (
       event &&
@@ -64,17 +77,17 @@ export function switchThemeWithTransition(
       }
     }
 
-    const endRadius =
+    // Exact mathematical distance from click origin to the farthest viewport corner
+    const endRadius = Math.ceil(
       Math.hypot(
         Math.max(x, window.innerWidth - x),
         Math.max(y, window.innerHeight - y)
-      ) * 1.38;
+      )
+    ) + 4;
 
     if (doc.startViewTransition) {
-      document.documentElement.setAttribute("data-theme-transition", "ink");
-
-      // Launch WebGL 2 ink splatter animation synchronously
-      inkTransitionEngine.play(x, y, nextTheme, 800);
+      // Freezes conflicting element CSS transitions while capturing snapshot
+      document.documentElement.setAttribute("data-theme-transition", "active");
 
       const transition = doc.startViewTransition(() => {
         applyTheme(nextTheme);
@@ -82,22 +95,20 @@ export function switchThemeWithTransition(
 
       transition.ready
         .then(() => {
-          // Generate procedural organic ink polygon keyframes
-          const steps = 9;
-          const keyframes: Keyframe[] = [];
-          for (let i = 0; i <= steps; i++) {
-            const t = i / steps;
-            const currentRadius = t * endRadius;
-            keyframes.push({
-              clipPath: generateInkPolygon(x, y, currentRadius, 2.5, t * 2.5, 72),
-            });
-          }
-
-          document.documentElement.animate(keyframes, {
-            duration: 750,
-            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-            pseudoElement: "::view-transition-new(root)",
-          });
+          const animation = document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`,
+              ],
+            },
+            {
+              duration: 460,
+              easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+              pseudoElement: "::view-transition-new(root)",
+            }
+          );
+          return animation.finished;
         })
         .catch(() => {
           applyTheme(nextTheme);
@@ -110,12 +121,12 @@ export function switchThemeWithTransition(
       return;
     }
 
-    // High-performance WebGL 2 Ink Bloom Fallback for browsers without View Transitions
-    inkTransitionEngine.play(x, y, nextTheme, 800);
-    setTimeout(() => {
-      applyTheme(nextTheme);
+    // Gentle CSS transition fallback for legacy browsers without View Transitions
+    document.documentElement.classList.add("theme-transitioning");
+    applyTheme(nextTheme);
+    window.setTimeout(() => {
+      document.documentElement.classList.remove("theme-transitioning");
       resolve();
-    }, 380);
+    }, 400);
   });
 }
-

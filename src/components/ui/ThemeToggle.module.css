@@ -9,7 +9,7 @@
   backdrop-filter: blur(var(--blur-sm));
   -webkit-backdrop-filter: blur(var(--blur-sm));
   border: 1px solid var(--stroke);
-  color: var(--bone);
+  color: var(--text-main);
   cursor: pointer;
   transition:
     transform var(--duration-fast) var(--ease-spring),
@@ -20,8 +20,8 @@
 
 .toggle:hover {
   background: var(--glass-hi);
-  border-color: var(--brass);
-  color: var(--brass);
+  border-color: var(--stroke-accent);
+  color: var(--accent-primary);
   transform: scale(1.05);
 }
 
