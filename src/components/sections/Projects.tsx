@@ -65,6 +65,7 @@ export const Projects: React.FC = () => {
             <article
               key={project.slug}
               data-scroll-disappear
+              style={{ "--card-index": idx } as React.CSSProperties}
               className={`${styles.productCard} ${project.flagship ? styles.flagshipCard : ""}`}
             >
               {/* Card Header & Badges */}
