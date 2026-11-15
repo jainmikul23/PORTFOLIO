@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "./Contact.module.css";
 import { profile } from "@/content/profile";
-import { Send, Copy, Check, Mail, ShieldCheck, ExternalLink } from "lucide-react";
+import { Send, Copy, Check, Mail, ShieldCheck, ExternalLink, RefreshCw } from "lucide-react";
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +15,8 @@ export const Contact: React.FC = () => {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [copied, setCopied] = useState(false);
+  const [copiedMsg, setCopiedMsg] = useState(false);
+  const [deliveryMethod, setDeliveryMethod] = useState<"resend" | "client_compose">("client_compose");
 
   const copyEmail = () => {
     navigator.clipboard.writeText(profile.links.email);
@@ -22,10 +24,30 @@ export const Contact: React.FC = () => {
     setTimeout(() => setCopied(false), 2500);
   };
 
+  const copyDraft = () => {
+    navigator.clipboard.writeText(`From: ${formData.name} <${formData.email}>\n\n${formData.message}`);
+    setCopiedMsg(true);
+    setTimeout(() => setCopiedMsg(false), 2500);
+  };
+
+  const getGmailComposeUrl = () => {
+    const subject = formData.name ? `[Portfolio Inquiry] From ${formData.name}` : "Portfolio Inquiry";
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+      profile.links.email
+    )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const getMailtoUrl = () => {
+    const subject = formData.name ? `[Portfolio Inquiry] From ${formData.name}` : "Portfolio Inquiry";
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    return `mailto:${profile.links.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Honeypot trap check
+    // Honeypot anti-spam check
     if (formData.company) {
       setStatus("success");
       return;
@@ -45,24 +67,29 @@ export const Contact: React.FC = () => {
         }),
       });
 
+      const data = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.error || "Failed to send message.");
+        throw new Error(data.error || "Failed to process message.");
+      }
+
+      if (data.method === "resend") {
+        setDeliveryMethod("resend");
+      } else {
+        setDeliveryMethod("client_compose");
+        // Trigger mail client draft directly
+        const mailto = getMailtoUrl();
+        window.location.href = mailto;
       }
 
       setStatus("success");
-      setFormData({ name: "", email: "", message: "", company: "" });
     } catch (err: unknown) {
       setStatus("error");
       setErrorMessage(
-        err instanceof Error ? err.message : "Submission failed. Please email directly at mikuljain09@gmail.com.",
+        err instanceof Error ? err.message : "Failed to dispatch. Please email directly at mikuljain09@gmail.com."
       );
     }
   };
-
-  const mailtoHref = `mailto:${profile.links.email}?subject=${encodeURIComponent(
-    formData.name ? `Portfolio Inquiry from ${formData.name}` : "Portfolio Inquiry",
-  )}&body=${encodeURIComponent(formData.message || "")}`;
 
   return (
     <section id="contact" className={styles.contactSection} aria-label="Contact Mikul Jain">
@@ -74,7 +101,7 @@ export const Contact: React.FC = () => {
             <span className={styles.accentText}>exceptional together.</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Whether you have an opening for a Full Stack Developer, want to discuss systems architecture, or collaborate on innovative web products — my inbox is open.
+            Whether you have an opening for a Full Stack Developer, want to discuss systems architecture, or collaborate on high-impact products — my inbox is open.
           </p>
         </div>
 
@@ -84,19 +111,36 @@ export const Contact: React.FC = () => {
             <div className={styles.channelsCard}>
               <h3 className={styles.channelsHeading}>Direct Channels</h3>
               <p className={styles.channelsDesc}>
-                Open to full-stack engineering roles, high-impact software internships, and product engineering collaborations.
+                Open to full-stack engineering roles, software engineering internships, and product architecture discussions.
               </p>
 
               <div className={styles.channelButtons}>
+                {/* 1-Click Copy Email */}
                 <button onClick={copyEmail} className={styles.copyBtn} type="button">
                   <Mail size={18} className={styles.channelIcon} />
                   <div className={styles.btnTextWrapper}>
-                    <span className={styles.btnLabel}>Direct Email</span>
+                    <span className={styles.btnLabel}>Copy Direct Email</span>
                     <span className={styles.btnValue}>{profile.links.email}</span>
                   </div>
                   {copied ? <Check size={18} className={styles.copyCheck} /> : <Copy size={16} />}
                 </button>
 
+                {/* 1-Click Open in Gmail Web */}
+                <a
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.links.email)}&su=${encodeURIComponent("Portfolio Inquiry")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.channelLink}
+                >
+                  <ExternalLink size={18} className={styles.channelIcon} />
+                  <div className={styles.btnTextWrapper}>
+                    <span className={styles.btnLabel}>Compose in Gmail</span>
+                    <span className={styles.btnValue}>Open web draft to {profile.links.email}</span>
+                  </div>
+                  <span className={styles.linkArrow}>&rarr;</span>
+                </a>
+
+                {/* LinkedIn Profile */}
                 <a
                   href={profile.links.linkedin}
                   target="_blank"
@@ -115,6 +159,7 @@ export const Contact: React.FC = () => {
                   <span className={styles.linkArrow}>&rarr;</span>
                 </a>
 
+                {/* GitHub Repositories */}
                 <a
                   href={profile.links.github}
                   target="_blank"
@@ -146,11 +191,46 @@ export const Contact: React.FC = () => {
               {status === "success" ? (
                 <div className={styles.successState}>
                   <div className={styles.successCircle}>✓</div>
-                  <h4 className={styles.successTitle}>Message Sent Successfully</h4>
+                  <h4 className={styles.successTitle}>
+                    {deliveryMethod === "resend" ? "Message Delivered!" : "Email Draft Ready"}
+                  </h4>
                   <p className={styles.successMessage}>
-                    Thank you for reaching out! Your message has been delivered to Mikul&apos;s inbox ({profile.links.email}). You will receive a response promptly.
+                    {deliveryMethod === "resend"
+                      ? `Thank you for reaching out! Your message was delivered directly to Mikul's inbox (${profile.links.email}). You will receive a response within 24 hours.`
+                      : `Your message to ${profile.links.email} is prepared. Click below to review and send in your preferred email client:`}
                   </p>
-                  <button onClick={() => setStatus("idle")} className={styles.resetBtn} type="button">
+
+                  <div className={styles.successActions}>
+                    <a
+                      href={getGmailComposeUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.actionBtnPrimary}
+                    >
+                      <ExternalLink size={16} />
+                      <span>Open in Gmail Web</span>
+                    </a>
+
+                    <a href={getMailtoUrl()} className={styles.actionBtnSecondary}>
+                      <Mail size={16} />
+                      <span>Open Default Mail App</span>
+                    </a>
+
+                    <button onClick={copyDraft} type="button" className={styles.actionBtnSecondary}>
+                      {copiedMsg ? <Check size={16} /> : <Copy size={16} />}
+                      <span>{copiedMsg ? "Copied!" : "Copy Message"}</span>
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setStatus("idle");
+                      setFormData({ name: "", email: "", message: "", company: "" });
+                    }}
+                    className={styles.resetBtn}
+                    type="button"
+                  >
+                    <RefreshCw size={13} style={{ marginRight: "0.35rem", display: "inline-block", verticalAlign: "middle" }} />
                     Send Another Message
                   </button>
                 </div>
@@ -217,10 +297,12 @@ export const Contact: React.FC = () => {
                       {errorMessage}
                       <div style={{ marginTop: "0.5rem" }}>
                         <a
-                          href={mailtoHref}
+                          href={getGmailComposeUrl()}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           style={{ color: "#ff633d", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "0.25rem" }}
                         >
-                          Open in your email client instead <ExternalLink size={13} />
+                          Open in Gmail directly <ExternalLink size={13} />
                         </a>
                       </div>
                     </div>
@@ -231,7 +313,7 @@ export const Contact: React.FC = () => {
                     disabled={status === "sending"}
                     className={styles.submitBtn}
                   >
-                    <span>{status === "sending" ? "Sending Message..." : "Send Message"}</span>
+                    <span>{status === "sending" ? "Preparing Message..." : "Send Message"}</span>
                     <Send size={16} />
                   </button>
                 </form>

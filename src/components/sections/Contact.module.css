@@ -274,6 +274,59 @@
   line-height: 1.6;
 }
 
+.successActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.actionBtnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: var(--r-full);
+  background: var(--accent-primary);
+  color: #ffffff;
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.actionBtnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.actionBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: var(--r-full);
+  background: var(--bg-channel-btn);
+  border: 1px solid var(--stroke);
+  color: var(--text-main);
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.actionBtnSecondary:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-channel-btn-hover);
+}
+
 .resetBtn {
   margin-top: 1rem;
   padding: 0.65rem 1.35rem;

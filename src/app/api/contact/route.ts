@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           error:
-            "Rate limit reached. Maximum 5 messages per hour. Please reach out directly at mikuljain09@gmail.com or on LinkedIn.",
+            "Rate limit reached. Maximum 5 messages per hour. Please email directly at mikuljain09@gmail.com or connect on LinkedIn.",
         },
         { status: 429 },
       );
@@ -40,14 +40,12 @@ export async function POST(req: Request) {
 
     const { name, email, message, honeypot } = parseResult.data;
 
-    // Honeypot silently accepted to block automated spam bots
+    // Honeypot silently accepted to neutralize automated spam bots
     if (honeypot) {
-      return NextResponse.json({ success: true, message: "Message received successfully." });
+      return NextResponse.json({ success: true, method: "honeypot", message: "Message received." });
     }
 
-    let emailDelivered = false;
-
-    // Strategy 1: Resend API (if configured in production)
+    // Direct Resend API Delivery (when valid RESEND_API_KEY is configured in Vercel)
     const resendKey = process.env.RESEND_API_KEY || "";
     if (resendKey && !resendKey.includes("placeholder")) {
       try {
@@ -60,50 +58,28 @@ export async function POST(req: Request) {
           subject: `[Portfolio Inquiry] From ${name}`,
           text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
         });
-        emailDelivered = true;
+
+        return NextResponse.json({
+          success: true,
+          method: "resend",
+          message: "Message delivered directly to Mikul's inbox. You will receive a response within 24 hours.",
+        });
       } catch (emailErr) {
         console.error("Resend API dispatch failed:", emailErr);
       }
     }
 
-    // Strategy 2: FormSubmit Direct Delivery (guaranteed delivery to mikuljain09@gmail.com)
-    if (!emailDelivered) {
-      try {
-        const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(TARGET_EMAIL)}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Origin: "https://mikuljain.vercel.app",
-            Referer: "https://mikuljain.vercel.app/",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            message,
-            _subject: `[Portfolio Inquiry] ${name} (${email})`,
-            _template: "table",
-          }),
-        });
-
-        if (formSubmitRes.ok) {
-          emailDelivered = true;
-        } else {
-          console.warn("FormSubmit response status:", formSubmitRes.status);
-        }
-      } catch (submitErr) {
-        console.error("FormSubmit dispatch error:", submitErr);
-      }
-    }
-
+    // Fallback mode: Payload successfully validated and logged
+    console.info(`[Contact Message] From ${name} <${email}>: ${message.substring(0, 100)}...`);
     return NextResponse.json({
       success: true,
-      message: "Message received and dispatched. I will respond to your email promptly.",
+      method: "client_compose",
+      message: "Message validated. Opening email client...",
     });
   } catch (error) {
     console.error("Contact API error:", error);
     return NextResponse.json(
-      { error: "Unable to send message. Please reach out directly at mikuljain09@gmail.com or on LinkedIn." },
+      { error: "Unable to process message. Please reach out directly at mikuljain09@gmail.com." },
       { status: 500 },
     );
   }
@@ -111,7 +87,7 @@ export async function POST(req: Request) {
 
 export async function GET() {
   return NextResponse.json(
-    { status: "ok", message: "Contact API endpoint is operational. Use POST to transmit inquiries." },
+    { status: "ok", message: "Contact API endpoint operational." },
     { status: 200 },
   );
 }
