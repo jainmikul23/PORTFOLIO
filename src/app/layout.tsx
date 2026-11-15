@@ -27,8 +27,8 @@ const playfair = Playfair_Display({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#090a0e",
-  colorScheme: "dark light",
+  themeColor: "#FAF8F5",
+  colorScheme: "light dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -117,10 +117,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
+      data-theme="light"
       className={`${inter.variable} ${spaceGrotesk.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
       <head>
+        {/* Anti-FOUC Theme Initialization (defaults to light mode) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem("portfolio-theme");var t=(s==="dark"||s==="light")?s:"light";document.documentElement.setAttribute("data-theme",t);}catch(e){}})()`,
+          }}
+        />
+
         {/* Google Search Console Verification Meta */}
         <meta
           name="google-site-verification"

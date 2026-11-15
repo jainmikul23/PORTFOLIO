@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme="dark"] {
   /* Surfaces - Clean Cinematic Dark (Matching White & Orange) */
   --bg-primary: #090a0e;
   --bg-secondary: #141720;

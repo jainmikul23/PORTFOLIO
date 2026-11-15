@@ -5,7 +5,7 @@ import styles from "./ThemeToggle.module.css";
 import { Theme, getInitialTheme, switchThemeWithTransition } from "@/lib/theme";
 
 export const ThemeToggle: React.FC = () => {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

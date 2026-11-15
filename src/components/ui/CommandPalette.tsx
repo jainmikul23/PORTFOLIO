@@ -45,8 +45,8 @@ export const CommandPalette: React.FC = () => {
   };
 
   const toggleTheme = () => {
-    const current = (document.documentElement.getAttribute("data-theme") || "dark") as Theme;
-    const next: Theme = current === "dark" ? "light" : "dark";
+    const current = (document.documentElement.getAttribute("data-theme") || "light") as Theme;
+    const next: Theme = current === "light" ? "dark" : "light";
     switchThemeWithTransition(next);
     close();
   };
