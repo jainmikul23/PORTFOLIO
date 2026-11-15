@@ -9,11 +9,10 @@ import { profile } from "@/content/profile";
 import {
   ArrowRight,
   MessageSquare,
-  Terminal,
   Sparkles,
-  Shield,
-  Cpu,
-  Gauge,
+  Terminal,
+  Layers,
+  Code2,
   ChevronDown,
 } from "lucide-react";
 import styles from "./CinematicHero.module.css";
@@ -27,11 +26,11 @@ interface CardState {
   pointerEvents: "auto" | "none";
 }
 
-const CARDS_META = [
-  { id: 0, label: "01 // VISION", title: "Master Vision" },
-  { id: 1, label: "02 // COCKPIT", title: "Core Architecture" },
-  { id: 2, label: "03 // IDENTITY", title: "Mikul Jain" },
-  { id: 3, label: "04 // CHAPTERS", title: "Portfolio Hub" },
+const DECK_ITEMS = [
+  { id: 0, label: "01", title: "Introduction" },
+  { id: 1, label: "02", title: "Core Focus" },
+  { id: 2, label: "03", title: "About Mikul" },
+  { id: 3, label: "04", title: "Explore" },
 ];
 
 export const CinematicHero: React.FC = () => {
@@ -50,11 +49,10 @@ export const CinematicHero: React.FC = () => {
     }
 
     const ctx = gsap.context(() => {
-      // Pin the full-screen container for 400vh of scroll distance
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=380%",
+        end: "+=360%",
         pin: pinContainerRef.current,
         pinSpacing: true,
         scrub: 0.6,
@@ -79,44 +77,40 @@ export const CinematicHero: React.FC = () => {
       const d = (scrollProgress - center) / spread;
 
       if (d < -1.2) {
-        // Far below
         return {
-          y: 120,
-          z: -200,
-          rotX: 14,
-          scale: 0.88,
+          y: 110,
+          z: -180,
+          rotX: 12,
+          scale: 0.9,
           opacity: 0,
           pointerEvents: "none",
         };
       } else if (d < 0) {
-        // Entering from bottom
-        const p = 1 + d; // 0 to 1
+        const p = 1 + d;
         return {
-          y: (1 - p) * 110,
-          z: (1 - p) * -160,
-          rotX: (1 - p) * 12,
-          scale: 0.9 + p * 0.1,
-          opacity: Math.max(0, Math.min(1, p * 1.3)),
+          y: (1 - p) * 100,
+          z: (1 - p) * -140,
+          rotX: (1 - p) * 10,
+          scale: 0.92 + p * 0.08,
+          opacity: Math.max(0, Math.min(1, p * 1.35)),
           pointerEvents: p > 0.5 ? "auto" : "none",
         };
       } else if (d <= 1) {
-        // Exiting to top
-        const p = d; // 0 to 1
+        const p = d;
         return {
-          y: -p * 110,
-          z: -p * 150,
-          rotX: -p * 10,
-          scale: 1 - p * 0.08,
-          opacity: Math.max(0, Math.min(1, 1 - p * 1.3)),
+          y: -p * 100,
+          z: -p * 140,
+          rotX: -p * 8,
+          scale: 1 - p * 0.07,
+          opacity: Math.max(0, Math.min(1, 1 - p * 1.35)),
           pointerEvents: p < 0.5 ? "auto" : "none",
         };
       } else {
-        // Far above
         return {
-          y: -120,
-          z: -200,
-          rotX: -12,
-          scale: 0.88,
+          y: -110,
+          z: -180,
+          rotX: -10,
+          scale: 0.9,
           opacity: 0,
           pointerEvents: "none",
         };
@@ -124,7 +118,6 @@ export const CinematicHero: React.FC = () => {
     });
   }, [scrollProgress]);
 
-  // Active card index (for sidebar indicator)
   const activeCardIndex = useMemo(() => {
     if (scrollProgress < 0.25) return 0;
     if (scrollProgress < 0.52) return 1;
@@ -132,12 +125,11 @@ export const CinematicHero: React.FC = () => {
     return 3;
   }, [scrollProgress]);
 
-  // Jump to specific card stage
   const jumpToCard = (cardIdx: number) => {
     if (!sectionRef.current) return;
     const targets = [0.08, 0.35, 0.62, 0.9];
     const targetProgress = targets[cardIdx] || 0;
-    const scrollDist = window.innerHeight * 3.8;
+    const scrollDist = window.innerHeight * 3.6;
     const targetScrollY =
       sectionRef.current.offsetTop + targetProgress * scrollDist;
 
@@ -152,48 +144,26 @@ export const CinematicHero: React.FC = () => {
       ref={sectionRef}
       id="hero"
       className={styles.section}
-      aria-label="Cinematic 3D Experience"
+      aria-label="Interactive 3D Portfolio"
     >
       <div ref={pinContainerRef} className={styles.pinContainer}>
         {/* 1. Scroll-Controlled Frame-by-Frame Canvas Engine */}
         <ScrollVideo progress={scrollProgress} />
 
-        {/* 2. Top Status Bar (Automotive HUD telemetry) */}
-        <header className={styles.hudHeader}>
-          <div className={styles.hudBadge}>
-            <span className={styles.pulseDot} />
-            <span className={styles.hudText}>
-              MIKUL.DEV // SCROLL 3D CARD STACK
-            </span>
-          </div>
-
-          <div className={styles.hudStats}>
-            <span className={styles.hudStatItem}>
-              <Gauge size={13} className={styles.magentaIcon} />
-              FRAME: {Math.min(190, Math.floor(scrollProgress * 190) + 1)} / 190
-            </span>
-            <span className={styles.hudDivider}>|</span>
-            <span className={styles.hudStatItem}>
-              <Cpu size={13} className={styles.magentaIcon} />
-              60 FPS GPU
-            </span>
-          </div>
-        </header>
-
-        {/* 3. Floating Card Deck Navigator (Right HUD Dock) */}
-        <nav className={styles.cardDeckNav} aria-label="Deck Navigation">
-          {CARDS_META.map((meta, idx) => (
+        {/* 2. Floating Clean Minimal Deck Indicator (Right side) */}
+        <nav className={styles.deckNav} aria-label="Deck Navigation">
+          {DECK_ITEMS.map((item, idx) => (
             <button
-              key={meta.id}
+              key={item.id}
               onClick={() => jumpToCard(idx)}
-              className={`${styles.deckNavBtn} ${
-                activeCardIndex === idx ? styles.deckNavBtnActive : ""
+              className={`${styles.deckNavDot} ${
+                activeCardIndex === idx ? styles.deckNavDotActive : ""
               }`}
-              title={meta.title}
-              aria-label={`Jump to ${meta.title}`}
+              title={item.title}
+              aria-label={`Jump to ${item.title}`}
             >
-              <span className={styles.deckNavDot} />
-              <span className={styles.deckNavLabel}>{meta.label}</span>
+              <span className={styles.dotPill} />
+              <span className={styles.dotNumber}>{item.label}</span>
             </button>
           ))}
         </nav>
@@ -203,10 +173,10 @@ export const CinematicHero: React.FC = () => {
             ======================================================== */}
         <div className={styles.cardDeckViewport}>
           {/* ----------------------------------------------------
-              CARD 1: MASTER IDENTITY & VISION
+              CARD 1: MASTER IDENTITY & HEADLINE
               ---------------------------------------------------- */}
           <article
-            className={`${styles.cinematicCard} ${styles.visionCard}`}
+            className={`${styles.card} ${styles.cardVision}`}
             style={{
               opacity: cards[0]?.opacity,
               transform: `translate3d(0, ${cards[0]?.y}px, ${cards[0]?.z}px) rotateX(${cards[0]?.rotX}deg) scale(${cards[0]?.scale})`,
@@ -214,19 +184,19 @@ export const CinematicHero: React.FC = () => {
             }}
           >
             <div className={styles.cardGlowBorder} aria-hidden="true" />
-            <div className={styles.cardContent}>
-              <div className={styles.identityBadge}>
-                <Sparkles size={14} className={styles.magentaIcon} />
-                <span>ULTRA-PREMIUM 3D EXPERIENCE</span>
+            <div className={styles.cardInner}>
+              <div className={styles.tagBadge}>
+                <span className={styles.badgeDot} />
+                <span>Product-Minded Full Stack Developer</span>
               </div>
 
-              {/* Letter-by-Letter Master Title */}
+              {/* Letter-by-Letter Title */}
               <h1 className={styles.masterTitle} aria-label="MIKUL JAIN">
                 {"MIKUL JAIN".split("").map((char, i) => (
                   <span
                     key={i}
                     className={styles.titleLetter}
-                    style={{ animationDelay: `${i * 0.05}s` }}
+                    style={{ animationDelay: `${i * 0.04}s` }}
                   >
                     {char === " " ? "\u00A0" : char}
                   </span>
@@ -234,19 +204,19 @@ export const CinematicHero: React.FC = () => {
               </h1>
 
               <p className={styles.masterHeadline}>
-                DESIGNING THE FUTURE.
+                I don&apos;t just write code.
                 <br />
-                <span className={styles.magentaGradientText}>
-                  BUILDING THE DIGITAL WORLD.
+                <span className={styles.orangeAccent}>
+                  I turn ideas into experiences.
                 </span>
               </p>
 
               <p className={styles.masterSubheading}>
-                Full Stack Developer &bull; Creative Technologist &bull; AI
-                Enthusiast
+                Building resilient web applications, systems architecture, and
+                AI integrations.
               </p>
 
-              {/* Interactive Scroll Prompter */}
+              {/* Scroll Prompter */}
               <div className={styles.scrollPrompter}>
                 <div className={styles.scrollTrack}>
                   <div
@@ -260,20 +230,18 @@ export const CinematicHero: React.FC = () => {
                   />
                 </div>
                 <div className={styles.scrollTextRow}>
-                  <ChevronDown size={14} className={styles.magentaIcon} />
-                  <span className={styles.scrollPromptText}>
-                    SCROLL DOWN TO ADVANCE CARDS
-                  </span>
+                  <ChevronDown size={14} className={styles.orangeIcon} />
+                  <span>SCROLL TO ADVANCE</span>
                 </div>
               </div>
             </div>
           </article>
 
           {/* ----------------------------------------------------
-              CARD 2: AUTOMOTIVE COCKPIT & ARCHITECTURE
+              CARD 2: CORE ARCHITECTURE & FOCUS
               ---------------------------------------------------- */}
           <article
-            className={`${styles.cinematicCard} ${styles.cockpitCard}`}
+            className={`${styles.card} ${styles.cardCockpit}`}
             style={{
               opacity: cards[1]?.opacity,
               transform: `translate3d(0, ${cards[1]?.y}px, ${cards[1]?.z}px) rotateX(${cards[1]?.rotX}deg) scale(${cards[1]?.scale})`,
@@ -281,30 +249,25 @@ export const CinematicHero: React.FC = () => {
             }}
           >
             <div className={styles.cardGlowBorder} aria-hidden="true" />
-            <div className={styles.cockpitCardContent}>
-              <div className={styles.cockpitHeader}>
-                <span className={styles.cockpitTag}>
-                  SYSTEM TELEMETRY // 02
-                </span>
-                <h2 className={styles.cockpitTitle}>
-                  Automotive-Grade Craft &amp;{" "}
-                  <span className={styles.magentaGradientText}>
-                    Architecture
-                  </span>
+            <div className={styles.cardInner}>
+              <div className={styles.sectionHeader}>
+                <span className={styles.categoryLabel}>ENGINEERING FOCUS</span>
+                <h2 className={styles.cardTitle}>
+                  Full-Stack Architecture &amp;{" "}
+                  <span className={styles.orangeAccent}>Modern Craft</span>
                 </h2>
               </div>
 
-              <div className={styles.cockpitGrid}>
-                <div className={styles.cockpitSubcard}>
-                  <div className={styles.subcardTop}>
-                    <Terminal size={15} className={styles.magentaIcon} />
+              <div className={styles.focusGrid}>
+                <div className={styles.focusBox}>
+                  <div className={styles.boxHeader}>
+                    <Terminal size={16} className={styles.orangeIcon} />
                     <span>01. CORE ENGINEERING</span>
                   </div>
-                  <h3 className={styles.subcardTitle}>Resilient Full Stack</h3>
-                  <p className={styles.subcardText}>
-                    Architecting scalable web applications with Next.js 15,
-                    React 19, TypeScript, and Node.js with deterministic runtime
-                    safety.
+                  <h3 className={styles.boxTitle}>Full Stack Systems</h3>
+                  <p className={styles.boxDesc}>
+                    Scalable full-stack products using Next.js 15, React 19,
+                    TypeScript, and Node.js with clean API boundaries.
                   </p>
                   <div className={styles.chipRow}>
                     <span className={styles.chip}>Next.js 15</span>
@@ -313,36 +276,38 @@ export const CinematicHero: React.FC = () => {
                   </div>
                 </div>
 
-                <div className={styles.cockpitCenterTelemetry}>
-                  <div className={styles.neonArc} />
-                  <span className={styles.telemetryTag}>
-                    CABIN AMBIENT HUD
-                  </span>
-                  <span className={styles.telemetryValue}>
-                    MERCEDES INSPIRATION
-                  </span>
-                  <span className={styles.telemetryDesc}>
-                    DEEP BURGUNDY &bull; NEON MAGENTA &bull; 60 FPS
-                  </span>
-                </div>
-
-                <div className={styles.cockpitSubcard}>
-                  <div className={styles.subcardTop}>
-                    <Shield size={15} className={styles.magentaIcon} />
-                    <span>02. SPATIAL &amp; PERFORMANCE</span>
+                <div className={styles.focusBox}>
+                  <div className={styles.boxHeader}>
+                    <Layers size={16} className={styles.orangeIcon} />
+                    <span>02. SYSTEMS &amp; AI</span>
                   </div>
-                  <h3 className={styles.subcardTitle}>
-                    Cinematic Interactivity
-                  </h3>
-                  <p className={styles.subcardText}>
-                    Frame-accurate scroll synchronization, GPU canvas
-                    compositing, and micro-interactions optimized for buttery
-                    60fps.
+                  <h3 className={styles.boxTitle}>Intelligent Workflows</h3>
+                  <p className={styles.boxDesc}>
+                    Integrating structured AI inference, robust relational
+                    databases, and resilient backend pipelines for real-world
+                    impact.
                   </p>
                   <div className={styles.chipRow}>
-                    <span className={styles.chip}>Canvas Engine</span>
+                    <span className={styles.chip}>AI Logic</span>
+                    <span className={styles.chip}>MySQL</span>
+                    <span className={styles.chip}>REST APIs</span>
+                  </div>
+                </div>
+
+                <div className={styles.focusBox}>
+                  <div className={styles.boxHeader}>
+                    <Code2 size={16} className={styles.orangeIcon} />
+                    <span>03. PERFORMANCE &amp; 3D</span>
+                  </div>
+                  <h3 className={styles.boxTitle}>Interactive Experiences</h3>
+                  <p className={styles.boxDesc}>
+                    60 FPS scroll synchronization, GPU canvas acceleration, and
+                    accessible design engineered for speed.
+                  </p>
+                  <div className={styles.chipRow}>
                     <span className={styles.chip}>GSAP Scrub</span>
-                    <span className={styles.chip}>WebGL 3D</span>
+                    <span className={styles.chip}>Three.js</span>
+                    <span className={styles.chip}>100 Lighthouse</span>
                   </div>
                 </div>
               </div>
@@ -350,10 +315,10 @@ export const CinematicHero: React.FC = () => {
           </article>
 
           {/* ----------------------------------------------------
-              CARD 3: PERSONAL IDENTITY & CREDENTIALS
+              CARD 3: PERSONAL IDENTITY & PORTRAIT
               ---------------------------------------------------- */}
           <article
-            className={`${styles.cinematicCard} ${styles.identityCard}`}
+            className={`${styles.card} ${styles.cardIdentity}`}
             style={{
               opacity: cards[2]?.opacity,
               transform: `translate3d(0, ${cards[2]?.y}px, ${cards[2]?.z}px) rotateX(${cards[2]?.rotX}deg) scale(${cards[2]?.scale})`,
@@ -362,41 +327,40 @@ export const CinematicHero: React.FC = () => {
           >
             <div className={styles.cardGlowBorder} aria-hidden="true" />
             <div className={styles.identityLayout}>
-              {/* Authentic Portrait Frame */}
-              <div className={styles.portraitChassis}>
+              {/* Portrait Frame */}
+              <div className={styles.portraitWrap}>
                 <div className={styles.portraitFrame}>
                   <Image
                     src="/mikul-jain.jpg"
-                    alt="Mikul Jain - Full Stack Developer and Creative Technologist"
-                    width={340}
-                    height={380}
+                    alt="Mikul Jain - Full Stack Developer"
+                    width={330}
+                    height={370}
                     priority
                     fetchPriority="high"
                     quality={85}
                     className={styles.portraitImg}
                   />
-                  <div className={styles.portraitGlossOverlay} />
-                  <div className={styles.portraitBorderGlow} />
-                  <div className={styles.portraitTag}>
-                    <Sparkles size={13} className={styles.magentaIcon} />
-                    <span>Available for High-Impact Roles</span>
+                  <div className={styles.portraitOverlay} />
+                  <div className={styles.portraitBadge}>
+                    <Sparkles size={13} className={styles.orangeIcon} />
+                    <span>Available for Opportunities</span>
                   </div>
                 </div>
               </div>
 
-              {/* Narrative & Verified Badges */}
-              <div className={styles.identityNarrative}>
-                <div className={styles.badgeRow}>
-                  <span className={styles.neonBadge}>MIKUL JAIN</span>
-                  <span className={styles.roleBadge}>
-                    CREATIVE TECHNOLOGIST
+              {/* Bio & Credentials */}
+              <div className={styles.identityContent}>
+                <div className={styles.nameBadgeRow}>
+                  <span className={styles.nameBadge}>MIKUL JAIN</span>
+                  <span className={styles.locationBadge}>
+                    Indore, India
                   </span>
                 </div>
 
                 <h2 className={styles.identityHeadline}>
-                  Turning Complex Architecture Into{" "}
-                  <span className={styles.magentaGradientText}>
-                    Seamless Experiences.
+                  Turning Complex Problems Into{" "}
+                  <span className={styles.orangeAccent}>
+                    Functional Products.
                   </span>
                 </h2>
 
@@ -405,35 +369,35 @@ export const CinematicHero: React.FC = () => {
                 </p>
 
                 {/* Verified Credentials */}
-                <div className={styles.credStrip}>
-                  <div className={styles.credItem}>
+                <div className={styles.credentialsRow}>
+                  <div className={styles.credCol}>
                     <span className={styles.credLabel}>EDUCATION</span>
                     <span className={styles.credValue}>
-                      B.Tech CSE &bull; AITR Indore
+                      B.Tech CSE &bull; AITR
                     </span>
                   </div>
                   <div className={styles.credDivider} />
-                  <div className={styles.credItem}>
-                    <span className={styles.credLabel}>ACADEMIC RECORD</span>
+                  <div className={styles.credCol}>
+                    <span className={styles.credLabel}>RECORD</span>
                     <span className={styles.credValue}>
                       8.22 CGPA (3rd Year)
                     </span>
                   </div>
                   <div className={styles.credDivider} />
-                  <div className={styles.credItem}>
-                    <span className={styles.credLabel}>ACHIEVEMENTS</span>
+                  <div className={styles.credCol}>
+                    <span className={styles.credLabel}>AWARDS</span>
                     <span className={styles.credValue}>
                       Top 10 CodeSpire &bull; Kriyeta Finalist
                     </span>
                   </div>
                 </div>
 
-                <div className={styles.actionRow}>
-                  <a href="#projects" className={styles.primaryBtn}>
-                    <span>Explore Selected Work</span>
+                <div className={styles.btnRow}>
+                  <a href="#projects" className={styles.primaryCta}>
+                    <span>Explore My Work</span>
                     <ArrowRight size={17} />
                   </a>
-                  <a href="#contact" className={styles.secondaryBtn}>
+                  <a href="#contact" className={styles.secondaryCta}>
                     <MessageSquare size={16} />
                     <span>Let&apos;s Connect</span>
                   </a>
@@ -443,10 +407,10 @@ export const CinematicHero: React.FC = () => {
           </article>
 
           {/* ----------------------------------------------------
-              CARD 4: SPATIAL PORTFOLIO CHAPTER HUB
+              CARD 4: CHAPTER DIRECTORY
               ---------------------------------------------------- */}
           <article
-            className={`${styles.cinematicCard} ${styles.hubCardMaster}`}
+            className={`${styles.card} ${styles.cardHub}`}
             style={{
               opacity: cards[3]?.opacity,
               transform: `translate3d(0, ${cards[3]?.y}px, ${cards[3]?.z}px) rotateX(${cards[3]?.rotX}deg) scale(${cards[3]?.scale})`,
@@ -454,74 +418,68 @@ export const CinematicHero: React.FC = () => {
             }}
           >
             <div className={styles.cardGlowBorder} aria-hidden="true" />
-            <div className={styles.hubContainer}>
-              <div className={styles.hubHeader}>
-                <span className={styles.hubSubtitle}>
-                  CHAPTER NAVIGATION // 04
-                </span>
+            <div className={styles.hubInner}>
+              <div className={styles.hubHeading}>
+                <span className={styles.categoryLabel}>CHAPTER DIRECTORY</span>
                 <h2 className={styles.hubTitle}>
                   Explore the{" "}
-                  <span className={styles.magentaGradientText}>
-                    Portfolio Universe
-                  </span>
+                  <span className={styles.orangeAccent}>Portfolio</span>
                 </h2>
               </div>
 
               <div className={styles.hubGrid}>
-                <a href="#about" className={styles.hubSubcard}>
-                  <span className={styles.hubCardNum}>01</span>
-                  <span className={styles.hubCardTitle}>ABOUT ME</span>
-                  <span className={styles.hubCardDesc}>
-                    Story, college background &amp; philosophy
+                <a href="#about" className={styles.hubTile}>
+                  <span className={styles.tileNum}>01</span>
+                  <span className={styles.tileTitle}>ABOUT ME</span>
+                  <span className={styles.tileDesc}>
+                    Background, story &amp; development philosophy
                   </span>
                 </a>
 
-                <a href="#capabilities" className={styles.hubSubcard}>
-                  <span className={styles.hubCardNum}>02</span>
-                  <span className={styles.hubCardTitle}>WHAT I DO</span>
-                  <span className={styles.hubCardDesc}>
-                    Systems architecture &amp; modern web craft
+                <a href="#capabilities" className={styles.hubTile}>
+                  <span className={styles.tileNum}>02</span>
+                  <span className={styles.tileTitle}>WHAT I DO</span>
+                  <span className={styles.tileDesc}>
+                    Full stack architecture, performance &amp; APIs
                   </span>
                 </a>
 
-                <a href="#projects" className={styles.hubSubcard}>
-                  <span className={styles.hubCardNum}>03</span>
-                  <span className={styles.hubCardTitle}>FLAGSHIP PROJECTS</span>
-                  <span className={styles.hubCardDesc}>
-                    HealthDost, Civic Issue, Banking System
+                <a href="#projects" className={styles.hubTile}>
+                  <span className={styles.tileNum}>03</span>
+                  <span className={styles.tileTitle}>FLAGSHIP PROJECTS</span>
+                  <span className={styles.tileDesc}>
+                    HealthDost, Civic Issue, Banking Systems
                   </span>
                 </a>
 
-                <a href="#skills" className={styles.hubSubcard}>
-                  <span className={styles.hubCardNum}>04</span>
-                  <span className={styles.hubCardTitle}>TECH STACK</span>
-                  <span className={styles.hubCardDesc}>
-                    Languages, frameworks, tooling &amp; databases
+                <a href="#skills" className={styles.hubTile}>
+                  <span className={styles.tileNum}>04</span>
+                  <span className={styles.tileTitle}>TECH STACK</span>
+                  <span className={styles.tileDesc}>
+                    Next.js, React, Node, Python, MySQL, Three.js
                   </span>
                 </a>
 
-                <a href="#journey" className={styles.hubSubcard}>
-                  <span className={styles.hubCardNum}>05</span>
-                  <span className={styles.hubCardTitle}>JOURNEY &amp; AWARDS</span>
-                  <span className={styles.hubCardDesc}>
-                    Hackathons, achievements &amp; milestones
+                <a href="#journey" className={styles.hubTile}>
+                  <span className={styles.tileNum}>05</span>
+                  <span className={styles.tileTitle}>JOURNEY &amp; AWARDS</span>
+                  <span className={styles.tileDesc}>
+                    Hackathons, milestones &amp; achievements
                   </span>
                 </a>
 
-                <a href="#contact" className={styles.hubSubcard}>
-                  <span className={styles.hubCardNum}>06</span>
-                  <span className={styles.hubCardTitle}>GET IN TOUCH</span>
-                  <span className={styles.hubCardDesc}>
-                    Inquiries, collaborations &amp; opportunities
+                <a href="#contact" className={styles.hubTile}>
+                  <span className={styles.tileNum}>06</span>
+                  <span className={styles.tileTitle}>CONTACT</span>
+                  <span className={styles.tileDesc}>
+                    Get in touch for projects &amp; collaborations
                   </span>
                 </a>
               </div>
 
-              <div className={styles.releaseIndicator}>
-                <div className={styles.mouseIcon}>
-                  <div className={styles.mouseWheel} />
-                </div>
-                <span>SCROLL DOWN TO ENTER CHAPTERS</span>
+              <div className={styles.scrollNextRow}>
+                <ChevronDown size={15} className={styles.orangeIcon} />
+                <span>SCROLL DOWN TO ENTER PORTFOLIO</span>
               </div>
             </div>
           </article>

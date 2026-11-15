@@ -78,28 +78,28 @@
 .productCard {
   position: sticky;
   top: calc(90px + var(--card-index, 0) * 22px);
-  background: rgba(22, 10, 24, 0.88);
+  background: var(--bg-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 16, 117, 0.32);
+  border: 1px solid rgba(255, 99, 61, 0.28);
   border-radius: var(--r-2xl);
   padding: 3rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 16, 117, 0.15);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 99, 61, 0.12);
   transition: all var(--duration-normal) var(--ease-out);
   margin-bottom: 2rem;
 }
 
 .productCard:hover {
-  border-color: rgba(255, 16, 117, 0.65);
-  box-shadow: 0 35px 85px -15px rgba(0, 0, 0, 0.98), 0 0 45px rgba(255, 16, 117, 0.3);
+  border-color: rgba(255, 99, 61, 0.6);
+  box-shadow: 0 35px 85px -15px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 99, 61, 0.25);
   transform: translateY(-4px);
 }
 
 .flagshipCard {
-  border-color: rgba(255, 16, 117, 0.45);
+  border-color: rgba(255, 99, 61, 0.4);
 }
 
 .cardHeader {

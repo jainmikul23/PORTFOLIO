@@ -18,8 +18,8 @@ export const Particles: React.FC<{ count?: number }> = ({ count = 300 }) => {
     const spd = new Float32Array(count);
     const cols = new Float32Array(count * 3);
 
-    const magenta = new THREE.Color("#FF1075");
-    const violet = new THREE.Color("#9D00FF");
+    const orange = new THREE.Color("#FF633D");
+    const white = new THREE.Color("#FFFFFF");
 
     for (let i = 0; i < count; i++) {
       const idx = i * 3;
@@ -34,7 +34,7 @@ export const Particles: React.FC<{ count?: number }> = ({ count = 300 }) => {
 
       spd[i] = 0.005 + Math.random() * 0.007;
 
-      const c = Math.random() > 0.4 ? magenta : violet;
+      const c = Math.random() > 0.35 ? orange : white;
       cols[idx] = c.r;
       cols[idx + 1] = c.g;
       cols[idx + 2] = c.b;
