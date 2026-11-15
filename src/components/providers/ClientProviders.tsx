@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { initSmoothScroll, destroySmoothScroll } from "@/lib/animations/scroll";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
-import { JsonLd } from "@/components/seo/JsonLd";
 
 // Lazy-load Three.js WebGL canvas so it does not block initial paint, FCP or LCP
 const Scene = dynamic(
@@ -56,9 +55,6 @@ export const ClientProviders: React.FC<ClientProvidersProps> = ({ children }) =>
 
   return (
     <>
-      {/* Search Engine & AI Structured Data */}
-      <JsonLd />
-
       {/* Non-Blocking Initial Ambient Indicator */}
       <LoadingScreen />
 

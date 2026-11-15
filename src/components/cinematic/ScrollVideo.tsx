@@ -39,7 +39,6 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     // Use closest loaded frame if requested frame is still downloading
     let img = imagesRef.current.get(frameIdx);
     if (!img || !img.complete || img.naturalWidth === 0) {
-      // Find nearest loaded frame
       let closest = -1;
       let minDiff = Infinity;
       imagesRef.current.forEach((cachedImg, idx) => {
@@ -93,7 +92,29 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
     }
   }, [drawFrame]);
 
-  // Initial setup: Load frame 1 immediately, then progressively load the rest
+  // Load a single frame by index on-demand
+  const loadSingle = useCallback(
+    (index: number): Promise<void> => {
+      return new Promise((resolve) => {
+        if (imagesRef.current.has(index)) return resolve();
+
+        const img = new Image();
+        img.src = getFramePath(index);
+        img.onload = () => {
+          imagesRef.current.set(index, img);
+          setLoadedCount((c) => c + 1);
+          if (currentFrameRef.current === index) {
+            drawFrame(index);
+          }
+          resolve();
+        };
+        img.onerror = () => resolve();
+      });
+    },
+    [drawFrame, getFramePath]
+  );
+
+  // Initial setup: Load frame 1 immediately, then schedule background keyframe preloading
   useEffect(() => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
@@ -110,10 +131,9 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
       setLoadedCount((c) => c + 1);
     };
 
-    // 2. Intelligent progressive batch loading (priority keyframes first, then intermediates)
-    // First pass: load every 4th frame for instant scrub response
-    // Second pass: fill in all remaining frames
-    const loadBatch = async () => {
+    // 2. High-performance idle loading:
+    // Uses requestIdleCallback to keep main thread completely unblocked
+    const scheduleBackgroundLoad = () => {
       const priorityIndices: number[] = [];
       const secondaryIndices: number[] = [];
 
@@ -125,59 +145,52 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
         }
       }
 
-      const loadSingle = (index: number): Promise<void> => {
-        return new Promise((resolve) => {
-          if (!isMounted) return resolve();
-          if (imagesRef.current.has(index)) return resolve();
+      const runBatch = async () => {
+        const CHUNK_SIZE = 4;
+        for (let i = 0; i < priorityIndices.length; i += CHUNK_SIZE) {
+          if (!isMounted) break;
+          const chunk = priorityIndices.slice(i, i + CHUNK_SIZE);
+          await Promise.all(chunk.map((idx) => loadSingle(idx)));
+        }
 
-          const img = new Image();
-          img.src = getFramePath(index);
-          img.onload = () => {
-            if (isMounted) {
-              imagesRef.current.set(index, img);
-              setLoadedCount((c) => c + 1);
-              // If user is currently stopped on this frame, render it
-              if (currentFrameRef.current === index) {
-                drawFrame(index);
-              }
-            }
-            resolve();
-          };
-          img.onerror = () => resolve();
-        });
+        // Fill in remaining intermediate frames
+        for (let i = 0; i < secondaryIndices.length; i += CHUNK_SIZE) {
+          if (!isMounted) break;
+          const chunk = secondaryIndices.slice(i, i + CHUNK_SIZE);
+          await Promise.all(chunk.map((idx) => loadSingle(idx)));
+        }
       };
 
-      // Load priority keyframes in parallel chunks of 6
-      const CHUNK_SIZE = 6;
-      for (let i = 0; i < priorityIndices.length; i += CHUNK_SIZE) {
-        if (!isMounted) break;
-        const chunk = priorityIndices.slice(i, i + CHUNK_SIZE);
-        await Promise.all(chunk.map((idx) => loadSingle(idx)));
-      }
-
-      // Load remaining frames in background
-      for (let i = 0; i < secondaryIndices.length; i += CHUNK_SIZE) {
-        if (!isMounted) break;
-        const chunk = secondaryIndices.slice(i, i + CHUNK_SIZE);
-        await Promise.all(chunk.map((idx) => loadSingle(idx)));
+      if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+        window.requestIdleCallback(() => runBatch(), { timeout: 3000 });
+      } else {
+        setTimeout(runBatch, 1200);
       }
     };
 
-    loadBatch();
+    scheduleBackgroundLoad();
 
     return () => {
       isMounted = false;
       window.removeEventListener("resize", resizeCanvas);
       if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
     };
-  }, [drawFrame, getFramePath, resizeCanvas, totalFrames]);
+  }, [drawFrame, getFramePath, resizeCanvas, totalFrames, loadSingle]);
 
-  // Synchronize canvas rendering with scroll progress
+  // Synchronize canvas rendering with scroll progress + lookahead preloading
   useEffect(() => {
     const targetFrame = Math.min(
       Math.max(0, Math.floor(progress * (totalFrames - 1))),
-      totalFrames - 1,
+      totalFrames - 1
     );
+
+    // Lookahead: Preload neighboring frames immediately around current scroll position
+    for (let offset = -2; offset <= 4; offset++) {
+      const nearbyIdx = targetFrame + offset;
+      if (nearbyIdx >= 0 && nearbyIdx < totalFrames && !imagesRef.current.has(nearbyIdx)) {
+        loadSingle(nearbyIdx);
+      }
+    }
 
     if (currentFrameRef.current !== targetFrame) {
       currentFrameRef.current = targetFrame;
@@ -186,7 +199,7 @@ export const ScrollVideo: React.FC<ScrollVideoProps> = ({
         drawFrame(targetFrame);
       });
     }
-  }, [progress, totalFrames, drawFrame]);
+  }, [progress, totalFrames, drawFrame, loadSingle]);
 
   return (
     <div className={`${styles.videoContainer} ${className || ""}`}>

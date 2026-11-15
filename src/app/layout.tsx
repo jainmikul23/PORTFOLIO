@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, Playfair_Display } from "next/font/google";
 import "@/styles/globals.css";
 import { ClientProviders } from "@/components/providers/ClientProviders";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,26 +26,57 @@ const playfair = Playfair_Display({
   style: ["normal", "italic"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#090a0e",
+  colorScheme: "dark light",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "Mikul Jain | Product-Minded Full Stack Developer",
+  title: {
+    default: "Mikul Jain | Product-Minded Full Stack Developer & Systems Architect",
+    template: "%s | Mikul Jain",
+  },
   description:
-    "Personal portfolio of Mikul Jain - Product-Minded Full Stack Developer specializing in reliable web systems, systems design, and AI integration.",
+    "Official portfolio of Mikul Jain - Full Stack Developer and Computer Science Engineer (AITR Indore). Building distributed systems, AI workflows, Next.js applications, and 60 FPS interactive web experiences.",
   keywords: [
     "Mikul Jain",
-    "Full Stack Developer",
-    "Product Engineer",
-    "AITR Indore",
-    "Next.js",
-    "React",
-    "Three.js",
-    "HealthDost",
+    "Mikul Jain Portfolio",
+    "Mikul Jain AITR",
+    "Mikul Jain Indore",
+    "Mikul Jain Developer",
+    "Mikul Jain Full Stack Developer",
+    "Mikul Jain Software Engineer",
+    "Product-Minded Full Stack Developer",
+    "HealthDost Mikul Jain",
     "Civic Issue System",
+    "AITR Indore",
+    "Acropolis Institute of Technology and Research",
+    "Next.js Developer India",
+    "Three.js Developer Indore",
+    "Full Stack Web Developer",
   ],
-  authors: [{ name: "Mikul Jain" }],
+  authors: [{ name: "Mikul Jain", url: "https://mikuljain.vercel.app" }],
   creator: "Mikul Jain",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://mikuljain.vercel.app"),
+  alternates: {
+    canonical: "https://mikuljain.vercel.app",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Mikul Jain | Product-Minded Full Stack Developer",
+    title: "Mikul Jain | Product-Minded Full Stack Developer & Systems Architect",
     description:
       "I don't just write code. I turn ideas into experiences. Explore flagship systems, architecture case studies, and engineering philosophy.",
     url: "https://mikuljain.vercel.app",
@@ -89,12 +121,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        {/* Google Search Console Verification */}
+        {/* Google Search Console Verification Meta */}
         <meta
           name="google-site-verification"
           content="Pg12xxCwxKSdyMJoogu5Qs1qPjNXdlERCoBC2VJlAcw"
         />
-        {/* Preload hero assets for instantaneous first frame paint */}
+
+        {/* Preload critical hero assets for instantaneous first frame paint */}
         <link
           rel="preload"
           as="image"
@@ -109,6 +142,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="image/jpeg"
           fetchPriority="high"
         />
+
+        {/* Search Engine & AI Knowledge Graph Schema (SSR rendered for instant crawler discovery) */}
+        <JsonLd />
       </head>
       <body>
         <ClientProviders>{children}</ClientProviders>
