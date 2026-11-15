@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import { ScrollVideo } from "./ScrollVideo";
+import { ScrollVideo, type ScrollVideoHandle } from "./ScrollVideo";
 import { gsap, ScrollTrigger, initGSAP } from "@/lib/animations/gsap";
 import { prefersReducedMotion } from "@/lib/animations/config";
 import { profile } from "@/content/profile";
@@ -17,15 +17,6 @@ import {
 } from "lucide-react";
 import styles from "./CinematicHero.module.css";
 
-interface CardState {
-  y: number;
-  z: number;
-  rotX: number;
-  scale: number;
-  opacity: number;
-  pointerEvents: "auto" | "none";
-}
-
 const DECK_ITEMS = [
   { id: 0, label: "01", title: "Master Identity" },
   { id: 1, label: "02", title: "Core Architecture" },
@@ -36,29 +27,125 @@ const DECK_ITEMS = [
 export const CinematicHero: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const pinContainerRef = useRef<HTMLDivElement | null>(null);
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const scrollVideoRef = useRef<ScrollVideoHandle | null>(null);
+  const scrollThumbRef = useRef<HTMLDivElement | null>(null);
+
+  // Direct element refs for 60/120 FPS hardware transforms without React Virtual DOM diffing
+  const card1Ref = useRef<HTMLElement | null>(null);
+  const card2Ref = useRef<HTMLElement | null>(null);
+  const card3Ref = useRef<HTMLElement | null>(null);
+  const card4Ref = useRef<HTMLElement | null>(null);
+
+  const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
+  const activeCardIndexRef = useRef<number>(0);
+
+  // Direct GPU transform function: runs synchronously inside scroll tick without React re-rendering
+  const applyCardTransforms = useCallback((progress: number) => {
+    // 1. Advance video canvas
+    scrollVideoRef.current?.setProgress(progress);
+
+    // 2. Update scroll thumb
+    if (scrollThumbRef.current) {
+      const scaleVal = Math.max(0.2, Math.min(1, progress / 0.25));
+      scrollThumbRef.current.style.transform = `scaleY(${scaleVal})`;
+    }
+
+    // 3. Compute 4 card transforms
+    const centers = [0.12, 0.38, 0.65, 0.92];
+    const spread = 0.16;
+    const cards = [card1Ref.current, card2Ref.current, card3Ref.current, card4Ref.current];
+
+    for (let i = 0; i < 4; i++) {
+      const cardEl = cards[i];
+      if (!cardEl) continue;
+
+      const center = centers[i] ?? 0;
+      const d = (progress - center) / spread;
+      let y = 0;
+      let z = 0;
+      let rotX = 0;
+      let scale = 1;
+      let opacity = 0;
+      let pointerEvents: "auto" | "none" = "none";
+
+      if (d < -1.2) {
+        y = 110;
+        z = -180;
+        rotX = 12;
+        scale = 0.9;
+        opacity = 0;
+        pointerEvents = "none";
+      } else if (d < 0) {
+        const p = 1 + d;
+        y = (1 - p) * 100;
+        z = (1 - p) * -140;
+        rotX = (1 - p) * 10;
+        scale = 0.92 + p * 0.08;
+        opacity = Math.max(0, Math.min(1, p * 1.35));
+        pointerEvents = p > 0.5 ? "auto" : "none";
+      } else if (d <= 1) {
+        const p = d;
+        y = -p * 100;
+        z = -p * 140;
+        rotX = -p * 8;
+        scale = 1 - p * 0.07;
+        opacity = Math.max(0, Math.min(1, 1 - p * 1.35));
+        pointerEvents = p < 0.5 ? "auto" : "none";
+      } else {
+        y = -110;
+        z = -180;
+        rotX = -10;
+        scale = 0.9;
+        opacity = 0;
+        pointerEvents = "none";
+      }
+
+      cardEl.style.transform = `translate3d(0, ${y}px, ${z}px) rotateX(${rotX}deg) scale(${scale})`;
+      cardEl.style.opacity = `${opacity}`;
+      cardEl.style.pointerEvents = pointerEvents;
+    }
+
+    // 4. Update deck navigation index ONLY when the active card changes (preserves battery & FPS)
+    let nextActive = 0;
+    if (progress < 0.25) nextActive = 0;
+    else if (progress < 0.52) nextActive = 1;
+    else if (progress < 0.78) nextActive = 2;
+    else nextActive = 3;
+
+    if (activeCardIndexRef.current !== nextActive) {
+      activeCardIndexRef.current = nextActive;
+      setActiveCardIndex(nextActive);
+    }
+  }, []);
 
   useEffect(() => {
     initGSAP();
 
     if (!sectionRef.current || !pinContainerRef.current) return;
 
+    // Initial positioning on mount
+    applyCardTransforms(0);
+
     if (prefersReducedMotion()) {
-      setScrollProgress(0.65);
+      applyCardTransforms(0.65);
       return;
     }
+
+    const isMobile = window.innerWidth <= 768;
+    // Responsive pin duration: Snappy 280% on mobile touch, deep 360% on desktop
+    const pinDistance = isMobile ? "+=280%" : "+=360%";
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=360%",
+        end: pinDistance,
         pin: pinContainerRef.current,
         pinSpacing: true,
-        scrub: 0.35,
+        scrub: 0.25, // Snappy hardware-locked scrub
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          setScrollProgress(self.progress);
+          applyCardTransforms(self.progress);
         },
       });
     }, sectionRef);
@@ -66,70 +153,14 @@ export const CinematicHero: React.FC = () => {
     return () => {
       ctx.revert();
     };
-  }, []);
-
-  // Compute 3D Card Stack transforms smoothly for each of the 4 cards
-  const cards = useMemo(() => {
-    const centers = [0.12, 0.38, 0.65, 0.92];
-    const spread = 0.16;
-
-    return centers.map((center): CardState => {
-      const d = (scrollProgress - center) / spread;
-
-      if (d < -1.2) {
-        return {
-          y: 110,
-          z: -180,
-          rotX: 12,
-          scale: 0.9,
-          opacity: 0,
-          pointerEvents: "none",
-        };
-      } else if (d < 0) {
-        const p = 1 + d;
-        return {
-          y: (1 - p) * 100,
-          z: (1 - p) * -140,
-          rotX: (1 - p) * 10,
-          scale: 0.92 + p * 0.08,
-          opacity: Math.max(0, Math.min(1, p * 1.35)),
-          pointerEvents: p > 0.5 ? "auto" : "none",
-        };
-      } else if (d <= 1) {
-        const p = d;
-        return {
-          y: -p * 100,
-          z: -p * 140,
-          rotX: -p * 8,
-          scale: 1 - p * 0.07,
-          opacity: Math.max(0, Math.min(1, 1 - p * 1.35)),
-          pointerEvents: p < 0.5 ? "auto" : "none",
-        };
-      } else {
-        return {
-          y: -110,
-          z: -180,
-          rotX: -10,
-          scale: 0.9,
-          opacity: 0,
-          pointerEvents: "none",
-        };
-      }
-    });
-  }, [scrollProgress]);
-
-  const activeCardIndex = useMemo(() => {
-    if (scrollProgress < 0.25) return 0;
-    if (scrollProgress < 0.52) return 1;
-    if (scrollProgress < 0.78) return 2;
-    return 3;
-  }, [scrollProgress]);
+  }, [applyCardTransforms]);
 
   const jumpToCard = (cardIdx: number) => {
     if (!sectionRef.current) return;
     const targets = [0.08, 0.35, 0.62, 0.9];
     const targetProgress = targets[cardIdx] || 0;
-    const scrollDist = window.innerHeight * 3.6;
+    const isMobile = window.innerWidth <= 768;
+    const scrollDist = window.innerHeight * (isMobile ? 2.8 : 3.6);
     const targetScrollY =
       sectionRef.current.offsetTop + targetProgress * scrollDist;
 
@@ -148,7 +179,7 @@ export const CinematicHero: React.FC = () => {
     >
       <div ref={pinContainerRef} className={styles.pinContainer}>
         {/* 1. Scroll-Controlled Frame-by-Frame Canvas Engine */}
-        <ScrollVideo progress={scrollProgress} />
+        <ScrollVideo ref={scrollVideoRef} />
 
         {/* 2. Floating Minimal Deck Indicator */}
         <nav className={styles.deckNav} aria-label="Deck Navigation">
@@ -161,6 +192,7 @@ export const CinematicHero: React.FC = () => {
               }`}
               title={item.title}
               aria-label={`Jump to ${item.title}`}
+              type="button"
             >
               <span className={styles.dotPill} />
               <span className={styles.dotNumber}>{item.label}</span>
@@ -176,12 +208,9 @@ export const CinematicHero: React.FC = () => {
               CARD 1: MASTER IDENTITY & HEADLINE
               ---------------------------------------------------- */}
           <article
+            ref={card1Ref}
             className={`${styles.card} ${styles.cardVision}`}
-            style={{
-              opacity: cards[0]?.opacity,
-              transform: `translate3d(0, ${cards[0]?.y}px, ${cards[0]?.z}px) rotateX(${cards[0]?.rotX}deg) scale(${cards[0]?.scale})`,
-              pointerEvents: cards[0]?.pointerEvents,
-            }}
+            style={{ opacity: 1, pointerEvents: "auto" }}
           >
             <div className={styles.cardGlowBorder} aria-hidden="true" />
             <div className={styles.cardInner}>
@@ -218,15 +247,7 @@ export const CinematicHero: React.FC = () => {
               {/* Scroll Prompter */}
               <div className={styles.scrollPrompter}>
                 <div className={styles.scrollTrack}>
-                  <div
-                    className={styles.scrollThumb}
-                    style={{
-                      transform: `scaleY(${Math.max(
-                        0.2,
-                        scrollProgress / 0.25,
-                      )})`,
-                    }}
-                  />
+                  <div ref={scrollThumbRef} className={styles.scrollThumb} />
                 </div>
                 <div className={styles.scrollTextRow}>
                   <ChevronDown size={14} className={styles.orangeIcon} />
@@ -240,12 +261,9 @@ export const CinematicHero: React.FC = () => {
               CARD 2: CORE ARCHITECTURE & FOCUS
               ---------------------------------------------------- */}
           <article
+            ref={card2Ref}
             className={`${styles.card} ${styles.cardArchitecture}`}
-            style={{
-              opacity: cards[1]?.opacity,
-              transform: `translate3d(0, ${cards[1]?.y}px, ${cards[1]?.z}px) rotateX(${cards[1]?.rotX}deg) scale(${cards[1]?.scale})`,
-              pointerEvents: cards[1]?.pointerEvents,
-            }}
+            style={{ opacity: 0, pointerEvents: "none" }}
           >
             <div className={styles.cardGlowBorder} aria-hidden="true" />
             <div className={styles.cardInner}>
@@ -313,12 +331,9 @@ export const CinematicHero: React.FC = () => {
               CARD 3: PERSONAL IDENTITY & PORTRAIT
               ---------------------------------------------------- */}
           <article
+            ref={card3Ref}
             className={`${styles.card} ${styles.cardIdentity}`}
-            style={{
-              opacity: cards[2]?.opacity,
-              transform: `translate3d(0, ${cards[2]?.y}px, ${cards[2]?.z}px) rotateX(${cards[2]?.rotX}deg) scale(${cards[2]?.scale})`,
-              pointerEvents: cards[2]?.pointerEvents,
-            }}
+            style={{ opacity: 0, pointerEvents: "none" }}
           >
             <div className={styles.cardGlowBorder} aria-hidden="true" />
             <div className={styles.identityLayout}>
@@ -405,12 +420,9 @@ export const CinematicHero: React.FC = () => {
               CARD 4: CHAPTER DIRECTORY
               ---------------------------------------------------- */}
           <article
+            ref={card4Ref}
             className={`${styles.card} ${styles.cardHub}`}
-            style={{
-              opacity: cards[3]?.opacity,
-              transform: `translate3d(0, ${cards[3]?.y}px, ${cards[3]?.z}px) rotateX(${cards[3]?.rotX}deg) scale(${cards[3]?.scale})`,
-              pointerEvents: cards[3]?.pointerEvents,
-            }}
+            style={{ opacity: 0, pointerEvents: "none" }}
           >
             <div className={styles.cardGlowBorder} aria-hidden="true" />
             <div className={styles.hubInner}>
