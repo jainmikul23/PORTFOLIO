@@ -15,8 +15,24 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/"],
       },
+      // First-Class AI Search & LLM Discovery Crawlers
+      {
+        userAgent: [
+          "GPTBot",
+          "ChatGPT-User",
+          "PerplexityBot",
+          "ClaudeBot",
+          "Google-Extended",
+          "Applebot-Extended",
+          "cohere-ai",
+          "Bingbot",
+        ],
+        allow: ["/", "/llms.txt", "/llms-full.txt", "/sitemap.xml"],
+        disallow: ["/api/"],
+      },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }
 

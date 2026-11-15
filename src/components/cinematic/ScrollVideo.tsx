@@ -29,6 +29,7 @@ export const ScrollVideo = forwardRef<ScrollVideoHandle, ScrollVideoProps>(
     const imagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
     const currentFrameRef = useRef<number>(0);
     const rafIdRef = useRef<number | null>(null);
+    const pendingLoadsRef = useRef<Set<number>>(new Set());
     const [_loadedCount, setLoadedCount] = useState<number>(0);
 
     // Helper to get frame path
@@ -117,15 +118,20 @@ export const ScrollVideo = forwardRef<ScrollVideoHandle, ScrollVideoProps>(
       }
     }, [drawFrame]);
 
-    // Load a single frame by index on-demand
+    // Load a single frame by index on-demand with async decoding and deduplication
     const loadSingle = useCallback(
       (index: number): Promise<void> => {
         return new Promise((resolve) => {
-          if (imagesRef.current.has(index)) return resolve();
+          if (imagesRef.current.has(index) || pendingLoadsRef.current.has(index)) {
+            return resolve();
+          }
 
+          pendingLoadsRef.current.add(index);
           const img = new Image();
+          img.decoding = "async";
           img.src = getFramePath(index);
           img.onload = () => {
+            pendingLoadsRef.current.delete(index);
             imagesRef.current.set(index, img);
             setLoadedCount((c) => c + 1);
             if (currentFrameRef.current === index) {
@@ -133,7 +139,10 @@ export const ScrollVideo = forwardRef<ScrollVideoHandle, ScrollVideoProps>(
             }
             resolve();
           };
-          img.onerror = () => resolve();
+          img.onerror = () => {
+            pendingLoadsRef.current.delete(index);
+            resolve();
+          };
         });
       },
       [drawFrame, getFramePath]
@@ -147,8 +156,8 @@ export const ScrollVideo = forwardRef<ScrollVideoHandle, ScrollVideoProps>(
           totalFrames - 1
         );
 
-        // Preload immediate neighbors [target - 2, target + 4]
-        for (let offset = -2; offset <= 4; offset++) {
+        // Rolling lookahead buffer [target - 2, target + 7]
+        for (let offset = -2; offset <= 7; offset++) {
           const nearbyIdx = targetFrame + offset;
           if (
             nearbyIdx >= 0 &&
@@ -178,68 +187,33 @@ export const ScrollVideo = forwardRef<ScrollVideoHandle, ScrollVideoProps>(
       [handleProgress]
     );
 
-    // Initial setup: Load frame 1 immediately, then schedule background keyframe preloading
+    // Initial setup: Load frame 0 immediately for instant FCP/LCP
     useEffect(() => {
       resizeCanvas();
       window.addEventListener("resize", resizeCanvas, { passive: true });
 
       let isMounted = true;
 
-      // 1. Load First Frame with maximum priority
+      // 1. Load First Frame with maximum priority and off-thread decoding
       const firstImg = new Image();
+      firstImg.decoding = "async";
       firstImg.src = getFramePath(0);
       firstImg.onload = () => {
         if (!isMounted) return;
         imagesRef.current.set(0, firstImg);
         drawFrame(0);
         setLoadedCount((c) => c + 1);
+
+        // Preload immediate adjacent frame for instantaneous scrub responsiveness
+        loadSingle(1);
       };
-
-      // 2. High-performance idle loading:
-      // Uses requestIdleCallback to keep main thread completely unblocked
-      const scheduleBackgroundLoad = () => {
-        const priorityIndices: number[] = [];
-        const secondaryIndices: number[] = [];
-
-        for (let i = 1; i < totalFrames; i++) {
-          if (i % 4 === 0) {
-            priorityIndices.push(i);
-          } else {
-            secondaryIndices.push(i);
-          }
-        }
-
-        const runBatch = async () => {
-          const CHUNK_SIZE = 4;
-          for (let i = 0; i < priorityIndices.length; i += CHUNK_SIZE) {
-            if (!isMounted) break;
-            const chunk = priorityIndices.slice(i, i + CHUNK_SIZE);
-            await Promise.all(chunk.map((idx) => loadSingle(idx)));
-          }
-
-          // Fill in remaining intermediate frames
-          for (let i = 0; i < secondaryIndices.length; i += CHUNK_SIZE) {
-            if (!isMounted) break;
-            const chunk = secondaryIndices.slice(i, i + CHUNK_SIZE);
-            await Promise.all(chunk.map((idx) => loadSingle(idx)));
-          }
-        };
-
-        if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-          window.requestIdleCallback(() => runBatch(), { timeout: 3000 });
-        } else {
-          setTimeout(runBatch, 1200);
-        }
-      };
-
-      scheduleBackgroundLoad();
 
       return () => {
         isMounted = false;
         window.removeEventListener("resize", resizeCanvas);
         if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
       };
-    }, [drawFrame, getFramePath, resizeCanvas, totalFrames, loadSingle]);
+    }, [drawFrame, getFramePath, resizeCanvas, loadSingle]);
 
     // Handle initial progress prop if passed
     useEffect(() => {

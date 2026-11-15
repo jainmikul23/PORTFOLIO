@@ -63,7 +63,12 @@ export const Navigation: React.FC = () => {
   return (
     <header className={`${styles.navContainer} ${scrolled ? styles.scrolled : ""}`}>
       <nav className={styles.navBar} aria-label="Main Navigation">
-        <a href="#hero" className={styles.brand} onClick={(e) => scrollTo(e, "hero")}>
+        <a
+          href="#hero"
+          className={styles.brand}
+          onClick={(e) => scrollTo(e, "hero")}
+          aria-label="Mikul Jain - Back to Top"
+        >
           <span className={styles.brandDot} />
           <span className={styles.brandText}>Mikul Jain</span>
         </a>
@@ -78,6 +83,7 @@ export const Navigation: React.FC = () => {
                 onClick={(e) => scrollTo(e, item.id)}
                 className={`${styles.navLink} ${isActive ? styles.active : ""}`}
                 aria-current={isActive ? "page" : undefined}
+                aria-label={`Navigate to ${item.label} section`}
               >
                 <span className={styles.linkIcon}>{item.icon}</span>
                 <span className={styles.linkLabel}>{item.label}</span>

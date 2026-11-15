@@ -87,8 +87,7 @@ export const Hero: React.FC = () => {
                   alt="Mikul Jain - Product-Minded Full Stack Developer"
                   width={340}
                   height={380}
-                  priority
-                  fetchPriority="high"
+                  loading="lazy"
                   quality={80}
                   sizes="(max-width: 768px) 340px, 380px"
                   className={styles.portraitImg}

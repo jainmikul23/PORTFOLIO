@@ -347,9 +347,8 @@ export const CinematicHero: React.FC = () => {
                     alt="Mikul Jain - Full Stack Developer"
                     width={330}
                     height={370}
-                    priority
-                    fetchPriority="high"
-                    quality={85}
+                    loading="lazy"
+                    quality={80}
                     className={styles.portraitImg}
                   />
                   <div className={styles.portraitOverlay} />
@@ -437,7 +436,11 @@ export const CinematicHero: React.FC = () => {
               </div>
 
               <div className={styles.hubGrid}>
-                <a href="#about" className={styles.hubTile}>
+                <a
+                  href="#about"
+                  className={styles.hubTile}
+                  aria-label="Chapter 01: About Me - Story, engineering principles and background"
+                >
                   <span className={styles.tileNum}>01</span>
                   <span className={styles.tileTitle}>ABOUT ME</span>
                   <span className={styles.tileDesc}>
@@ -445,7 +448,11 @@ export const CinematicHero: React.FC = () => {
                   </span>
                 </a>
 
-                <a href="#capabilities" className={styles.hubTile}>
+                <a
+                  href="#capabilities"
+                  className={styles.hubTile}
+                  aria-label="Chapter 02: Capabilities - Full stack architecture, performance and APIs"
+                >
                   <span className={styles.tileNum}>02</span>
                   <span className={styles.tileTitle}>CAPABILITIES</span>
                   <span className={styles.tileDesc}>
@@ -453,7 +460,11 @@ export const CinematicHero: React.FC = () => {
                   </span>
                 </a>
 
-                <a href="#projects" className={styles.hubTile}>
+                <a
+                  href="#projects"
+                  className={styles.hubTile}
+                  aria-label="Chapter 03: Flagship Projects - HealthDost, Civic Issue, Banking Systems"
+                >
                   <span className={styles.tileNum}>03</span>
                   <span className={styles.tileTitle}>FLAGSHIP PROJECTS</span>
                   <span className={styles.tileDesc}>
@@ -461,7 +472,11 @@ export const CinematicHero: React.FC = () => {
                   </span>
                 </a>
 
-                <a href="#skills" className={styles.hubTile}>
+                <a
+                  href="#skills"
+                  className={styles.hubTile}
+                  aria-label="Chapter 04: Tech Stack - Next.js, React, Node, Python, MySQL, Three.js"
+                >
                   <span className={styles.tileNum}>04</span>
                   <span className={styles.tileTitle}>TECH STACK</span>
                   <span className={styles.tileDesc}>
@@ -469,7 +484,11 @@ export const CinematicHero: React.FC = () => {
                   </span>
                 </a>
 
-                <a href="#journey" className={styles.hubTile}>
+                <a
+                  href="#journey"
+                  className={styles.hubTile}
+                  aria-label="Chapter 05: Honors & Milestones - Hackathon podiums and academic distinctions"
+                >
                   <span className={styles.tileNum}>05</span>
                   <span className={styles.tileTitle}>HONORS &amp; MILESTONES</span>
                   <span className={styles.tileDesc}>
@@ -477,7 +496,11 @@ export const CinematicHero: React.FC = () => {
                   </span>
                 </a>
 
-                <a href="#contact" className={styles.hubTile}>
+                <a
+                  href="#contact"
+                  className={styles.hubTile}
+                  aria-label="Chapter 06: Contact - Open inbox for opportunities and discussions"
+                >
                   <span className={styles.tileNum}>06</span>
                   <span className={styles.tileTitle}>CONTACT</span>
                   <span className={styles.tileDesc}>

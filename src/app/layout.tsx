@@ -8,14 +8,12 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-space-grotesk",
-  weight: ["400", "500", "600", "700"],
 });
 
 const playfair = Playfair_Display({
@@ -23,7 +21,6 @@ const playfair = Playfair_Display({
   display: "swap",
   variable: "--font-playfair",
   weight: ["400", "600"],
-  style: ["normal", "italic"],
 });
 
 export const viewport: Viewport = {
@@ -49,14 +46,36 @@ export const metadata: Metadata = {
     "Mikul Jain Full Stack Developer",
     "Mikul Jain Software Engineer",
     "Product-Minded Full Stack Developer",
+    "Systems Architect Mikul Jain",
     "HealthDost Mikul Jain",
-    "Civic Issue System",
+    "Civic Issue System Mikul Jain",
+    "Banking Management System Mikul Jain",
+    "Online Examination System Mikul Jain",
     "AITR Indore",
     "Acropolis Institute of Technology and Research",
+    "Acropolis Institute Indore Computer Science",
+    "RGPV Computer Science Engineer",
     "Next.js Developer India",
     "Three.js Developer Indore",
-    "Full Stack Web Developer",
+    "WebGL Creative Developer",
+    "Full Stack Web Developer India",
+    "AI Integration Specialist",
+    "Gemini 2.5 Flash HealthDost",
+    "Distributed Systems Architect Indore",
+    "MERN Stack Developer Indore",
+    "Python Django Developer Indore",
+    "Top Engineering Students AITR",
+    "HackDay 2nd Position Winner Google ACM",
+    "Mikul Jain GitHub",
+    "Mikul Jain LinkedIn",
+    "Hire Full Stack Developer",
+    "Best Portfolio Website 2026",
   ],
+  other: {
+    "llms-txt": "/llms.txt",
+    "ai-summary":
+      "Mikul Jain is a Product-Minded Full Stack Developer & Systems Architect from Indore (AITR). Specializing in Next.js 15, TypeScript, WebGL 2, distributed systems, and AI workflows.",
+  },
   authors: [{ name: "Mikul Jain", url: "https://mikuljain.vercel.app" }],
   creator: "Mikul Jain",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://mikuljain.vercel.app"),
@@ -135,7 +154,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           content="Pg12xxCwxKSdyMJoogu5Qs1qPjNXdlERCoBC2VJlAcw"
         />
 
-        {/* Preload critical hero assets for instantaneous first frame paint */}
+        {/* Preload critical hero frame for instantaneous first frame paint */}
         <link
           rel="preload"
           as="image"
@@ -143,13 +162,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="image/webp"
           fetchPriority="high"
         />
-        <link
-          rel="preload"
-          as="image"
-          href="/mikul-jain.jpg"
-          type="image/jpeg"
-          fetchPriority="high"
-        />
+
+        {/* AI Agent & LLM Ingestion Standards */}
+        <link rel="help" href="/llms.txt" type="text/markdown" title="LLMs Summary" />
+        <link rel="alternate" href="/llms-full.txt" type="text/markdown" title="LLMs Full Dossier" />
 
         {/* Search Engine & AI Knowledge Graph Schema (SSR rendered for instant crawler discovery) */}
         <JsonLd />

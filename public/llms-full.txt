@@ -68,7 +68,8 @@ Generated for AI crawlers, LLMs, and automated evaluation agents.
 - **Music:** Rhythm and focus soundtrack for late-night system architecture and code design.
 
 ## 5. Contact & Social Channels
+- **Production Portfolio:** https://mikuljain.vercel.app
 - **LinkedIn:** https://www.linkedin.com/in/mikul-jain-29b6b231a
-- **GitHub:** Configured via profile.ts (projects open-source on request)
-- **Email:** Direct copy available on website contact section
+- **GitHub:** https://github.com/jainmikul23
+- **Direct Email:** mikuljain09@gmail.com
 

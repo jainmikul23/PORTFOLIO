@@ -183,6 +183,7 @@ export const Dock: React.FC = () => {
               onClick={(e) => scrollToSection(e, item.id)}
               className={`${styles.dockItem} ${isActive ? styles.active : ""}`}
               aria-current={isActive ? "page" : undefined}
+              aria-label={`Navigate to ${item.label} section`}
               data-label={item.label}
             >
               <span className={styles.icon}>{item.icon}</span>
