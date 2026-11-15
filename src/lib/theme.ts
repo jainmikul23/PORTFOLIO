@@ -1,4 +1,5 @@
 import { prefersReducedMotion } from "@/lib/animations/config";
+import { generateInkPolygon, inkTransitionEngine } from "@/lib/animations/inkTransition";
 
 export type Theme = "dark" | "light";
 
@@ -42,69 +43,79 @@ export function switchThemeWithTransition(
       };
     };
 
-    const hasClickCoordinates =
+    // Calculate origin coordinate for the ink splatter
+    let x = window.innerWidth - 60;
+    let y = 44;
+
+    if (
       event &&
       typeof event.clientX === "number" &&
       typeof event.clientY === "number" &&
-      (event.clientX > 0 || event.clientY > 0);
+      (event.clientX > 0 || event.clientY > 0)
+    ) {
+      x = event.clientX;
+      y = event.clientY;
+    } else {
+      const toggleEl = document.querySelector('button[aria-label*="theme"]') as HTMLElement | null;
+      if (toggleEl) {
+        const rect = toggleEl.getBoundingClientRect();
+        x = rect.left + rect.width / 2;
+        y = rect.top + rect.height / 2;
+      }
+    }
+
+    const endRadius =
+      Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      ) * 1.38;
 
     if (doc.startViewTransition) {
-      if (hasClickCoordinates) {
-        document.documentElement.setAttribute("data-theme-transition", "circle");
-        const x = event.clientX;
-        const y = event.clientY;
-        const endRadius = Math.hypot(
-          Math.max(x, window.innerWidth - x),
-          Math.max(y, window.innerHeight - y)
-        );
+      document.documentElement.setAttribute("data-theme-transition", "ink");
 
-        const transition = doc.startViewTransition(() => {
-          applyTheme(nextTheme);
-        });
+      // Launch WebGL 2 ink splatter animation synchronously
+      inkTransitionEngine.play(x, y, nextTheme, 800);
 
-        transition.ready
-          .then(() => {
-            document.documentElement.animate(
-              {
-                clipPath: [
-                  `circle(0px at ${x}px ${y}px)`,
-                  `circle(${endRadius}px at ${x}px ${y}px)`,
-                ],
-              },
-              {
-                duration: 500,
-                easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-                pseudoElement: "::view-transition-new(root)",
-              }
-            );
-          })
-          .catch(() => {
-            applyTheme(nextTheme);
-          });
-
-        transition.finished.finally(() => {
-          document.documentElement.removeAttribute("data-theme-transition");
-          resolve();
-        });
-        return;
-      }
-
-      // Default smooth cross-fade via View Transitions
       const transition = doc.startViewTransition(() => {
         applyTheme(nextTheme);
       });
-      transition.finished.finally(() => resolve());
+
+      transition.ready
+        .then(() => {
+          // Generate procedural organic ink polygon keyframes
+          const steps = 9;
+          const keyframes: Keyframe[] = [];
+          for (let i = 0; i <= steps; i++) {
+            const t = i / steps;
+            const currentRadius = t * endRadius;
+            keyframes.push({
+              clipPath: generateInkPolygon(x, y, currentRadius, 2.5, t * 2.5, 72),
+            });
+          }
+
+          document.documentElement.animate(keyframes, {
+            duration: 750,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            pseudoElement: "::view-transition-new(root)",
+          });
+        })
+        .catch(() => {
+          applyTheme(nextTheme);
+        });
+
+      transition.finished.finally(() => {
+        document.documentElement.removeAttribute("data-theme-transition");
+        resolve();
+      });
       return;
     }
 
-    // CSS Transition Fallback for legacy browsers
-    document.documentElement.classList.add("theme-transitioning");
-    applyTheme(nextTheme);
-
+    // High-performance WebGL 2 Ink Bloom Fallback for browsers without View Transitions
+    inkTransitionEngine.play(x, y, nextTheme, 800);
     setTimeout(() => {
-      document.documentElement.classList.remove("theme-transitioning");
+      applyTheme(nextTheme);
       resolve();
-    }, 450);
+    }, 380);
   });
 }
 
