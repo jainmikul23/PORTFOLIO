@@ -5,6 +5,7 @@ import styles from "./CommandPalette.module.css";
 import { Glass } from "./Glass";
 import { profile } from "@/content/profile";
 import { Theme, switchThemeWithTransition } from "@/lib/theme";
+import { haptic } from "@/lib/haptics";
 
 interface CommandItem {
   id: string;
@@ -20,7 +21,11 @@ export const CommandPalette: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const toggleOpen = useCallback(() => {
-    setIsOpen((prev) => !prev);
+    setIsOpen((prev) => {
+      const next = !prev;
+      if (next) haptic.heavy();
+      return next;
+    });
     setQuery("");
     setSelectedIndex(0);
   }, []);
@@ -31,6 +36,7 @@ export const CommandPalette: React.FC = () => {
   }, []);
 
   const scrollTo = (id: string) => {
+    haptic.selection();
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -39,6 +45,7 @@ export const CommandPalette: React.FC = () => {
   };
 
   const copyEmail = () => {
+    haptic.success();
     navigator.clipboard.writeText("mikuljain09@gmail.com");
     alert("Email copied to clipboard!");
     close();
@@ -148,14 +155,17 @@ export const CommandPalette: React.FC = () => {
         close();
       } else if (e.key === "ArrowDown") {
         e.preventDefault();
+        haptic.selection();
         setSelectedIndex((prev) => (prev + 1) % (filtered.length || 1));
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
+        haptic.selection();
         setSelectedIndex((prev) => (prev - 1 + (filtered.length || 1)) % (filtered.length || 1));
       } else if (e.key === "Enter") {
         e.preventDefault();
         const selected = filtered[selectedIndex];
         if (selected) {
+          haptic.success();
           selected.action();
         }
       }

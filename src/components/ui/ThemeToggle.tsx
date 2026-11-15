@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ThemeToggle.module.css";
 import { Theme, getInitialTheme, switchThemeWithTransition } from "@/lib/theme";
+import { haptic } from "@/lib/haptics";
 
 export const ThemeToggle: React.FC = () => {
   const [theme, setTheme] = useState<Theme>("light");
@@ -15,6 +16,7 @@ export const ThemeToggle: React.FC = () => {
   }, []);
 
   const handleToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    haptic.strong();
     const nextTheme: Theme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     switchThemeWithTransition(nextTheme, e);

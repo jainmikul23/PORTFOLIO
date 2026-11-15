@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "./Contact.module.css";
 import { profile } from "@/content/profile";
 import { Send, Copy, Check, Mail, ShieldCheck, ExternalLink, RefreshCw } from "lucide-react";
+import { haptic } from "@/lib/haptics";
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -19,12 +20,14 @@ export const Contact: React.FC = () => {
   const [deliveryMethod, setDeliveryMethod] = useState<"resend" | "client_compose">("client_compose");
 
   const copyEmail = () => {
+    haptic.success();
     navigator.clipboard.writeText(profile.links.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
 
   const copyDraft = () => {
+    haptic.success();
     navigator.clipboard.writeText(`From: ${formData.name} <${formData.email}>\n\n${formData.message}`);
     setCopiedMsg(true);
     setTimeout(() => setCopiedMsg(false), 2500);
@@ -83,7 +86,9 @@ export const Contact: React.FC = () => {
       }
 
       setStatus("success");
+      haptic.success();
     } catch (err: unknown) {
+      haptic.error();
       setStatus("error");
       setErrorMessage(
         err instanceof Error ? err.message : "Failed to dispatch. Please email directly at mikuljain09@gmail.com."

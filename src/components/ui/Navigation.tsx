@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Navigation.module.css";
 import { ThemeToggle } from "./ThemeToggle";
 import { Compass, User, Briefcase, FolderGit2, Cpu, Milestone, Heart, Mail } from "lucide-react";
+import { haptic } from "@/lib/haptics";
 
 interface NavItem {
   id: string;
@@ -51,6 +52,7 @@ export const Navigation: React.FC = () => {
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    haptic.selection();
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });

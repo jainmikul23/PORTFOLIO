@@ -7,6 +7,7 @@ import { profile } from "@/content/profile";
 import type { Project } from "@/content/schema";
 import { ArrowUpRight, ExternalLink, Check, Zap, Layers } from "lucide-react";
 import { useSectionDisappear } from "@/hooks/useCinematicScrollDisappear";
+import { haptic } from "@/lib/haptics";
 
 export const Projects: React.FC = () => {
   const [filter, setFilter] = useState<"all" | "flagship" | "systems">("all");
@@ -39,19 +40,28 @@ export const Projects: React.FC = () => {
           {/* Filter Pills */}
           <div className={styles.filterBar}>
             <button
-              onClick={() => setFilter("all")}
+              onClick={() => {
+                haptic.strong();
+                setFilter("all");
+              }}
               className={`${styles.filterBtn} ${filter === "all" ? styles.activeFilter : ""}`}
             >
               All Products ({profile.projects.length})
             </button>
             <button
-              onClick={() => setFilter("flagship")}
+              onClick={() => {
+                haptic.strong();
+                setFilter("flagship");
+              }}
               className={`${styles.filterBtn} ${filter === "flagship" ? styles.activeFilter : ""}`}
             >
               Flagship Case Studies (2)
             </button>
             <button
-              onClick={() => setFilter("systems")}
+              onClick={() => {
+                haptic.strong();
+                setFilter("systems");
+              }}
               className={`${styles.filterBtn} ${filter === "systems" ? styles.activeFilter : ""}`}
             >
               Systems &amp; Architecture (2)

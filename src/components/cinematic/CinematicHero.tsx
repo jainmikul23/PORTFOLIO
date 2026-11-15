@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ScrollVideo, type ScrollVideoHandle } from "./ScrollVideo";
 import { gsap, ScrollTrigger, initGSAP } from "@/lib/animations/gsap";
 import { prefersReducedMotion } from "@/lib/animations/config";
+import { haptic } from "@/lib/haptics";
 import { profile } from "@/content/profile";
 import {
   ArrowRight,
@@ -115,6 +116,7 @@ export const CinematicHero: React.FC = () => {
     if (activeCardIndexRef.current !== nextActive) {
       activeCardIndexRef.current = nextActive;
       setActiveCardIndex(nextActive);
+      haptic.impact();
     }
   }, []);
 

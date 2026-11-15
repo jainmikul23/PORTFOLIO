@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Dock.module.css";
 import { ThemeToggle } from "./ThemeToggle";
+import { haptic } from "@/lib/haptics";
 
 interface NavItem {
   id: string;
@@ -162,6 +163,7 @@ export const Dock: React.FC = () => {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    haptic.strong();
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { initSmoothScroll, destroySmoothScroll } from "@/lib/animations/scroll";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
+import { haptic } from "@/lib/haptics";
 
 // Lazy-load Three.js WebGL canvas so it does not block initial paint, FCP or LCP
 const Scene = dynamic(
@@ -21,6 +22,9 @@ export const ClientProviders: React.FC<ClientProvidersProps> = ({ children }) =>
   useEffect(() => {
     // Initialize Lenis smooth scroll
     initSmoothScroll();
+
+    // Initialize Global Tactile Haptics Engine (Android Vibration + iOS Acoustic Transducer)
+    const cleanupHaptics = haptic.initGlobalListeners();
 
     let timerId: NodeJS.Timeout | null = null;
 
@@ -42,6 +46,7 @@ export const ClientProviders: React.FC<ClientProvidersProps> = ({ children }) =>
 
     return () => {
       destroySmoothScroll();
+      cleanupHaptics();
       if (typeof window !== "undefined") {
         window.removeEventListener("scroll", start3D);
         window.removeEventListener("pointermove", start3D);
