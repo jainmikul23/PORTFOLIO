@@ -1,38 +1,38 @@
 :root {
-  /* Surfaces - Cinematic Dark (Default) */
-  --bg-primary: #090a0e;
-  --bg-secondary: #141720;
-  --bg-card: #1b1e28;
-  --bg-card-hover: #222633;
+  /* Surfaces - Luxury Automotive Obsidian & Burgundy */
+  --bg-primary: #06070a;
+  --bg-secondary: #120711;
+  --bg-card: #150a16;
+  --bg-card-hover: #200d20;
 
-  /* Translucent Section Surfaces (shines WebGL through while keeping text legible) */
-  --bg-section-primary: rgba(9, 10, 14, 0.82);
-  --bg-section-secondary: rgba(20, 23, 32, 0.82);
-  --bg-overlay-badge: rgba(9, 10, 14, 0.85);
-  --bg-channel-btn: rgba(243, 240, 233, 0.04);
-  --bg-channel-btn-hover: rgba(243, 240, 233, 0.08);
+  /* Translucent Section Surfaces (shines WebGL & Video through while keeping text legible) */
+  --bg-section-primary: rgba(6, 7, 10, 0.88);
+  --bg-section-secondary: rgba(18, 7, 17, 0.88);
+  --bg-overlay-badge: rgba(14, 5, 14, 0.9);
+  --bg-channel-btn: rgba(255, 255, 255, 0.04);
+  --bg-channel-btn-hover: rgba(255, 16, 117, 0.12);
 
   /* Typography Colors */
   --text-main: #f3f0e9;       /* Ivory */
   --text-muted: #b8bac3;      /* Crisp Legible Grey */
   --text-dim: #9aa0ae;        /* AA Accessible Subdued */
 
-  /* Accents */
-  --accent-primary: #ff633d;  /* Cinematic Orange */
-  --accent-glow: rgba(255, 99, 61, 0.28);
-  --accent-secondary: #a6a9ff; /* Futuristic Lavender / Cool Blue */
-  --accent-secondary-glow: rgba(166, 169, 255, 0.22);
+  /* Accents - Neon Magenta & Electric Violet (Mercedes Luxury Interior) */
+  --accent-primary: #ff1075;  /* Neon Magenta */
+  --accent-glow: rgba(255, 16, 117, 0.35);
+  --accent-secondary: #9d00ff; /* Electric Violet */
+  --accent-secondary-glow: rgba(157, 0, 255, 0.25);
   --accent-success: #7fb7a4;
 
   /* Strokes & Glass */
   --stroke: rgba(243, 240, 233, 0.1);
   --stroke-hi: rgba(243, 240, 233, 0.22);
-  --stroke-accent: rgba(255, 99, 61, 0.4);
-  --stroke-secondary: rgba(166, 169, 255, 0.35);
+  --stroke-accent: rgba(255, 16, 117, 0.45);
+  --stroke-secondary: rgba(157, 0, 255, 0.35);
 
-  --glass: rgba(27, 30, 40, 0.7);
-  --glass-hi: rgba(27, 30, 40, 0.88);
-  --glass-panel: rgba(20, 23, 32, 0.75);
+  --glass: rgba(21, 10, 22, 0.72);
+  --glass-hi: rgba(28, 12, 30, 0.9);
+  --glass-panel: rgba(16, 7, 17, 0.8);
 
   /* Fonts */
   --font-primary: var(--font-space-grotesk), "Space Grotesk", sans-serif;
@@ -55,9 +55,9 @@
   --blur-lg: 40px;
 
   /* Shadows */
-  --shadow-glass: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 20px 50px -15px rgba(0, 0, 0, 0.7);
-  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 15px 35px -10px rgba(0, 0, 0, 0.6);
-  --shadow-accent: 0 0 28px rgba(255, 99, 61, 0.35);
+  --shadow-glass: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 20px 50px -15px rgba(0, 0, 0, 0.85);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 15px 35px -10px rgba(0, 0, 0, 0.75);
+  --shadow-accent: 0 0 35px rgba(255, 16, 117, 0.45);
 
   /* Animations */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);

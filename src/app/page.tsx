@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigation } from "@/components/ui/Navigation";
-import { Hero } from "@/components/sections/Hero";
+import { CinematicHero } from "@/components/cinematic/CinematicHero";
 import { About } from "@/components/sections/About";
 import { Capabilities } from "@/components/sections/Capabilities";
 import { Projects } from "@/components/sections/Projects";
@@ -25,15 +25,20 @@ export default function HomePage() {
       {/* Floating Cinematic Navigation */}
       <Navigation />
 
-      {/* Complete 7-Chapter Storytelling Structure */}
+      {/* Master Cinematic Experience & 6-Chapter Storytelling Structure */}
       <main id="main-content">
-        <Hero />
+        {/* 01 & 02 — Pinned Scroll-Controlled Google Flow 3D Experience */}
+        <CinematicHero />
+        {/* 03 — About Me */}
         <About />
+        {/* 04 — Tech Stack & Capabilities */}
         <Capabilities />
+        {/* 05 — Selected Projects */}
         <Projects />
         <Skills />
         <Journey />
         <Beyond />
+        {/* 06 — Contact */}
         <Contact />
       </main>
 

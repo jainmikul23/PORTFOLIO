@@ -61,7 +61,7 @@ export const AmbientMesh: React.FC = () => {
       <mesh ref={coreRef}>
         <octahedronGeometry args={[0.85, 0]} />
         <meshBasicMaterial
-          color="#FF633D"
+          color="#FF1075"
           wireframe
           transparent
           opacity={0.85}
@@ -72,18 +72,18 @@ export const AmbientMesh: React.FC = () => {
       <mesh ref={knotRef}>
         <torusKnotGeometry args={[1.3, 0.35, 80, 20]} />
         <meshBasicMaterial
-          color="#FF633D"
+          color="#FF1075"
           wireframe
           transparent
           opacity={0.55}
         />
       </mesh>
 
-      {/* 3. Orbiting Inner Energy Ring (Cyan/Lavender) */}
+      {/* 3. Orbiting Inner Energy Ring (Cyan/Lavender -> Electric Violet) */}
       <mesh ref={ringRef}>
         <torusGeometry args={[2.1, 0.02, 16, 64]} />
         <meshBasicMaterial
-          color="#A6A9FF"
+          color="#9D00FF"
           transparent
           opacity={0.8}
         />
@@ -93,7 +93,7 @@ export const AmbientMesh: React.FC = () => {
       <mesh ref={outerRingRef}>
         <torusGeometry args={[2.6, 0.018, 16, 72]} />
         <meshBasicMaterial
-          color="#FF805E"
+          color="#FF3399"
           transparent
           opacity={0.7}
         />
