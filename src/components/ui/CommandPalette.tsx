@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import styles from "./CommandPalette.module.css";
 import { Glass } from "./Glass";
 import { profile } from "@/content/profile";
+import { Theme, switchThemeWithTransition } from "@/lib/theme";
 
 interface CommandItem {
   id: string;
@@ -44,10 +45,9 @@ export const CommandPalette: React.FC = () => {
   };
 
   const toggleTheme = () => {
-    const current = document.documentElement.getAttribute("data-theme") || "dark";
-    const next = current === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("portfolio-theme", next);
+    const current = (document.documentElement.getAttribute("data-theme") || "dark") as Theme;
+    const next: Theme = current === "dark" ? "light" : "dark";
+    switchThemeWithTransition(next);
     close();
   };
 

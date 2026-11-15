@@ -2,30 +2,22 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./ThemeToggle.module.css";
+import { Theme, getInitialTheme, switchThemeWithTransition } from "@/lib/theme";
 
 export const ThemeToggle: React.FC = () => {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("portfolio-theme") as "dark" | "light" | null;
-    if (stored) {
-      setTheme(stored);
-      document.documentElement.setAttribute("data-theme", stored);
-    } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const initial = prefersDark ? "dark" : "light";
-      setTheme(initial);
-      document.documentElement.setAttribute("data-theme", initial);
-    }
+    const initial = getInitialTheme();
+    setTheme(initial);
   }, []);
 
-  const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
+  const handleToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
-    localStorage.setItem("portfolio-theme", nextTheme);
-    document.documentElement.setAttribute("data-theme", nextTheme);
+    switchThemeWithTransition(nextTheme, e);
   };
 
   if (!mounted) {
@@ -34,10 +26,11 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={handleToggle}
       className={styles.toggle}
-      aria-label={`Switch to ${theme === "dark" ? "light warm paper" : "dark ink"} theme`}
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
       title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+      type="button"
     >
       {theme === "dark" ? (
         /* Sun Icon (1.5px stroke) */
@@ -79,4 +72,3 @@ export const ThemeToggle: React.FC = () => {
     </button>
   );
 };
-
